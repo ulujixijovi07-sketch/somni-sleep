@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useParams } from "next/navigation";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
   Heart,
@@ -11,6 +12,7 @@ import {
   Truck,
   Clock,
   Check,
+  CheckCircle,
 } from "@phosphor-icons/react";
 import { getProductBySlug } from "@/data/products";
 import { addToCart } from "@/components/product-card";
@@ -19,6 +21,14 @@ export default function ProductPage() {
   const params = useParams();
   const slug = params.slug as string;
   const product = getProductBySlug(slug);
+  const [added, setAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    addToCart(product);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2500);
+  };
 
   if (!product) {
     return (
@@ -35,8 +45,33 @@ export default function ProductPage() {
 
   return (
     <main className="min-h-screen bg-abyss pt-32 pb-24">
+      {/* Toast notification */}
+      <AnimatePresence>
+        {added && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-24 left-1/2 -translate-x-1/2 z-[150]"
+          >
+            <div className="glass-card px-5 py-3 flex items-center gap-3 shadow-xl border-moonlight/20">
+              <CheckCircle size={18} className="text-moonlight" weight="fill" />
+              <div>
+                <p className="text-sm text-cream font-medium">Added to cart</p>
+                <p className="text-xs text-mist/60">{product.name}</p>
+              </div>
+              <Link
+                href="/cart"
+                className="text-xs text-moonlight font-medium hover:text-moonlight-dim transition-colors ml-2"
+              >
+                View Cart &rarr;
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-[1400px] mx-auto px-6">
-        {/* Back */}
         <Link
           href={`/shop/${product.category}`}
           className="inline-flex items-center gap-2 text-mist hover:text-cream transition-colors text-sm mb-12"
@@ -50,13 +85,17 @@ export default function ProductPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="aspect-[4/5] bg-deep rounded-2xl border border-moonlight/10 flex items-center justify-center"
+            className="aspect-[4/5] bg-gradient-to-br from-deep to-ocean rounded-2xl border border-moonlight/10 flex items-center justify-center overflow-hidden relative"
           >
-            <div className="text-center">
-              <span className="text-6xl mb-4 block">
-                {product.category === "visual" ? "👁️" : product.category === "auditory" ? "🔊" : product.category === "tactile" ? "✋" : "🌿"}
-              </span>
-              <p className="text-mist text-sm">{product.name}</p>
+            {/* Better product placeholder */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,168,76,0.06),transparent_60%)]" />
+            <div className="text-center relative z-10">
+              <div className="w-24 h-24 rounded-full bg-moonlight/[0.06] flex items-center justify-center mx-auto mb-4">
+                <span className="text-5xl">
+                  {product.category === "visual" ? "◉" : product.category === "auditory" ? "◒" : product.category === "tactile" ? "◐" : "❋"}
+                </span>
+              </div>
+              <p className="text-mist/50 text-xs uppercase tracking-[0.2em]">{product.senseLabel} Collection</p>
             </div>
           </motion.div>
 
@@ -108,7 +147,7 @@ export default function ProductPage() {
 
             {/* Add to cart */}
             <button
-              onClick={() => addToCart(product)}
+              onClick={handleAddToCart}
               className="btn-primary mt-8 w-full flex items-center justify-center gap-3 py-4 text-base"
             >
               <ShoppingBag size={20} weight="bold" />

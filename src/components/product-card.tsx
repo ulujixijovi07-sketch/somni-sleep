@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { Heart, ShoppingBag } from "@phosphor-icons/react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Heart, ShoppingBag, CheckCircle } from "@phosphor-icons/react";
 import { Product } from "@/data/products";
 
 export function addToCart(product: Product) {

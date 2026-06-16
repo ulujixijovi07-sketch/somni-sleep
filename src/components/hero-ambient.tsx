@@ -26,8 +26,7 @@ export default function HeroAmbient() {
       const w = canvas.width;
       const h = canvas.height;
 
-      // Deep dark base
-      ctx.fillStyle = "#050A14";
+      ctx.fillStyle = "#0B1A2E";
       ctx.fillRect(0, 0, w, h);
 
       // Orb 1 — warm gold, slow drift

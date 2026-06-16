@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import {
   Eye,
   SpeakerHigh,
@@ -9,22 +9,13 @@ import {
   Wind,
   ArrowRight,
   Heart,
-  ShieldCheck,
-  Truck,
-  Clock,
 } from "@phosphor-icons/react";
 import { senseData, getBestSellers } from "@/data/products";
 import ProductCard from "@/components/product-card";
 import HeroAmbient from "@/components/hero-ambient";
+import SocialProof from "@/components/social-proof";
 
 const bestSellers = getBestSellers(4);
-
-const trustItems = [
-  { icon: Heart, label: "4.9 / 5 avg rating", sub: "2,300+ verified reviews" },
-  { icon: ShieldCheck, label: "30-Night Trial", sub: "Money-back guarantee" },
-  { icon: Truck, label: "Free Shipping", sub: "On orders over $75" },
-  { icon: Clock, label: "Science-Backed", sub: "Every claim, every product" },
-];
 
 const bgImages: Record<string, string> = {
   visual:    "/bg-visual.jpg",
@@ -119,7 +110,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 2.8 }}
             className="mt-6 text-mist text-base md:text-lg max-w-[48ch] mx-auto leading-relaxed"
           >
-            Four sensory pathways to deep sleep. Backed by neuroscience.
+            Four pathways to deep sleep. Neuroscience-backed.
           </motion.p>
 
           <motion.div
@@ -135,21 +126,24 @@ export default function HomePage() {
               See the Science <ArrowRight size={14} className="inline ml-2" />
             </Link>
           </motion.div>
+        </div>
+      </section>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 3.4 }}
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-[700px] mx-auto"
-          >
-            {trustItems.map(({ icon: Icon, label, sub }) => (
-              <div key={label} className="text-center">
-                <Icon size={18} className="text-moonlight/40 mx-auto mb-2" weight="light" />
-                <p className="text-xs text-cream/60 font-medium">{label}</p>
-                <p className="text-[10px] text-mist/40 mt-1">{sub}</p>
-              </div>
-            ))}
-          </motion.div>
+      {/* Social Proof Bar */}
+      <SocialProof />
+
+      {/* Founder Snippet */}
+      <section className="relative bg-abyss border-b border-moonlight/5">
+        <div className="max-w-[900px] mx-auto px-8 py-10 flex items-center gap-6">
+          <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-moonlight/20">
+            <img src="/founder.jpg" alt="Dr. Adrian Voss" className="w-full h-full object-cover" />
+          </div>
+          <div>
+            <p className="text-sm text-cream/80 italic leading-relaxed">
+              &ldquo;I spent five years staring at the ceiling with a PhD in neuroscience. Turns out knowing how the brain works doesn&apos;t help if your senses won&apos;t shut up.&rdquo;
+            </p>
+            <p className="text-xs text-mist/50 mt-2">Dr. Adrian Voss, Founder</p>
+          </div>
         </div>
       </section>
 
@@ -165,7 +159,7 @@ export default function HomePage() {
                 Sleep Is <span className="text-moonlight">Sensory.</span>
               </h2>
               <p className="mt-3 text-sm text-mist leading-relaxed max-w-[52ch]">
-                Every cue — light, sound, touch, scent — is processed by your brain{"'"}s vigilance system. When signals read <em>danger</em>, your nervous system keeps you awake. The SOMNI protocol targets all four pathways.
+                Light, sound, touch, scent. Your brain processes all of it. When any of it reads as danger, your nervous system stays on alert. SOMNI targets all four at once.
               </p>
             </div>
 
@@ -317,7 +311,7 @@ export default function HomePage() {
                 name: "Olivia Bennett",
                 product: "3D Contour Sleep Mask",
                 rating: 5,
-                text: "I have tried every sleep mask on the market. This is the only one that doesn't press on my eyelashes. The blackout is absolute. For the first time in years, I sleep through the night.",
+                text: "I've tried every sleep mask out there. This is the only one that doesn't press on my eyelashes. Total blackout. First time in years I've slept through the night.",
               },
               {
                 name: "James Chen",

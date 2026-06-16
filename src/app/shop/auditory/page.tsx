@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { SpeakerHigh } from "@phosphor-icons/react";
 import { senseData, getProductsBySense } from "@/data/products";
 import ProductCard from "@/components/product-card";
