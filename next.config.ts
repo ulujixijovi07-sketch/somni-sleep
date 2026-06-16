@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  turbopack: {
-    root: "D:\\projects\\somni-sleep",
-  },
+  /* config options here */
 };
 
 export default nextConfig;
