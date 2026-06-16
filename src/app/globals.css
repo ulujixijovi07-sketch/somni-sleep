@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme {
+  --color-abyss: #050A14;
+  --color-deep: #0A1225;
+  --color-ocean: #0F1A33;
+  --color-moonlight: #C9A84C;
+  --color-moonlight-dim: #A68A3E;
+  --color-cream: #F0EDE8;
+  --color-soft-white: #E3DFD9;
+  --color-mist: #7A8278;
+  --color-slate: #4A5260;
+
+  --font-display: "DM Serif Display", serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+/* ============================================
+   PARALLAX FIXED BACKGROUND
+   ============================================ */
+.parallax-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.parallax-full {
+  min-height: 100vh;
+}
+
+.parallax-half {
+  min-height: 55vh;
+  border-radius: 48px 48px 0 0;
+  overflow: hidden;
+}
+
+/* ============================================
+   BASE
+   ============================================ */
+body {
+  background-color: var(--color-abyss);
+  color: var(--color-soft-white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+html { scroll-behavior: smooth; }
+
+::selection {
+  background-color: rgba(201, 168, 76, 0.3);
+  color: var(--color-soft-white);
+}
+
+/* ============================================
+   COMPONENTS
+   ============================================ */
+@layer components {
+  .btn-primary {
+    background-color: var(--color-moonlight);
+    color: var(--color-abyss);
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-moonlight-dim);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(201, 168, 76, 0.25);
+  }
+
+  .btn-outline {
+    border: 1.5px solid var(--color-moonlight);
+    color: var(--color-moonlight);
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    background: transparent;
+    transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .btn-outline:hover {
+    background-color: rgba(201, 168, 76, 0.1);
+  }
+
+  .glass-card {
+    background: rgba(10, 18, 37, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 168, 76, 0.1);
+    border-radius: 1.25rem;
+  }
+
+  .gold-underline {
+    position: relative;
+  }
+  .gold-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-moonlight);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .gold-underline:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-abyss); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 2px; }
