@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 interface Star {
   x: number;
@@ -29,19 +29,22 @@ function pickColor(): string {
 }
 
 export default function StarryBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const noiseRef = useRef<ImageData | null>(null);
-  const starsRef = useRef<Star[]>([]);
-
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    /* ---- create canvas detached from React tree ---- */
+    const canvas = document.createElement("canvas");
+    canvas.style.cssText =
+      "position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:0";
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    document.body.prepend(canvas);
 
     let W: number, H: number, dpr: number;
     let pulseTimer: ReturnType<typeof setTimeout>;
     const t0 = Date.now();
+    const stars: Star[] = [];
+    let noise: ImageData | null = null;
 
     /* ---- noise texture: very dark grain #020208 → #080812 ---- */
     function makeNoise(): ImageData {
@@ -84,10 +87,10 @@ export default function StarryBackground() {
       // scale count to viewport: ~25–40 at 1920×1080
       const count = Math.max(15, Math.min(50, Math.round((W * H) / 52000)));
 
-      const arr: Star[] = [];
+      stars.length = 0;
       for (let i = 0; i < count; i++) {
         const bright = Math.random() < 0.1; // 10% bright
-        arr.push({
+        stars.push({
           x: Math.random() * W,
           y: Math.random() * H,
           r: bright
@@ -103,16 +106,14 @@ export default function StarryBackground() {
       }
 
       // mark 1–2 stars for very slow subtle pulse
-      for (let i = 0; i < Math.min(2, arr.length); i++) {
-        arr[i].pulse = true;
+      for (let i = 0; i < Math.min(2, stars.length); i++) {
+        stars[i].pulse = true;
       }
-
-      starsRef.current = arr;
     }
 
     /* ---- draw crisp filled circles — no blur, no glow ---- */
     function drawStars(now: number) {
-      for (const s of starsRef.current) {
+      for (const s of stars) {
         let alpha = s.opacity;
         if (s.pulse) {
           // very slow sinusoidal pulse, period ~8–12 s
@@ -130,9 +131,9 @@ export default function StarryBackground() {
 
     /* ---- one full redraw (noise → nebulae → stars) ---- */
     function redraw(now: number) {
-      if (!noiseRef.current) return;
+      if (!noise) return;
       ctx!.clearRect(0, 0, W, H);
-      ctx!.putImageData(noiseRef.current, 0, 0);
+      ctx!.putImageData(noise, 0, 0);
       drawNebulae();
       drawStars(now);
     }
@@ -146,7 +147,7 @@ export default function StarryBackground() {
       canvas.height = H * dpr;
       ctx!.setTransform(1, 0, 0, 1, 0, 0);
       ctx!.scale(dpr, dpr);
-      noiseRef.current = makeNoise();
+      noise = makeNoise();
       spawnStars();
       redraw((Date.now() - t0) / 1000);
     }
@@ -164,20 +165,9 @@ export default function StarryBackground() {
     return () => {
       clearTimeout(pulseTimer);
       window.removeEventListener("resize", resize);
+      canvas.remove();
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 w-full h-full"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        pointerEvents: "none",
-        zIndex: 0,
-      }}
-    />
-  );
+  return null;
 }
