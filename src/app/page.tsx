@@ -226,8 +226,8 @@ export default function HomePage() {
             {/* Light overlay — just enough for text */}
             <div className="absolute inset-0 bg-abyss/40" />
 
-            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-20">
-              <div className={`grid md:grid-cols-2 gap-12 items-center ${isEven ? "" : "md:[direction:rtl]"}`}>
+            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-28">
+              <div className={`grid md:grid-cols-2 gap-14 items-center ${isEven ? "" : "md:[direction:rtl]"}`}>
                 <div className={isEven ? "" : "md:[direction:ltr]"}>
                   <div className="flex items-center gap-2 mb-4">
                     <Icon size={20} className="text-moonlight" weight="duotone" />
