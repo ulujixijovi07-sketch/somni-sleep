@@ -66,6 +66,8 @@ body {
 
 html { scroll-behavior: smooth; }
 
+footer { position: relative; z-index: 1; }
+
 ::selection {
   background-color: rgba(201, 168, 76, 0.3);
   color: var(--color-soft-white);

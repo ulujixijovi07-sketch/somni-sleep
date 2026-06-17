@@ -54,6 +54,11 @@ export function Header() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -200,7 +205,6 @@ export function Header() {
                   : "translate-y-8 opacity-0"
               )}
               style={{ transitionDelay: mobileMenuOpen ? `${150 + i * 75}ms` : "0ms" }}
-              onClick={() => setMobileMenuOpen(false)}
             >
               {link.label}
             </Link>

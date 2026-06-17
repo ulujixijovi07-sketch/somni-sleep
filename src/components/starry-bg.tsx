@@ -33,7 +33,7 @@ export default function StarryBackground() {
       // Draw ~30-40 tiny crisp stars spread across full page height
       const W_logical = window.innerWidth;
       const H_logical = Math.max(window.innerHeight, document.body.scrollHeight);
-      const count = 200;
+      const count = 400;
 
       for (let i = 0; i < count; i++) {
         const x = Math.random() * W_logical;
@@ -72,7 +72,7 @@ export default function StarryBackground() {
         position: "absolute",
         top: 0,
         left: 0,
-        zIndex: 0,
+        zIndex: -1,
         pointerEvents: "none",
       }}
     />
