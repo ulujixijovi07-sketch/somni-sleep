@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     const timestamp = Math.round(Date.now() / 1000);
     const signature = require("crypto")
       .createHash("sha1")
-      .update(`folder=nocturne/products&timestamp=${timestamp}${apiSecret}`)
+      .update(`folder=somni/products&timestamp=${timestamp}${apiSecret}`)
       .digest("hex");
 
     const uploadForm = new FormData();
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     uploadForm.append("api_key", apiKey);
     uploadForm.append("timestamp", String(timestamp));
     uploadForm.append("signature", signature);
-    uploadForm.append("folder", "nocturne/products");
+    uploadForm.append("folder", "somni/products");
 
     const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
       method: "POST",

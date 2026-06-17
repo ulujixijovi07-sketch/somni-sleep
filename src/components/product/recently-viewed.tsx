@@ -14,7 +14,7 @@ type ViewedProduct = {
   image: string;
 };
 
-const STORAGE_KEY = "nocturne-viewed";
+const STORAGE_KEY = "somni-viewed";
 const MAX_ITEMS = 6;
 
 function loadViewed(): ViewedProduct[] {

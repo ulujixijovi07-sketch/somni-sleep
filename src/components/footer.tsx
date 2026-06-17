@@ -22,9 +22,9 @@ const INFO_LINKS = [
 
 export function Footer() {
   const [socialLinks, setSocialLinks] = useState([
-    { label: "Instagram", href: "https://instagram.com/nocturne.lingerie" },
-    { label: "TikTok", href: "https://tiktok.com/@nocturne.lingerie" },
-    { label: "Pinterest", href: "https://pinterest.com/nocturnelingerie" },
+    { label: "Instagram", href: "https://instagram.com/somni.sleep" },
+    { label: "TikTok", href: "https://tiktok.com/@somni.sleep" },
+    { label: "Pinterest", href: "https://pinterest.com/somnisleep" },
   ]);
 
   useEffect(() => {

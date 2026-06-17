@@ -174,7 +174,7 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem("nocturne-giftcards");
+      const raw = localStorage.getItem("somni-giftcards");
       if (raw) setSavedCards(JSON.parse(raw));
     } catch {}
   }, []);
@@ -252,10 +252,10 @@ export default function CheckoutPage() {
         // Remove used gift card from localStorage
         if (promoCode) {
           try {
-            const raw = localStorage.getItem("nocturne-giftcards");
+            const raw = localStorage.getItem("somni-giftcards");
             if (raw) {
               const cards = JSON.parse(raw).filter((c: any) => c.code !== promoCode.code);
-              localStorage.setItem("nocturne-giftcards", JSON.stringify(cards));
+              localStorage.setItem("somni-giftcards", JSON.stringify(cards));
             }
           } catch {}
         }

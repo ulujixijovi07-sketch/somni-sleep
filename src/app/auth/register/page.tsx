@@ -45,10 +45,10 @@ export default function RegisterPage() {
       // Save gift card to localStorage for immediate use after login
       if (data.giftCard) {
         try {
-          const raw = localStorage.getItem("nocturne-giftcards");
+          const raw = localStorage.getItem("somni-giftcards");
           const cards = raw ? JSON.parse(raw) : [];
           cards.push(data.giftCard);
-          localStorage.setItem("nocturne-giftcards", JSON.stringify(cards));
+          localStorage.setItem("somni-giftcards", JSON.stringify(cards));
         } catch (_) {}
       }
 
@@ -65,7 +65,7 @@ export default function RegisterPage() {
     <div className="flex min-h-screen items-center justify-center bg-brand-primary px-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <Link href="/" className="font-display text-3xl font-light tracking-[0.2em] text-text-primary">NOCTURNE</Link>
+          <Link href="/" className="font-display text-3xl font-light tracking-[0.2em] text-text-primary">SOMNI</Link>
           <p className="mt-2 font-body text-sm text-text-secondary">Create your account</p>
         </div>
 

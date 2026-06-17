@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
         qty: item.quantity,
         price: item.price,
       })),
-      trackingUrl: `https://lovenocturne.com/en/order/tracking?email=${encodeURIComponent(customerEmail)}&order=${orderNumber}`,
+      trackingUrl: `https://somnisleep.com/en/order/tracking?email=${encodeURIComponent(customerEmail)}&order=${orderNumber}`,
     });
 
     // Consume promo code

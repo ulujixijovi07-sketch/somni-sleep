@@ -26,7 +26,7 @@ export default function GiftCardsPage() {
 
       // 1. localStorage cards
       try {
-        const saved = localStorage.getItem("nocturne-giftcards");
+        const saved = localStorage.getItem("somni-giftcards");
         if (saved) {
           const local = JSON.parse(saved);
           local.forEach((c: GiftCard) => {
@@ -55,7 +55,7 @@ export default function GiftCardsPage() {
   // Sync to localStorage
   useEffect(() => {
     if (!loaded) return;
-    localStorage.setItem("nocturne-giftcards", JSON.stringify(cards));
+    localStorage.setItem("somni-giftcards", JSON.stringify(cards));
   }, [cards, loaded]);
 
   const addCard = async () => {

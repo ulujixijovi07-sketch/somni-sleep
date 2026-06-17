@@ -19,7 +19,7 @@ type WishlistContextType = {
 };
 
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
-const STORAGE_KEY = "nocturne-wishlist";
+const STORAGE_KEY = "somni-wishlist";
 
 function loadLocal(): WishlistItem[] {
   if (typeof window === "undefined") return [];

@@ -71,8 +71,8 @@ export function getProductsByCategory(slug: string): Product[] {
     const nameLower = p.name.toLowerCase();
     const catName = cat.name.toLowerCase();
     const catSlug = cat.slug.toLowerCase();
-    if (catSlug === "lingerie-sets") return nameLower.includes("set") || nameLower.includes("lingerie");
-    if (catSlug === "bodysuits-teddies") return nameLower.includes("bodysuit") || nameLower.includes("teddy");
+    if (catSlug === "lingerie-sets") return [];
+    if (catSlug === "bodysuits-teddies") return [];
     if (catSlug === "bras") return nameLower.includes("bra") || nameLower.includes("balconette") || nameLower.includes("plunge") || nameLower.includes("bralette");
     if (catSlug === "briefs-thongs") return nameLower.includes("brief") || nameLower.includes("thong");
     if (catSlug === "suspender-belts") return nameLower.includes("suspender") || nameLower.includes("garter");
@@ -81,7 +81,7 @@ export function getProductsByCategory(slug: string): Product[] {
     if (catSlug === "corsets-bustiers") return nameLower.includes("corset") || nameLower.includes("bustier");
     if (catSlug === "robes-kimonos") return nameLower.includes("robe") || nameLower.includes("kimono");
     if (catSlug === "harnesses-body-chains") return nameLower.includes("harness") || nameLower.includes("body chain") || nameLower.includes("cuff") || nameLower.includes("collar");
-    if (catSlug === "bridal-lingerie") return nameLower.includes("bridal") || nameLower.includes("elara") || nameLower.includes("aurora");
+    if (catSlug === "bridal-lingerie") return [];
     if (catSlug === "self-love") return p.collection?.slug === "seraphina" || nameLower.includes("self");
     if (catSlug === "accessories") return nameLower.includes("choker") || nameLower.includes("glove") || nameLower.includes("chain");
     return true;

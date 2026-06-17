@@ -171,7 +171,7 @@ export default function CartPage() {
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem("nocturne-giftcards");
+      const raw = localStorage.getItem("somni-giftcards");
       if (raw) setSavedCards(JSON.parse(raw));
     } catch {}
   }, []);

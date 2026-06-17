@@ -110,11 +110,11 @@ export async function sendWelcomeEmail(to: string) {
     await resend.emails.send({
       from: FROM,
       to,
-      subject: "Welcome to the Nocturne Society",
+      subject: "Welcome to the SOMNI Society",
       html: `
         <div style="max-width:600px;margin:0 auto;font-family:Georgia,serif;background:#1A1817;color:#F6F2ED;padding:40px">
           <h1 style="font-weight:300;letter-spacing:0.2em;text-align:center;color:#C9A84C">SOMNI</h1>
-          <p style="text-align:center;font-size:14px;color:#A69D94;margin-top:30px">You've joined the Nocturne Society.</p>
+          <p style="text-align:center;font-size:14px;color:#A69D94;margin-top:30px">You've joined the SOMNI Society.</p>
           <div style="background:#2D2520;padding:20px;margin:30px 0;text-align:center">
             <p style="font-size:12px;color:#A69D94;text-transform:uppercase;letter-spacing:0.1em">What you'll receive</p>
             <p style="font-size:14px;color:#F6F2ED;line-height:1.8;margin:12px 0">
@@ -124,7 +124,7 @@ export async function sendWelcomeEmail(to: string) {
             </p>
           </div>
           <div style="text-align:center;margin:30px 0">
-            <a href="https://lovenocturne.com" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Explore the Collection</a>
+            <a href="https://somnisleep.com" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Explore Products</a>
           </div>
           <p style="font-size:11px;color:#5A524A;text-align:center;margin-top:40px">Discreet packaging • Private billing • SSL encrypted</p>
         </div>`,
@@ -215,7 +215,7 @@ export async function sendTierUpgradeEmail(to: string, customerName: string, new
             <p style="font-size:13px;color:#A69D94;line-height:1.8">${benefits.split(" • ").map((b) => `• ${b}<br>`).join("")}</p>
           </div>
           <div style="text-align:center;margin:30px 0">
-            <a href="https://lovenocturne.com" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Explore New Arrivals</a>
+            <a href="https://somnisleep.com" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Explore New Arrivals</a>
           </div>
         </div>`,
     });
@@ -243,7 +243,7 @@ export async function sendBirthdayGift(to: string, customerName: string, giftCod
             <p style="font-family:monospace;font-size:20px;color:#F6F2ED;background:#1A1817;padding:8px 20px;display:inline-block;margin-top:4px;letter-spacing:0.1em">${giftCode}</p>
           </div>
           <div style="text-align:center;margin:30px 0">
-            <a href="https://lovenocturne.com" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Treat Yourself</a>
+            <a href="https://somnisleep.com" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Sleep Better Tonight</a>
           </div>
           <p style="font-size:11px;color:#5A524A;text-align:center">Valid for 30 days. One-time use only.</p>
         </div>`,

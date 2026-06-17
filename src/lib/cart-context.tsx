@@ -51,7 +51,7 @@ type CartContextType = {
 // ─── Context ────────────────────────────────────────────────────────────
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
-const STORAGE_KEY = "nocturne-cart";
+const STORAGE_KEY = "somni-cart";
 
 function loadLocal(): CartItem[] {
   if (typeof window === "undefined") return [];

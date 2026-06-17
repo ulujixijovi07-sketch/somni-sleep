@@ -22,20 +22,20 @@ export function OrganizationJsonLd() {
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "SOMNI",
-        url: "https://nocturne.com",
-        logo: "https://nocturne.com/logo.png",
+        url: "https://somnisleep.com",
+        logo: "https://somnisleep.com/logo.png",
         description:
-          "Dark luxury lingerie. Sensual, editorial, empowering. For the woman who owns her night.",
+          "Science-backed sleep tools for deep, restorative rest.",
         foundingDate: "2024",
         contactPoint: {
           "@type": "ContactPoint",
-          email: "hello@nocturne.com",
+          email: "hello@somnisleep.com",
           contactType: "customer service",
         },
         sameAs: [
-          "https://instagram.com/nocturne",
-          "https://pinterest.com/nocturne",
-          "https://tiktok.com/@nocturne",
+          "https://instagram.com/somni.sleep",
+          "https://pinterest.com/somnisleep",
+          "https://tiktok.com/@somni.sleep",
         ],
       }}
     />
@@ -68,7 +68,7 @@ export function ProductJsonLd({
         "@type": "Product",
         name,
         description,
-        url: `https://nocturne.com/products/${slug}`,
+        url: `https://somnisleep.com/products/${slug}`,
         image: images,
         offers: {
           "@type": "Offer",
@@ -124,7 +124,7 @@ export function BreadcrumbJsonLd({ items }: { items: Crumb[] }) {
           "@type": "ListItem",
           position: i + 1,
           name: item.name,
-          item: `https://nocturne.com${item.url}`,
+          item: `https://somnisleep.com${item.url}`,
         })),
       }}
     />

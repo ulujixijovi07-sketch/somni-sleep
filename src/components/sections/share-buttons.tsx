@@ -8,7 +8,7 @@ type ShareButtonsProps = {
 };
 
 export function ShareButtons({ url, title }: ShareButtonsProps) {
-  const shareUrl = `https://lovenocturne.com${url}`;
+  const shareUrl = `https://somnisleep.com${url}`;
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(title);
 

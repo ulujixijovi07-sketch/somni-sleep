@@ -50,7 +50,7 @@ async function uploadToCloudinary(file: File): Promise<string> {
   const timestamp = Math.round(Date.now() / 1000);
   const signature = crypto
     .createHash("sha1")
-    .update(`folder=nocturne/reviews&timestamp=${timestamp}${apiSecret}`)
+    .update(`folder=somni/reviews&timestamp=${timestamp}${apiSecret}`)
     .digest("hex");
 
   const uploadForm = new FormData();
@@ -58,7 +58,7 @@ async function uploadToCloudinary(file: File): Promise<string> {
   uploadForm.append("api_key", apiKey);
   uploadForm.append("timestamp", String(timestamp));
   uploadForm.append("signature", signature);
-  uploadForm.append("folder", "nocturne/reviews");
+  uploadForm.append("folder", "somni/reviews");
 
   const res = await fetch(
     `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,

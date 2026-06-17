@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       .setExpirationTime("1h")
       .sign(secret);
 
-    const resetUrl = `https://lovenocturne.com/auth/reset-password?token=${token}`;
+    const resetUrl = `https://somnisleep.com/auth/reset-password?token=${token}`;
     await sendPasswordReset(email, resetUrl);
 
     return NextResponse.json({ success: true, message: "If that email exists, we've sent a reset link." });

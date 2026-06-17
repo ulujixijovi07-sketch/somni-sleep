@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendAbandonedCartReminder, sendTierUpgradeEmail, sendBirthdayGift } from "@/lib/email";
 
-const CRON_SECRET = process.env.CRON_SECRET || "nocturne-cron-secret";
+const CRON_SECRET = process.env.CRON_SECRET || "somni-cron-secret";
 
 // GET /api/cron/jobs?secret=xxx&job=abandoned-cart|birthday
 export async function GET(request: NextRequest) {
@@ -65,7 +65,7 @@ async function runAbandonedCart() {
       user.email,
       user.name || "Valued Customer",
       items,
-      `https://lovenocturne.com/cart`,
+      `https://somnisleep.com/cart`,
     );
 
     await prisma.user.update({
