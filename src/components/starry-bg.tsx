@@ -6,66 +6,32 @@ interface Star {
   x: number;
   y: number;
   r: number;
-  baseAlpha: number;
+  opacity: number;
+  color: string;
+  pulse: boolean;
   phase: number;
-  speed: number;
-  color: string;     // hex for center
-  glowColor: string; // hex for outer glow
-  tier: 1 | 2 | 3;
 }
 
-// 92% cool blue-white palette
-const BLUE_WHITES = [
-  "#C8D8F0", "#D0DCF4", "#D8E0F8", "#DCE4FA", "#E0E8FC",
-  "#C4D4EC", "#CCD8F0", "#D4DCF4", "#E4ECFE", "#E8EEFF",
+const PALETTE = [
+  { color: "#E3E4EF", weight: 0.75 }, // cool white-blue
+  { color: "#FFFFFF", weight: 0.15 }, // pure white
+  { color: "#C9A84C", weight: 0.10 }, // gold
 ];
 
-// 8% warm gold (rare)
-const GOLDS = ["#C9A84C"];
-
-// Tier definitions
-const TIERS = [
-  { share: 0.60, rMin: 0.5, rMax: 1.0, aMin: 0.15, aMax: 0.30, speedMin: 0.0008, speedMax: 0.0020 },
-  { share: 0.30, rMin: 1.0, rMax: 1.5, aMin: 0.30, aMax: 0.60, speedMin: 0.0005, speedMax: 0.0012 },
-  { share: 0.10, rMin: 1.5, rMax: 2.5, aMin: 0.60, aMax: 1.00, speedMin: 0.0003, speedMax: 0.0008 },
-] as const;
-
-const STAR_MIN = 250;
-const STAR_MAX = 350;
-
-function pickColor(): { color: string; glowColor: string } {
+function pickColor(): string {
   const r = Math.random();
-  if (r < 0.08) {
-    // Warm gold
-    return { color: "#C9A84C", glowColor: "#C9A84C" };
+  let acc = 0;
+  for (const p of PALETTE) {
+    acc += p.weight;
+    if (r < acc) return p.color;
   }
-  const base = BLUE_WHITES[Math.floor(Math.random() * BLUE_WHITES.length)];
-  // Pick a slightly different shade for the outer glow
-  const glow =
-    BLUE_WHITES[Math.floor(Math.random() * BLUE_WHITES.length)];
-  return { color: base, glowColor: glow };
-}
-
-function hexToRgba(hex: string, a: number): string {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r}, ${g}, ${b}, ${a.toFixed(3)})`;
-}
-
-function pickTier(): { tier: 1 | 2 | 3; rMin: number; rMax: number; aMin: number; aMax: number; speedMin: number; speedMax: number } {
-  const roll = Math.random();
-  if (roll < TIERS[0].share) {
-    return { tier: 1, ...TIERS[0] };
-  }
-  if (roll < TIERS[0].share + TIERS[1].share) {
-    return { tier: 2, ...TIERS[1] };
-  }
-  return { tier: 3, ...TIERS[2] };
+  return PALETTE[0].color;
 }
 
 export default function StarryBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const noiseRef = useRef<ImageData | null>(null);
+  const starsRef = useRef<Star[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -73,13 +39,105 @@ export default function StarryBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId: number;
-    let W: number;
-    let H: number;
-    let dpr: number;
-    let stars: Star[] = [];
-    let visible = true;
+    let W: number, H: number, dpr: number;
+    let pulseTimer: ReturnType<typeof setTimeout>;
+    const t0 = Date.now();
 
+    /* ---- noise texture: very dark grain #020208 → #080812 ---- */
+    function makeNoise(): ImageData {
+      const img = ctx!.createImageData(W, H);
+      const d = img.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const v = 2 + Math.floor(Math.random() * 7); // 2–8
+        d[i] = v; // R
+        d[i + 1] = v; // G
+        d[i + 2] = v + Math.floor(Math.random() * 10); // B — slight blue bias
+        d[i + 3] = 255; // A
+      }
+      return img;
+    }
+
+    /* ---- 2–3 faint nebula-like blobs (radial gradients, very low opacity) ---- */
+    function drawNebulae() {
+      const blobs: {
+        x: number;
+        y: number;
+        r: number;
+        c: [number, number, number];
+      }[] = [
+        { x: W * 0.22, y: H * 0.28, r: Math.min(W, H) * 0.42, c: [18, 14, 36] },
+        { x: W * 0.72, y: H * 0.58, r: Math.min(W, H) * 0.38, c: [12, 18, 32] },
+        { x: W * 0.48, y: H * 0.18, r: Math.min(W, H) * 0.32, c: [15, 12, 28] },
+      ];
+      for (const b of blobs) {
+        const g = ctx!.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+        g.addColorStop(0, `rgba(${b.c[0]},${b.c[1]},${b.c[2]},0.06)`);
+        g.addColorStop(0.5, `rgba(${b.c[0]},${b.c[1]},${b.c[2]},0.02)`);
+        g.addColorStop(1, "rgba(0,0,0,0)");
+        ctx!.fillStyle = g;
+        ctx!.fillRect(0, 0, W, H);
+      }
+    }
+
+    /* ---- spawn stars: point sources, no glow ---- */
+    function spawnStars() {
+      // scale count to viewport: ~25–40 at 1920×1080
+      const count = Math.max(15, Math.min(50, Math.round((W * H) / 52000)));
+
+      const arr: Star[] = [];
+      for (let i = 0; i < count; i++) {
+        const bright = Math.random() < 0.1; // 10% bright
+        arr.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: bright
+            ? 0.8 + Math.random() * 0.7 // 0.8–1.5 px
+            : 0.3 + Math.random() * 0.5, // 0.3–0.8 px
+          opacity: bright
+            ? 0.8 + Math.random() * 0.2 // 0.8–1.0
+            : 0.4 + Math.random() * 0.3, // 0.4–0.7
+          color: pickColor(),
+          pulse: false,
+          phase: Math.random() * Math.PI * 2,
+        });
+      }
+
+      // mark 1–2 stars for very slow subtle pulse
+      for (let i = 0; i < Math.min(2, arr.length); i++) {
+        arr[i].pulse = true;
+      }
+
+      starsRef.current = arr;
+    }
+
+    /* ---- draw crisp filled circles — no blur, no glow ---- */
+    function drawStars(now: number) {
+      for (const s of starsRef.current) {
+        let alpha = s.opacity;
+        if (s.pulse) {
+          // very slow sinusoidal pulse, period ~8–12 s
+          const t = 0.5 + 0.5 * Math.sin(now * 0.0008 + s.phase);
+          alpha = s.opacity * (0.75 + 0.25 * t); // ±12.5 % variation
+        }
+        ctx!.globalAlpha = alpha;
+        ctx!.fillStyle = s.color;
+        ctx!.beginPath();
+        ctx!.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx!.fill();
+      }
+      ctx!.globalAlpha = 1;
+    }
+
+    /* ---- one full redraw (noise → nebulae → stars) ---- */
+    function redraw(now: number) {
+      if (!noiseRef.current) return;
+      ctx!.clearRect(0, 0, W, H);
+      ctx!.putImageData(noiseRef.current, 0, 0);
+      drawNebulae();
+      drawStars(now);
+    }
+
+    /* ---- resize: rebuild noise, re-spawn stars ---- */
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = window.innerWidth;
@@ -88,94 +146,23 @@ export default function StarryBackground() {
       canvas.height = H * dpr;
       ctx!.setTransform(1, 0, 0, 1, 0, 0);
       ctx!.scale(dpr, dpr);
+      noiseRef.current = makeNoise();
       spawnStars();
+      redraw((Date.now() - t0) / 1000);
     }
 
-    function spawnStars() {
-      const count = STAR_MIN + Math.floor(Math.random() * (STAR_MAX - STAR_MIN));
-      stars = Array.from({ length: count }, () => {
-        const { tier, rMin, rMax, aMin, aMax, speedMin, speedMax } = pickTier();
-        const { color, glowColor } = pickColor();
-        return {
-          x: Math.random() * W,
-          y: Math.random() * H,
-          r: rMin + Math.random() * (rMax - rMin),
-          baseAlpha: aMin + Math.random() * (aMax - aMin),
-          phase: Math.random() * Math.PI * 2,
-          speed: speedMin + Math.random() * (speedMax - speedMin),
-          color,
-          glowColor,
-          tier,
-        };
-      });
-    }
-
-    function drawStar(s: Star, alpha: number) {
-      const { x, y, r } = s;
-      if (s.tier === 1) {
-        // Small stars (60%): sharp filled circle — crisp point, no blur
-        ctx!.beginPath();
-        ctx!.arc(x, y, r, 0, Math.PI * 2);
-        ctx!.fillStyle = hexToRgba(s.color, alpha);
-        ctx!.fill();
-      } else if (s.tier === 2) {
-        // Medium stars (30%): small glow 2–3× radius (tight)
-        const glowR = r * 2.5;
-        const grad = ctx!.createRadialGradient(x, y, 0, x, y, glowR);
-        grad.addColorStop(0, hexToRgba(s.color, alpha));
-        grad.addColorStop(0.25, hexToRgba(s.glowColor, alpha * 0.5));
-        grad.addColorStop(0.6, hexToRgba(s.glowColor, alpha * 0.1));
-        grad.addColorStop(1, "rgba(0, 0, 0, 0)");
-
-        ctx!.beginPath();
-        ctx!.arc(x, y, glowR, 0, Math.PI * 2);
-        ctx!.fillStyle = grad;
-        ctx!.fill();
-      } else {
-        // Bright stars (10%): subtle glow 3–4× radius
-        const glowR = r * 3;
-        const grad = ctx!.createRadialGradient(x, y, 0, x, y, glowR);
-        grad.addColorStop(0, hexToRgba(s.color, alpha));
-        grad.addColorStop(0.15, hexToRgba(s.glowColor, alpha * 0.7));
-        grad.addColorStop(0.4, hexToRgba(s.glowColor, alpha * 0.2));
-        grad.addColorStop(1, "rgba(0, 0, 0, 0)");
-
-        ctx!.beginPath();
-        ctx!.arc(x, y, glowR, 0, Math.PI * 2);
-        ctx!.fillStyle = grad;
-        ctx!.fill();
-      }
-    }
-
-    function draw(timestamp: number) {
-      if (!visible) {
-        animationId = requestAnimationFrame(draw);
-        return;
-      }
-
-      ctx!.clearRect(0, 0, W, H);
-
-      for (const s of stars) {
-        const twinkle = 0.5 + 0.5 * Math.sin(timestamp * s.speed + s.phase);
-        const alpha = s.baseAlpha * (0.4 + 0.6 * twinkle); // range 0.4×–1.0× baseAlpha
-        drawStar(s, alpha);
-      }
-
-      animationId = requestAnimationFrame(draw);
-    }
-
-    function handleVisibility() {
-      visible = !document.hidden;
+    /* ---- 200 ms interval: subtle pulse only, not 60 fps ---- */
+    function tick() {
+      redraw((Date.now() - t0) / 1000);
+      pulseTimer = setTimeout(tick, 200);
     }
 
     resize();
-    document.addEventListener("visibilitychange", handleVisibility);
     window.addEventListener("resize", resize);
-    animationId = requestAnimationFrame(draw);
+    pulseTimer = setTimeout(tick, 200);
 
     return () => {
-      cancelAnimationFrame(animationId);
-      document.removeEventListener("visibilitychange", handleVisibility);
+      clearTimeout(pulseTimer);
       window.removeEventListener("resize", resize);
     };
   }, []);
@@ -184,7 +171,13 @@ export default function StarryBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full"
-      style={{ position: "fixed", top: 0, left: 0, pointerEvents: "none", zIndex: 0 }}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        pointerEvents: "none",
+        zIndex: 0,
+      }}
     />
   );
 }

@@ -23,7 +23,6 @@ const bgImages: Record<string, string> = {
   auditory:  "/bg-auditory.jpg",
   tactile:   "/bg-tactile.jpg",
   olfactory: "/bg-olfactory.jpg",
-  products:  "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1920&q=90",
 };
 
 const senses = [
@@ -291,11 +290,7 @@ export default function HomePage() {
       {/* ============================================
           BEST SELLERS
           ============================================ */}
-      <section
-        className="parallax-section parallax-full"
-        style={{ backgroundImage: `url(${bgImages.products})` }}
-      >
-        <div className="absolute inset-0 bg-abyss/55" />
+      <section className="relative bg-[#050510]/40 py-20 md:py-28 px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
