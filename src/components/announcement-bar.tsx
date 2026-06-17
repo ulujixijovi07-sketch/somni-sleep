@@ -2,17 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-const DEFAULT_ANNOUNCEMENTS = [
-  "Free shipping over $99",
-  "Discreet packaging",
-  "Premium Quality",
-];
-
 const INTERVAL = 4000;
 const TRANSITION = 800;
 
 export function AnnouncementBar() {
-  const [announcements, setAnnouncements] = useState(DEFAULT_ANNOUNCEMENTS);
+  const [announcements, setAnnouncements] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
   const [index, setIndex] = useState(0);
   const [exiting, setExiting] = useState(false);
   const [dismissed, setDismissed] = useState(false);
@@ -30,7 +25,8 @@ export function AnnouncementBar() {
           } catch {}
         }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -45,9 +41,10 @@ export function AnnouncementBar() {
     return () => clearInterval(timer);
   }, [announcements.length]);
 
-  const current = announcements[index] || announcements[0];
+  // Don't render if loading or no announcements or dismissed
+  if (loading || dismissed || announcements.length === 0) return null;
 
-  if (dismissed) return null;
+  const current = announcements[index] || announcements[0];
 
   return (
     <div

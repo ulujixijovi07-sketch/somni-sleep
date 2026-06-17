@@ -258,7 +258,7 @@ export default function HomePage() {
                       <span className="text-moonlight text-xs uppercase tracking-[0.2em] font-medium">{sense.name}</span>
                     </div>
                     <h2 className="font-[family-name:var(--font-display)] text-2xl md:text-4xl font-bold tracking-tighter text-cream leading-[1.1]">
-                      {sense.title}{" "}
+                      {sense.title}:{" "}
                       <span className="text-moonlight">{sense.name}</span>
                     </h2>
 

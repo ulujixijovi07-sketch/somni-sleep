@@ -11,7 +11,7 @@ import { useCart } from "@/lib/cart-context";
 import { useSession, signOut } from "next-auth/react";
 
 const NAV_LINKS = [
-  { label: "Shop All", href: "/categories/all" },
+  { label: "Shop All", href: "/shop/visual" },
   { label: "Visual", href: "/shop/visual" },
   { label: "Auditory", href: "/shop/auditory" },
   { label: "Tactile", href: "/shop/tactile" },

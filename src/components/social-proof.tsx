@@ -114,21 +114,24 @@ export default function SocialProof() {
           </div>
 
           {/* Featured in — media logos bar */}
-          <div className="mt-6 pt-5 border-t border-moonlight/5 flex flex-wrap items-center justify-center gap-8">
+          <div className="mt-6 pt-5 border-t border-moonlight/5 flex flex-col items-center gap-3">
             <span className="text-[10px] uppercase tracking-[0.25em] text-mist/30">Featured in</span>
-            {[
-              "The New York Times",
-              "Forbes",
-              "Vogue",
-              "WIRED",
-              "Healthline",
-              "Sleep Foundation",
-              "MindBodyGreen",
-            ].map((name) => (
-              <span key={name} className="text-[11px] text-mist/25 tracking-wider font-medium">
-                {name}
-              </span>
-            ))}
+            <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+              {[
+                "The New York Times",
+                "Forbes",
+                "Vogue",
+                "WIRED",
+                "Healthline",
+                "Sleep Foundation",
+                "MindBodyGreen",
+              ].map((name, i, arr) => (
+                <span key={name} className="inline-flex items-center gap-2">
+                  <span className="text-xs uppercase tracking-widest text-mist/40 font-medium">{name}</span>
+                  {i < arr.length - 1 && <span className="text-mist/20 text-xs">·</span>}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>

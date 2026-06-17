@@ -151,7 +151,7 @@ export default function ProductPage() {
               className="btn-primary mt-8 w-full flex items-center justify-center gap-3 py-4 text-base"
             >
               <ShoppingBag size={20} weight="bold" />
-              Add to Cart
+              Add to Cart — ${product.price}
             </button>
 
             {/* Trust badges */}
