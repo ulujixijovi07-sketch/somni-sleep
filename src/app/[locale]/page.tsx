@@ -152,6 +152,12 @@ export default function HomePage() {
               &ldquo;I spent five years staring at the ceiling with a PhD in neuroscience. Turns out knowing how the brain works doesn&apos;t help if your senses won&apos;t shut up.&rdquo;
             </p>
             <p className="text-xs text-mist/50 mt-2">Dr. Adrian Voss, Founder</p>
+            <Link
+              href="/story"
+              className="inline-flex items-center gap-1.5 mt-2 text-[11px] uppercase tracking-[0.15em] text-moonlight hover:text-moonlight-dim transition-colors font-medium"
+            >
+              Our Story <ArrowRight size={12} />
+            </Link>
           </div>
         </motion.div>
       </section>
