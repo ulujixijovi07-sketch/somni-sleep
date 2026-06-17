@@ -1,0 +1,25 @@
+继续上一轮未完成的任务。目标：补齐上一轮没复制完的文件。
+
+## 检查完成度
+运行这些命令查看缺失:
+1. ls D:/projects/somni-sleep/src/app/api/payment/paypal/
+2. ls D:/projects/somni-sleep/src/app/api/payment/create-intent/
+3. ls D:/projects/somni-sleep/src/components/  (看有哪些 checkout/stripe/paypal 相关文件)
+4. ls D:/projects/somni-sleep/src/app/\[locale\]/account/
+5. ls D:/projects/somni-sleep/src/app/\[locale\]/admin/products/
+6. ls D:/projects/somni-sleep/src/app/api/admin/reviews/
+
+## 补齐缺失文件
+对于每个检查发现缺失的目录/文件，从 D:/projects/nocturne 对应位置复制。不要跳过任何文件。用 read + write 逐文件复制。
+
+## SEO/营销组件
+搜索 D:/projects/nocturne/src/components/ 下含以下关键词的文件并复制:
+- json-ld
+- share-buttons  
+- recently-viewed
+- newsletter
+
+## Admin API 补齐
+搜索 D:/projects/nocturne/src/app/api/admin/ 下所有子目录，确保每个子目录的 route.ts 都已复制到 SOMNI。
+
+完成后告诉我哪些文件已复制，哪些仍缺失（如果源文件不存在）。

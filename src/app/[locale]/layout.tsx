@@ -1,9 +1,9 @@
-import { AnnouncementBar } from "@/components/layout/announcement-bar";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import { AnnouncementBar } from "@/components/announcement-bar";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import { CartProvider } from "@/lib/cart-context";
 import { WishlistProvider } from "@/lib/wishlist-context";
-import { BackToTop } from "@/components/ui/back-to-top";
+import { BackToTop } from "@/components/back-to-top";
 
 export default function LocaleLayout({
   children,

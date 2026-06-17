@@ -1,0 +1,166 @@
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { sendOrderConfirmation, sendTierUpgradeEmail } from "@/lib/email";
+import { calculateTax } from "@/lib/tax";
+
+export const runtime = "nodejs";
+
+function getTier(totalSpent: number): string {
+  if (totalSpent >= 5000) return "PLATINUM";
+  if (totalSpent >= 2000) return "GOLD";
+  if (totalSpent >= 500) return "SILVER";
+  return "BRONZE";
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const session = await auth();
+    const body = await request.json();
+
+    const {
+      email,
+      firstName,
+      lastName,
+      address: street,
+      city,
+      zip,
+      country,
+      phone,
+      delivery,
+      shippingCost,
+      promoCode,
+      discount,
+      items,
+    } = body;
+
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return NextResponse.json({ error: "No items in order" }, { status: 400 });
+    }
+
+    const customerName = `${firstName || ""} ${lastName || ""}`.trim();
+    const customerEmail = session?.user?.email || email || "";
+
+    // Calculate totals
+    const subtotal = items.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0);
+
+    // Calculate tax
+    let taxRate = 0;
+    let taxAmount = 0;
+    try {
+      const taxResult = await calculateTax(
+        { zip: zip || "", state: body.state || "", country: country || "US", city, street },
+        subtotal,
+        shippingCost || 0,
+        items.map((item: any, idx: number) => ({ id: String(idx), quantity: item.quantity, unitPrice: item.price })),
+      );
+      taxRate = taxResult.taxRate;
+      taxAmount = taxResult.taxAmount;
+    } catch {}
+
+    const total = subtotal + (shippingCost || 0) + taxAmount - (discount || 0);
+
+    // Generate order number
+    const chars = "ABCDEFGHIJKLMNPQRSTUVWXYZ23456789";
+    const rand = () => Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
+    const orderNumber = `NC-${rand()}-${rand().slice(0, 3)}`;
+
+    // Build shipping address JSON
+    const shippingAddress = JSON.stringify({ street, city, zip, country, phone, name: customerName });
+
+    // Create order
+    const order = await prisma.order.create({
+      data: {
+        orderNumber,
+        customerName: customerName || "Guest",
+        customerEmail,
+        status: "PENDING",
+        subtotal,
+        shipping: shippingCost || 0,
+        discount: discount || 0,
+        tax: taxAmount,
+        total: Math.max(0, total),
+        shippingAddress,
+        items: {
+          create: items.map((item: any) => ({
+            productId: item.productId,
+            productName: item.name,
+            variantSku: item.sku || null,
+            unitPrice: item.price,
+            quantity: item.quantity,
+            subtotal: item.price * item.quantity,
+          })),
+        },
+        events: {
+          create: {
+            eventType: "CREATED",
+            operatorName: customerName || "Customer",
+          },
+        },
+      },
+      include: { items: true },
+    });
+
+    // Send confirmation email (fire-and-forget)
+    sendOrderConfirmation(customerEmail, {
+      orderNumber,
+      customerName: customerName || "Valued Customer",
+      total: Math.max(0, total),
+      items: items.map((item: any) => ({
+        name: item.name,
+        qty: item.quantity,
+        price: item.price,
+      })),
+      trackingUrl: `https://lovenocturne.com/en/order/tracking?email=${encodeURIComponent(customerEmail)}&order=${orderNumber}`,
+    });
+
+    // Consume promo code
+    if (promoCode) {
+      await prisma.promoCode.update({
+        where: { code: promoCode },
+        data: { usedCount: { increment: 1 } },
+      });
+
+      // Check if max uses reached
+      const promo = await prisma.promoCode.findUnique({ where: { code: promoCode } });
+      if (promo && promo.maxUses && promo.usedCount >= promo.maxUses) {
+        await prisma.promoCode.update({
+          where: { code: promoCode },
+          data: { isActive: false },
+        });
+      }
+
+      // For gift cards, always deactivate after one use
+      if (promo?.isGiftCard) {
+        await prisma.promoCode.update({
+          where: { code: promoCode },
+          data: { isActive: false },
+        });
+      }
+    }
+
+    // Update user total spent and check tier upgrade
+    if (session?.user?.id) {
+      const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+      if (user) {
+        const newTotal = user.totalSpent + Math.max(0, total);
+        const newTier = getTier(newTotal);
+        const oldTier = user.memberTier || "BRONZE";
+
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { totalSpent: newTotal, memberTier: newTier },
+        });
+
+        if (newTier !== oldTier && newTier !== "BRONZE") {
+          sendTierUpgradeEmail(user.email, user.name || "Valued Customer", newTier);
+        }
+      }
+    }
+
+    return NextResponse.json({ success: true, orderNumber, orderId: order.id, customerEmail }, { status: 201 });
+  } catch (error: any) {
+    console.error("Checkout error:", error);
+    return NextResponse.json({ error: "Failed to place order" }, { status: 500 });
+  }
+}

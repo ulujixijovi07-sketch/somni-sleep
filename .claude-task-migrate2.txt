@@ -1,0 +1,61 @@
+你是一个全栈工程师。任务：从 NOCTURNE 项目批量复制购物车、支付、结账、订单、心愿单相关的核心文件到 SOMNI 项目。
+
+## 源项目: D:/projects/nocturne
+## 目标项目: D:/projects/somni-sleep
+
+## 步骤 1: 复制 contexts
+- 读 D:/projects/nocturne/src/lib/cart-context.tsx → 写 D:/projects/somni-sleep/src/lib/cart-context.tsx
+- 读 D:/projects/nocturne/src/lib/wishlist-context.tsx → 写 D:/projects/somni-sleep/src/lib/wishlist-context.tsx
+
+## 步骤 2: 复制 API 路由（读源文件→写目标文件，创建目录）
+- src/app/api/cart/route.ts
+- src/app/api/checkout/route.ts
+- src/app/api/payment/create-intent/route.ts
+- src/app/api/payment/paypal/create-order/route.ts
+- src/app/api/payment/paypal/capture-order/route.ts
+- src/app/api/wishlist/route.ts
+- src/app/api/promo/validate/route.ts
+- src/app/api/account/orders/route.ts
+- src/app/api/account/addresses/route.ts
+- src/app/api/account/gift-cards/route.ts
+- src/app/api/subscribe/route.ts
+- src/app/api/contact/route.ts
+- src/app/api/search/route.ts
+- src/app/api/notify-me/route.ts
+- src/app/api/track-order/route.ts
+- src/app/api/cron/jobs/route.ts
+- src/app/api/site-settings/route.ts
+
+## 步骤 3: 复制前端页面
+- src/app/[locale]/cart/page.tsx → 写目标（保留原文件名）
+- src/app/[locale]/checkout/page.tsx
+- src/app/[locale]/order/confirmation/page.tsx
+- src/app/[locale]/order/tracking/page.tsx
+- src/app/[locale]/account/page.tsx
+- src/app/[locale]/account/orders/page.tsx
+- src/app/[locale]/account/wishlist/page.tsx
+- src/app/[locale]/account/addresses/page.tsx
+- src/app/[locale]/account/gift-cards/page.tsx
+
+## 步骤 4: 复制 checkout 相关组件
+搜索 D:/projects/nocturne/src/components/ 下所有含 checkout 或 stripe 或 paypal 的 .tsx 文件，全部复制到 SOMNI 对应位置。
+
+## 步骤 5: 复制 admin 全部文件
+搜索 D:/projects/nocturne/src/app/[locale]/admin/ 下所有 .tsx 和 .ts 文件。也搜索 src/app/api/admin/ 下所有 route.ts。全部复制到 SOMNI。
+
+## 步骤 6: 复制 SEO + marketing 组件
+搜索 D:/projects/nocturne/src/components/ 下所有含 seo, json-ld, share, recently, newsletter 的 .tsx 文件，全部复制。
+
+## 步骤 7: 复制 Review 相关
+- src/app/api/reviews/route.ts
+- src/app/api/admin/reviews/route.ts
+- src/app/api/admin/reviews/bulk-generate/route.ts
+- src/app/api/admin/reviews/[id]/route.ts
+
+## 步骤 8: 复制数据 JSON 文件
+搜索 D:/projects/nocturne/src/data/ 下所有 .json 文件，全部复制到 SOMNI src/data/。
+
+## 注意
+- 所有文件直接复制，不做任何修改
+- 使用 mkdir -p 创建目标目录
+- 完成后不做 build 验证（我来做）
