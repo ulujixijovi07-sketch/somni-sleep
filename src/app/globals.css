@@ -33,6 +33,11 @@
 
 .parallax-half {
   min-height: 80vh;
+  border-radius: 48px 48px 0 0;
+  overflow: hidden;
+  margin-top: -48px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================================
