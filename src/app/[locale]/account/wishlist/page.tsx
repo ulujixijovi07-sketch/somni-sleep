@@ -74,7 +74,7 @@ export default function WishlistPage() {
           href="/collections"
           className="mt-8 inline-block rounded bg-brand-gold px-10 py-4 font-medium text-xs font-medium uppercase tracking-widest text-brand-dark transition-colors hover:bg-brand-gold/90"
         >
-          Explore Collections
+          Explore Products
         </Link>
       </div>
     );

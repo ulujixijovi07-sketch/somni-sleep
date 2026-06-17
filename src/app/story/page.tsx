@@ -29,7 +29,7 @@ const milestones = [
 
 const beliefs = [
   { icon: Eye, text: "A sleep mask is a light-blocking device for your internal clock. Nothing less." },
-  { icon: SpeakerHigh, text: "White noise isn't about relaxation. It's acoustic masking. Your brainstem stops flinching at every sound." },
+  { icon: SpeakerHigh, text: "White noise masks irregular sound. Your brainstem stops flinching. That's the whole trick." },
   { icon: Hand, text: "Deep pressure triggers your vagus nerve. Neurochemistry, not coziness. Serotonin up, cortisol down, measured in studies." },
   { icon: Wind, text: "Pillow spray targets GABA receptors in your amygdala. Same pathway as anti-anxiety meds, just through your nose." },
 ];

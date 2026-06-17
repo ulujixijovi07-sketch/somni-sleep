@@ -21,7 +21,7 @@ export function OrganizationJsonLd() {
       data={{
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: "NOCTURNE",
+        name: "SOMNI",
         url: "https://nocturne.com",
         logo: "https://nocturne.com/logo.png",
         description:
@@ -80,7 +80,7 @@ export function ProductJsonLd({
         },
         brand: {
           "@type": "Brand",
-          name: "NOCTURNE",
+          name: "SOMNI",
         },
       }}
     />

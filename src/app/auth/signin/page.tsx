@@ -51,7 +51,7 @@ export default function SignInPage() {
       <div className="w-full max-w-md space-y-8">
         {/* Brand */}
         <div className="text-center">
-          <Link href="/" className="font-display text-3xl font-light tracking-[0.2em] text-text-primary">NOCTURNE</Link>
+          <Link href="/" className="font-display text-3xl font-light tracking-[0.2em] text-text-primary">SOMNI</Link>
           <p className="mt-2 font-body text-sm text-text-secondary">Sign in to your account</p>
         </div>
 
@@ -65,7 +65,7 @@ export default function SignInPage() {
               </svg>
             </div>
             <p className="font-display text-lg text-text-light">Account Created!</p>
-            <p className="mt-1 font-body text-xs text-text-secondary">Welcome to NOCTURNE. Sign in to start shopping.</p>
+            <p className="mt-1 font-body text-xs text-text-secondary">Welcome to SOMNI. Sign in to start shopping.</p>
             <div className="mt-4 rounded border border-brand-gold/20 bg-brand-dark/40 px-4 py-3">
               <p className="font-accent text-[10px] uppercase tracking-widest text-brand-gold/60">Your 10% Welcome Gift</p>
               <p className="mt-1 font-mono text-xl tracking-wider text-brand-gold">{welcomeGiftCode}</p>

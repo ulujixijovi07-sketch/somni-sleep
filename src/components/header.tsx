@@ -11,11 +11,11 @@ import { useCart } from "@/lib/cart-context";
 import { useSession, signOut } from "next-auth/react";
 
 const NAV_LINKS = [
-  { label: "Collections", href: "/categories/all" },
-  { label: "Lingerie", href: "/categories/lingerie-sets" },
-  { label: "Bridal", href: "/categories/bridal-lingerie" },
-  { label: "Self-Love", href: "/categories/self-love" },
-  { label: "Sale", href: "/categories/all?sale=1" },
+  { label: "Shop All", href: "/categories/all" },
+  { label: "Visual", href: "/shop/visual" },
+  { label: "Auditory", href: "/shop/auditory" },
+  { label: "Tactile", href: "/shop/tactile" },
+  { label: "Olfactory", href: "/shop/olfactory" },
 ];
 
 export function Header() {
@@ -82,7 +82,7 @@ export function Header() {
             className="font-display text-lg font-light tracking-[0.2em] text-text-primary shrink-0"
             onClick={() => setMobileMenuOpen(false)}
           >
-            NOCTURNE
+            SOMNI
           </Link>
 
           {/* Desktop Navigation */}

@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const SHOP_LINKS = [
-  { label: "All Collections", href: "/collections" },
-  { label: "Lingerie Sets", href: "/categories/lingerie-sets" },
-  { label: "Bras", href: "/categories/bras" },
-  { label: "Bodysuits", href: "/categories/bodysuits-teddies" },
+  { label: "Visual / LUX", href: "/shop/visual" },
+  { label: "Auditory / SONUS", href: "/shop/auditory" },
+  { label: "Tactile / TACTUS", href: "/shop/tactile" },
+  { label: "Olfactory / OLFACIO", href: "/shop/olfactory" },
 ];
 
 const INFO_LINKS = [
@@ -99,7 +99,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
       <div className="border-t border-white/5">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 py-6 lg:flex-row lg:justify-between lg:px-8">
           <p className="font-body text-[12px] font-light text-brand-light/20">
-            &copy; {new Date().getFullYear()} NOCTURNE. All rights reserved.
+            &copy; {new Date().getFullYear()} SOMNI. All rights reserved.
           </p>
           <p className="font-body text-[11px] font-light text-brand-light/20">
             SSL Encrypted — Your data is always protected

@@ -53,7 +53,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="flex min-h-screen items-center justify-center bg-brand-secondary px-4">
         <div className="w-full max-w-sm rounded-sm border border-border bg-brand-primary p-8 shadow-sm text-center">
           <h1 className="font-display text-2xl font-light tracking-[0.2em] text-text-primary">
-            NOCTURNE
+            SOMNI
           </h1>
           <p className="mt-2 font-body text-xs text-text-secondary">Admin access restricted</p>
           <button
@@ -80,7 +80,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           onClick={() => setSidebarOpen(false)}
           className="font-display text-lg tracking-[0.15em] text-text-light"
         >
-          NOCTURNE
+          SOMNI
         </Link>
         <button
           onClick={() => setSidebarOpen(false)}
@@ -193,7 +193,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <List className="h-5 w-5" />
             </button>
             <span className="font-display text-lg tracking-[0.15em] text-text-primary">
-              NOCTURNE
+              SOMNI
             </span>
           </div>
 

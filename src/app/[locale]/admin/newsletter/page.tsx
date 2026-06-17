@@ -47,9 +47,9 @@ export default function AdminNewsletterPage() {
 
   const previewHtml = body
     ? `<div style="max-width:600px;margin:0 auto;font-family:Georgia,serif;background:#1A1817;color:#F6F2ED;padding:40px">
-<h1 style="font-weight:300;letter-spacing:0.2em;text-align:center;color:#C9A96E">NOCTURNE</h1>
+<h1 style="font-weight:300;letter-spacing:0.2em;text-align:center;color:#C9A84C">SOMNI</h1>
 ${body}
-<p style="font-size:11px;color:#5A524A;text-align:center;margin-top:40px;border-top:1px solid #3D3530;padding-top:20px">© NOCTURNE · <a href="%unsubscribe_url%" style="color:#5A524A">Unsubscribe</a></p>
+<p style="font-size:11px;color:#5A524A;text-align:center;margin-top:40px;border-top:1px solid #3D3530;padding-top:20px">© SOMNI · <a href="%unsubscribe_url%" style="color:#5A524A">Unsubscribe</a></p>
 </div>`
     : "";
 

@@ -130,7 +130,7 @@ export default function GiftCardsPage() {
               <button onClick={() => removeCard(card.code)} className="absolute top-3 right-3 flex h-6 w-6 items-center justify-center rounded-full bg-brand-dark/60 text-text-secondary/60 hover:bg-brand-burgundy hover:text-white opacity-0 group-hover:opacity-100 transition-all">
                 <X className="h-3.5 w-3.5" />
               </button>
-              <p className="font-medium text-[10px] uppercase tracking-[0.2em] text-brand-gold/50">NOCTURNE GIFT CARD</p>
+              <p className="font-medium text-[10px] uppercase tracking-[0.2em] text-brand-gold/50">SOMNI GIFT CARD</p>
               <p className="mt-3 font-mono text-lg font-medium tracking-wider text-brand-gold">{card.code}</p>
               <p className="mt-1 font-display text-2xl font-light text-text-primary">
                 {card.type === "percentage" ? `${card.value}% OFF` : `$${card.value} OFF`}
