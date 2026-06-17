@@ -132,6 +132,25 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Before/After emotional anchor */}
+      <section className="relative bg-abyss/40 border-b border-moonlight/5">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.32, 0.72, 0, 1] }}
+          className="max-w-[600px] mx-auto px-8 py-10 text-center"
+        >
+          <p className="text-base md:text-lg text-mist/50 leading-relaxed">
+            2:47 AM. Staring at the ceiling. Again.
+          </p>
+          <p className="text-moonlight/30 my-2 text-sm">&#8595;</p>
+          <p className="text-base md:text-lg text-cream/80 leading-relaxed">
+            10:31 PM. Eyes closed. <span className="text-moonlight">Mind quiet.</span>
+          </p>
+        </motion.div>
+      </section>
+
       {/* Social Proof Bar */}
       <SocialProof />
 
