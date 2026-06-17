@@ -31,7 +31,7 @@ export const senseData = {
       "Your brain has a master clock called the suprachiasmatic nucleus. It cares about one thing: light. A sliver of blue light through your eyelids cuts melatonin by up to 50%. The LUX collection goes after this pathway directly.",
     scienceBlurb:
       "Blue light after sunset delays melatonin by 3 hours on average, according to Harvard Medical School. Total darkness is not a luxury. It is a biological requirement.",
-    color: "from-[#132743] to-[#0B1A2E]",
+    color: "from-[#0A0A1A] to-[#050510]",
     accentColor: "#C9A84C",
     icon: "Eye",
   },
@@ -44,7 +44,7 @@ export const senseData = {
       "A part of your brainstem called the reticular activating system stays half-awake all night, scanning for irregular sounds. A car door. A neighbor. A snore. SONUS raises the noise floor so those spikes don't register.",
     scienceBlurb:
       "A 2021 meta-analysis in Sleep Medicine Reviews (n=8,242) found white noise reduced sleep onset latency by 38% compared to silence in noisy environments.",
-    color: "from-[#1A3555] to-[#132743]",
+    color: "from-[#111128] to-[#0A0A1A]",
     accentColor: "#7EB8C9",
     icon: "SpeakerHigh",
   },
@@ -57,7 +57,7 @@ export const senseData = {
       "Deep pressure on your skin hits the vagus nerve, which shifts your nervous system out of fight-or-flight and into rest mode. Same reason a hug feels good. We just put it in a product.",
     scienceBlurb:
       "Research published in the Journal of Sleep Research confirms that weighted pressure stimulation increases serotonin by 28% and decreases cortisol by 31% within 20 minutes.",
-    color: "from-[#132743] to-[#1A3555]",
+    color: "from-[#0A0A1A] to-[#111128]",
     accentColor: "#B8917E",
     icon: "Hand",
   },
@@ -70,7 +70,7 @@ export const senseData = {
       "Your sense of smell has a backdoor to your brain's emotion center. It skips the usual relay station and goes straight to the amygdala. OLFACIO scents tell your brain one thing: you're safe. Go to sleep.",
     scienceBlurb:
       "A controlled study at the University of Southampton found that lavender aromatherapy improved sleep quality scores by 20% compared to placebo, with effects strongest in the first week of use.",
-    color: "from-[#1A3555] to-[#0B1A2E]",
+    color: "from-[#111128] to-[#050510]",
     accentColor: "#9FAF8E",
     icon: "Wind",
   },

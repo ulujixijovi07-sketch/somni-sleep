@@ -327,7 +327,7 @@ export default function HomePage() {
       {/* ============================================
           REVIEWS
           ============================================ */}
-      <section className="relative bg-[#071220] py-16 md:py-24 px-6">
+      <section className="relative bg-[#050510] py-16 md:py-24 px-6">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center mb-12">
             <p className="text-moonlight text-xs uppercase tracking-[0.2em] mb-3">Verified Reviews</p>

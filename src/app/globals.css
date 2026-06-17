@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-abyss: #0B1A2E;
-  --color-deep: #132743;
-  --color-ocean: #1A3555;
+  --color-abyss: #050510;
+  --color-deep: #0A0A1A;
+  --color-ocean: #111128;
   --color-moonlight: #C9A84C;
   --color-moonlight-dim: #A68A3E;
   --color-cream: #F5F1EB;
