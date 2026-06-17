@@ -55,108 +55,94 @@ export default function HeroAmbient() {
       }
     }
 
-    // Sleep mask path — centered and scaled relative to viewport
+    // Sleep mask silhouette — follows reference contour (191×107px, AR 1.79:1)
     function getMaskPath(scale: number) {
       const cx = W / 2;
       const cy = H * 0.4;
-      const w = scale * 0.85; // half-width scale factor
-      const h = scale * 0.55; // half-height scale factor
 
-      const mx = cx;
-      const my = cy;
+      const refW = 191;
+      const refCX = 95.5;
+      const refCY = 53.5;
 
-      const p = new Path2D();
+      // Key contour points from reference sleep mask image
+      const pts = [
+        { x: 7, y: 51 },    // 0: upper left strap side
+        { x: 15, y: 91 },   // 1: left lower side
+        { x: 39, y: 109 },  // 2: left bottom curve
+        { x: 96, y: 100 },  // 3: center bottom (nose bridge)
+        { x: 137, y: 132 }, // 4: right bottom wing tip (lowest, asymmetric)
+        { x: 193, y: 110 }, // 5: right lower side
+        { x: 179, y: 65 },  // 6: right upper strap side
+        { x: 43, y: 26 },   // 7: top center
+      ];
 
-      // Start at left strap point
-      const lx = mx - w * 1.15;
-      const ly = my;
+      const n = pts.length;
+      const s = (2 * scale) / refW; // px per reference unit
 
-      p.moveTo(lx, ly);
+      const mx = (rx: number) => cx + (rx - refCX) * s;
+      const my = (ry: number) => cy + (ry - refCY) * s;
 
-      // Left eye — top curve
-      p.bezierCurveTo(
-        mx - w * 0.95,
-        my - h * 1.15,
-        mx - w * 0.35,
-        my - h * 0.75,
-        mx - w * 0.08,
-        my
-      );
+      // Smooth tangents at each anchor (Catmull-Rom style)
+      const tangents = pts.map((_p, i) => {
+        const prev = pts[(i - 1 + n) % n];
+        const next = pts[(i + 1) % n];
+        const dx = next.x - prev.x;
+        const dy = next.y - prev.y;
+        const len = Math.sqrt(dx * dx + dy * dy) || 1;
+        return { x: dx / len, y: dy / len };
+      });
 
-      // Nose bridge dip (top)
-      p.bezierCurveTo(
-        mx - w * 0.02,
-        my - h * 0.08,
-        mx + w * 0.02,
-        my - h * 0.08,
-        mx + w * 0.08,
-        my
-      );
+      const path = new Path2D();
+      path.moveTo(mx(pts[0].x), my(pts[0].y));
 
-      // Right eye — top curve
-      p.bezierCurveTo(
-        mx + w * 0.35,
-        my - h * 0.75,
-        mx + w * 0.95,
-        my - h * 1.15,
-        mx + w * 1.15,
-        my
-      );
+      for (let i = 0; i < n; i++) {
+        const a = pts[i];
+        const b = pts[(i + 1) % n];
+        const ta = tangents[i];
+        const tb = tangents[(i + 1) % n];
 
-      // Right eye — bottom curve (outer to inner)
-      p.bezierCurveTo(
-        mx + w * 0.9,
-        my + h * 1.05,
-        mx + w * 0.4,
-        my + h * 0.55,
-        mx + w * 0.08,
-        my + h * 0.05
-      );
+        const segLen = Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2);
+        const k = 0.3; // tension — lower = rounder curves
 
-      // Nose bridge dip (bottom) — deeper dip for nose
-      p.bezierCurveTo(
-        mx + w * 0.03,
-        my + h * 0.2,
-        mx - w * 0.03,
-        my + h * 0.2,
-        mx - w * 0.08,
-        my + h * 0.05
-      );
+        const cp1x = a.x + ta.x * segLen * k;
+        const cp1y = a.y + ta.y * segLen * k;
+        const cp2x = b.x - tb.x * segLen * k;
+        const cp2y = b.y - tb.y * segLen * k;
 
-      // Left eye — bottom curve (inner to outer)
-      p.bezierCurveTo(
-        mx - w * 0.4,
-        my + h * 0.55,
-        mx - w * 0.9,
-        my + h * 1.05,
-        lx,
-        ly
-      );
+        path.bezierCurveTo(
+          mx(cp1x), my(cp1y),
+          mx(cp2x), my(cp2y),
+          mx(b.x), my(b.y)
+        );
+      }
 
-      p.closePath();
-      return p;
+      path.closePath();
+      return path;
     }
 
-    // Subtle secondary glow shapes — two eye ellipses
+    // Dual eye glows — centered on the mask's widest horizontal zone
     function getEyeOvals(scale: number) {
       const cx = W / 2;
       const cy = H * 0.4;
-      const w = scale * 0.85;
+      const s = (2 * scale) / 191;
 
-      const eyeW = w * 0.28;
-      const eyeH = w * 0.16;
-      const gap = w * 0.28;
+      // Eye centers in reference coords: ~y=58 (widest zone), x=±50 from center
+      const eyeY = cy + (58 - 53.5) * s;
+      const eyeGap = 50.5 * s; // half-distance between eye centers
+
+      const eyeRx = scale * 0.2;
+      const eyeRy = scale * 0.12;
 
       return [
-        { x: cx - gap, y: cy, rx: eyeW, ry: eyeH },
-        { x: cx + gap, y: cy, rx: eyeW, ry: eyeH },
+        { x: cx - eyeGap, y: eyeY, rx: eyeRx, ry: eyeRy },
+        { x: cx + eyeGap, y: eyeY, rx: eyeRx, ry: eyeRy },
       ];
     }
 
     function drawMask(t: number) {
       const cx = W / 2;
       const cy = H * 0.4;
-      const scale = Math.min(W, H) * 0.35;
+      const scale = Math.min(W * 0.65, H * 0.85) / 2;
 
       // Pulse animation — slow breathing rhythm
       const pulse = 1 + 0.06 * Math.sin(t * 0.0012);
@@ -255,34 +241,39 @@ export default function HeroAmbient() {
       ctx!.lineWidth = 3;
       ctx!.stroke(maskPath);
 
-      // ---- Subtle strap lines ----
-      const lx = cx - scale * 0.85 * 1.15;
-      const rx = cx + scale * 0.85 * 1.15;
+      // ---- Subtle strap lines from upper attachment points ----
+      const rs = (2 * scale) / 191;
+      const leftStrapX = cx + (7 - 95.5) * rs;
+      const leftStrapY = cy + (51 - 53.5) * rs;
+      const rightStrapX = cx + (179 - 95.5) * rs;
+      const rightStrapY = cy + (65 - 53.5) * rs;
       const strapAlpha = 0.1 + glowIntensity * 0.06;
 
+      // Left strap
       ctx!.beginPath();
-      ctx!.moveTo(lx, cy);
+      ctx!.moveTo(leftStrapX, leftStrapY);
       ctx!.bezierCurveTo(
-        lx - scale * 0.3,
-        cy - scale * 0.05,
-        lx - scale * 0.8,
-        cy,
-        lx - scale * 1.1,
-        cy
+        leftStrapX - scale * 0.25,
+        leftStrapY - scale * 0.04,
+        leftStrapX - scale * 0.7,
+        leftStrapY + scale * 0.02,
+        leftStrapX - scale * 0.95,
+        leftStrapY + scale * 0.01
       );
       ctx!.strokeStyle = `rgba(201, 168, 76, ${strapAlpha})`;
       ctx!.lineWidth = 1;
       ctx!.stroke();
 
+      // Right strap
       ctx!.beginPath();
-      ctx!.moveTo(rx, cy);
+      ctx!.moveTo(rightStrapX, rightStrapY);
       ctx!.bezierCurveTo(
-        rx + scale * 0.3,
-        cy - scale * 0.05,
-        rx + scale * 0.8,
-        cy,
-        rx + scale * 1.1,
-        cy
+        rightStrapX + scale * 0.25,
+        rightStrapY - scale * 0.04,
+        rightStrapX + scale * 0.7,
+        rightStrapY + scale * 0.02,
+        rightStrapX + scale * 0.95,
+        rightStrapY + scale * 0.01
       );
       ctx!.strokeStyle = `rgba(201, 168, 76, ${strapAlpha})`;
       ctx!.lineWidth = 1;
