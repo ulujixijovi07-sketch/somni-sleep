@@ -74,7 +74,7 @@ export default function HomePage() {
           <motion.span
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.6 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
             className="inline-block rounded-full border border-moonlight/20 bg-moonlight/5 px-4 py-1.5 text-[10px] uppercase tracking-[0.2em] text-moonlight mb-6"
           >
             Science of Sleep, Art of Rest
@@ -90,7 +90,7 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.8,
-                    delay: 1.8 + i * 0.08,
+                    delay: 0.6 + i * 0.05,
                     ease: [0.32, 0.72, 0, 1],
                   }}
                   className="inline-block mr-[0.25em]"
@@ -107,7 +107,7 @@ export default function HomePage() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.8 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
             className="mt-6 text-mist text-base md:text-lg max-w-[48ch] mx-auto leading-relaxed"
           >
             Four pathways to deep sleep. Neuroscience-backed.
@@ -116,7 +116,7 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 3.0 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
             className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link href="/shop/visual" className="btn-primary text-sm uppercase tracking-[0.15em] px-8 py-3.5">
