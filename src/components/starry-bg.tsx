@@ -112,18 +112,39 @@ export default function StarryBackground() {
 
     function drawStar(s: Star, alpha: number) {
       const { x, y, r } = s;
-      // Glow radius: 2×–3× star radius for soft radial spread
-      const glowR = r * 2.5;
-      const grad = ctx!.createRadialGradient(x, y, 0, x, y, glowR);
-      grad.addColorStop(0, hexToRgba(s.color, alpha));
-      grad.addColorStop(0.3, hexToRgba(s.glowColor, alpha * 0.6));
-      grad.addColorStop(0.6, hexToRgba(s.glowColor, alpha * 0.15));
-      grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+      if (s.tier === 1) {
+        // Small stars (60%): sharp filled circle — crisp point, no blur
+        ctx!.beginPath();
+        ctx!.arc(x, y, r, 0, Math.PI * 2);
+        ctx!.fillStyle = hexToRgba(s.color, alpha);
+        ctx!.fill();
+      } else if (s.tier === 2) {
+        // Medium stars (30%): small glow 2–3× radius (tight)
+        const glowR = r * 2.5;
+        const grad = ctx!.createRadialGradient(x, y, 0, x, y, glowR);
+        grad.addColorStop(0, hexToRgba(s.color, alpha));
+        grad.addColorStop(0.25, hexToRgba(s.glowColor, alpha * 0.5));
+        grad.addColorStop(0.6, hexToRgba(s.glowColor, alpha * 0.1));
+        grad.addColorStop(1, "rgba(0, 0, 0, 0)");
 
-      ctx!.beginPath();
-      ctx!.arc(x, y, glowR, 0, Math.PI * 2);
-      ctx!.fillStyle = grad;
-      ctx!.fill();
+        ctx!.beginPath();
+        ctx!.arc(x, y, glowR, 0, Math.PI * 2);
+        ctx!.fillStyle = grad;
+        ctx!.fill();
+      } else {
+        // Bright stars (10%): subtle glow 3–4× radius
+        const glowR = r * 3;
+        const grad = ctx!.createRadialGradient(x, y, 0, x, y, glowR);
+        grad.addColorStop(0, hexToRgba(s.color, alpha));
+        grad.addColorStop(0.15, hexToRgba(s.glowColor, alpha * 0.7));
+        grad.addColorStop(0.4, hexToRgba(s.glowColor, alpha * 0.2));
+        grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+
+        ctx!.beginPath();
+        ctx!.arc(x, y, glowR, 0, Math.PI * 2);
+        ctx!.fillStyle = grad;
+        ctx!.fill();
+      }
     }
 
     function draw(timestamp: number) {
@@ -163,7 +184,7 @@ export default function StarryBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full"
-      style={{ pointerEvents: "none", zIndex: 0 }}
+      style={{ position: "fixed", top: 0, left: 0, pointerEvents: "none", zIndex: 0 }}
     />
   );
 }
