@@ -58,7 +58,7 @@
    BASE
    ============================================ */
 body {
-  background-color: var(--color-abyss);
+  background: radial-gradient(ellipse at 50% 0%, #0A1120 0%, #050510 60%, #020208 100%);
   color: var(--color-soft-white);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;

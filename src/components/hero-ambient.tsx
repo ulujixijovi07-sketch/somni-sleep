@@ -304,9 +304,8 @@ export default function HeroAmbient() {
     function draw(timestamp: number) {
       ctx!.clearRect(0, 0, W, H);
 
-      // Background
-      ctx!.fillStyle = "#050510";
-      ctx!.fillRect(0, 0, W, H);
+      // Background — transparent, let StarryBackground show through
+      ctx!.clearRect(0, 0, W, H);
 
       // Subtle vignette
       const vig = ctx!.createRadialGradient(
