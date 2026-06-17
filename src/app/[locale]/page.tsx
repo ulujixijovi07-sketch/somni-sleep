@@ -137,7 +137,7 @@ export default function HomePage() {
       <SocialProof />
 
       {/* Founder Snippet */}
-      <section className="relative z-10 bg-abyss border-b border-moonlight/5">
+      <section className="relative bg-abyss/30 border-b border-moonlight/5">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -160,7 +160,7 @@ export default function HomePage() {
       {/* ============================================
           THE SCIENCE
           ============================================ */}
-      <section className="relative z-10 min-h-[100dvh] flex items-center bg-abyss">
+      <section className="relative min-h-[100dvh] flex items-center bg-abyss/30">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -237,15 +237,15 @@ export default function HomePage() {
           <section
             id={`sense-${sense.id}`}
             key={sense.id}
-            className={`parallax-section z-10 ${isFirst ? "parallax-half-first" : "parallax-half"}`}
+            className={`parallax-section ${isFirst ? "parallax-half-first" : "parallax-half"}`}
             style={{ backgroundImage: `url(${bgImages[sense.id]})` }}
           >
             {/* Content wrapper: first section gets rounded container */}
             <div className={isFirst ? "parallax-inner" : ""}>
               {/* Light overlay — just enough for text */}
-              <div className="absolute inset-0 bg-abyss/60 z-0" />
+              <div className="absolute inset-0 bg-abyss/30 z-0" />
 
-              <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-28">
+              <div className="relative w-full max-w-[1400px] mx-auto px-6 py-28">
                 <div className={`grid md:grid-cols-2 gap-14 items-center ${isEven ? "" : "md:[direction:rtl]"}`}>
                   <div className={isEven ? "" : "md:[direction:ltr]"}>
                     <div className="flex items-center gap-2 mb-4">
@@ -292,7 +292,7 @@ export default function HomePage() {
           BEST SELLERS
           ============================================ */}
       <section
-        className="parallax-section parallax-full z-10"
+        className="parallax-section parallax-full"
         style={{ backgroundImage: `url(${bgImages.products})` }}
       >
         <div className="absolute inset-0 bg-abyss/55" />
@@ -301,7 +301,7 @@ export default function HomePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-          className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-28"
+          className="relative w-full max-w-[1400px] mx-auto px-6 py-28"
         >
           <div className="text-center mb-12">
             <p className="text-moonlight text-xs uppercase tracking-[0.2em] mb-2">Most Loved</p>
@@ -327,7 +327,7 @@ export default function HomePage() {
       {/* ============================================
           REVIEWS
           ============================================ */}
-      <section className="relative z-10 bg-[#050510] py-16 md:py-24 px-6">
+      <section className="relative bg-[#050510]/40 py-16 md:py-24 px-6">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center mb-12">
             <p className="text-moonlight text-xs uppercase tracking-[0.2em] mb-3">Verified Reviews</p>
@@ -387,7 +387,7 @@ export default function HomePage() {
       </section>
 
       {/* NEWSLETTER */}
-      <section className="relative z-10 bg-abyss border-t border-moonlight/5 py-20 md:py-28 px-6">
+      <section className="relative bg-abyss/30 border-t border-moonlight/5 py-20 md:py-28 px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

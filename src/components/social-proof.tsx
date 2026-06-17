@@ -55,7 +55,7 @@ export default function SocialProof() {
       </AnimatePresence>
 
       {/* Social proof bar — placed after hero */}
-      <section className="relative z-10 bg-deep/50 border-y border-moonlight/10">
+      <section className="relative bg-abyss/30 border-y border-moonlight/10">
         <div className="max-w-[1400px] mx-auto px-8 py-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
             {/* Reviews */}
