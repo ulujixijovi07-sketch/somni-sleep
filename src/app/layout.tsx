@@ -1,9 +1,7 @@
+import React from "react";
 import { Providers } from "./providers";
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import LoadingScreen from "@/components/loading-screen";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -84,12 +82,7 @@ export default function RootLayout({
         )}
       </head>
       <body className={`${dmSans.variable} ${dmSerif.variable} antialiased`}>
-        <Providers>
-          <LoadingScreen />
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

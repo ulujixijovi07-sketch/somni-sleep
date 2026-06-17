@@ -1,0 +1,23 @@
+修复 SOMNI 项目 (D:/projects/somni-sleep) 的运行时错误。当前 /en 页面出错。
+
+## 错误 1: "React is not defined" in src/app/layout.tsx
+文件: D:/projects/somni-sleep/src/app/layout.tsx
+问题: 用了 `<React.Fragment>` 但没有 `import React from "react"`
+修复: 在第 1 行加 `import React from "react";`
+
+## 错误 2: /en 页面 404
+文件: D:/projects/somni-sleep/src/app/[locale]/page.tsx
+这是 NOCTURNE 复制过来的首页，需要改成 SOMNI 的首页内容。
+当前 SOMNI 的首页是 D:/projects/somni-sleep/src/app/page.tsx（旧的根路由首页）。
+
+方案: 修改 D:/projects/somni-sleep/src/app/[locale]/page.tsx，让它能渲染。最简单方法：
+- 读取 D:/projects/somni-sleep/src/app/page.tsx 的内容（SOMNI 原来的首页）
+- 把内容写到 D:/projects/somni-sleep/src/app/[locale]/page.tsx 作为 locale 首页
+- 但保持 `"use client"` 指令和 SOMNI 原首页的所有代码逻辑
+- 不需要改任何组件引用
+
+## 验证
+完成后运行 curl 测试:
+sleep 15 (等dev server热更新)
+curl -sI --max-time 5 'http://localhost:3001/en' | head -3
+预期结果: HTTP/1.1 200 OK

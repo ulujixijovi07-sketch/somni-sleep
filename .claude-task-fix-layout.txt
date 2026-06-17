@@ -1,0 +1,18 @@
+修复 D:/projects/somni-sleep/src/app/layout.tsx 的架构冲突。
+
+## 问题
+Root layout 渲染了 Header + Footer（SOMNI原有的），Locale layout 也渲染了 Header + Footer（NOCTURNE的带CartProvider）。
+Header 组件用了 useCart()，需要 CartProvider 包裹，但 root layout 的 Header 在 CartProvider 外面。
+
+## 修复
+编辑 D:/projects/somni-sleep/src/app/layout.tsx:
+- 删除 `import { Header } from "@/components/header"` （第5行附近）
+- 删除 `import { Footer } from "@/components/footer"` （第6行附近）
+- 删除 `import LoadingScreen from "@/components/loading-screen"` （如果有）
+- 把 body 里的 JSX 从 `<Providers><LoadingScreen /><Header />{children}<Footer /></Providers>` 改成 `<body className={`${dmSans.variable} ${dmSerif.variable} antialiased`}><Providers>{children}</Providers></body>`
+  
+ 就是说只保留 Providers 包裹 children。所有 UI chrome（Header/Footer/AnnouncementBar/LoadingScreen）交给 src/app/[locale]/layout.tsx 的 LocaleLayout 处理。
+
+## 验证
+运行: sleep 15 && curl -sI --max-time 5 'http://localhost:3001/en' | head -3
+如果返回 HTTP 200 就成功。如果还是 500，读取 body 中的错误信息。

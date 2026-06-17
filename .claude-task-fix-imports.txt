@@ -1,0 +1,28 @@
+修复 D:/projects/somni-sleep/src/app/layout.tsx 的导入冲突。
+
+## 问题
+root layout.tsx (src/app/layout.tsx) 用 default import:
+```
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+```
+
+但 header.tsx 和 footer.tsx 现在用的是 named export (从NOCTURNE复制过来的):
+```
+export function Header() { ... }
+export function Footer() { ... }
+```
+
+## 修复
+在 D:/projects/somni-sleep/src/app/layout.tsx 中:
+- 把 `import Header from "@/components/header"` 改成 `import { Header } from "@/components/header"`
+- 把 `import Footer from "@/components/footer"` 改成 `import { Footer } from "@/components/footer"`
+
+## 同时检查
+在 SOMNI 项目 src/ 下搜索所有使用 `from "@/components/header"` 或 `from "@/components/footer"` 的 default import，全部改成 named import。
+
+用 grep 搜索: `from "@/components/header"` 和 `from "@/components/footer"`
+
+## 验证
+运行: cd D:/projects/somni-sleep && npx next build --webpack 2>&1 | grep -iE "error.*import|✓ Compiled"
+如果没有 import 错误就成功了。
