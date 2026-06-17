@@ -72,14 +72,14 @@ export default function HomePage() {
         <HeroAmbient />
 
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 text-center py-24">
-          <motion.p
+          <motion.span
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.6 }}
-            className="text-moonlight text-xs uppercase tracking-[0.3em] mb-6 font-medium"
+            className="inline-block rounded-full border border-moonlight/20 bg-moonlight/5 px-4 py-1.5 text-[10px] uppercase tracking-[0.2em] text-moonlight mb-6"
           >
             Science of Sleep, Art of Rest
-          </motion.p>
+          </motion.span>
 
           <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-[1.05] text-cream max-w-[16ch] mx-auto">
             {"You Don't Have Insomnia. Your Senses Just Need Reset."
@@ -138,7 +138,13 @@ export default function HomePage() {
 
       {/* Founder Snippet */}
       <section className="relative bg-abyss border-b border-moonlight/5">
-        <div className="max-w-[900px] mx-auto px-8 py-16 flex items-center gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+          className="max-w-[900px] mx-auto px-8 py-16 flex items-center gap-6"
+        >
           <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-moonlight/20">
             <img src="/founder.jpg" alt="Dr. Adrian Voss" className="w-full h-full object-cover" />
           </div>
@@ -148,69 +154,74 @@ export default function HomePage() {
             </p>
             <p className="text-xs text-mist/50 mt-2">Dr. Adrian Voss, Founder</p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ============================================
           THE SCIENCE
           ============================================ */}
-      <section className="relative min-h-[100dvh] flex items-center bg-abyss">
-        <div className="relative w-full max-w-[1400px] mx-auto px-6 py-20">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-moonlight text-xs uppercase tracking-[0.2em] mb-3">The 4-Sense Protocol</p>
-              <h2 className="font-[family-name:var(--font-display)] text-2xl md:text-4xl font-bold tracking-tighter text-cream leading-[1.1]">
-                Sleep Is <span className="text-moonlight">Sensory.</span>
-              </h2>
-              <p className="mt-3 text-sm text-mist leading-relaxed max-w-[52ch]">
-                Light, sound, touch, scent. Your brain processes all of it. When any of it reads as danger, your nervous system stays on alert. SOMNI targets all four at once.
-              </p>
+      <section className="relative bg-abyss">
+        {/* Intro — fades up */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+          className="relative w-full max-w-[1400px] mx-auto px-6 pt-20 pb-14"
+        >
+          <p className="text-moonlight text-xs uppercase tracking-[0.2em] mb-3">The 4-Sense Protocol</p>
+          <h2 className="font-[family-name:var(--font-display)] text-2xl md:text-4xl font-bold tracking-tighter text-cream leading-[1.1]">
+            Sleep Is <span className="text-moonlight">Sensory.</span>
+          </h2>
+          <p className="mt-3 text-sm text-mist leading-relaxed max-w-[52ch]">
+            Light, sound, touch, scent. Your brain processes all of it. When any of it reads as danger, your nervous system stays on alert. SOMNI targets all four at once.
+          </p>
+        </motion.div>
+
+        {/* Sticky stacking protocol cards */}
+        <div className="relative" style={{ height: "400dvh" }}>
+          {[
+            { step: "01", sense: "Visual", action: "Block blue light", result: "Melatonin begins", target: "visual" },
+            { step: "02", sense: "Auditory", action: "Mask disruptive noise", result: "Arousal threshold rises", target: "auditory" },
+            { step: "03", sense: "Tactile", action: "Apply deep pressure", result: "Parasympathetic activates", target: "tactile" },
+            { step: "04", sense: "Olfactory", action: "Signal safety via scent", result: "Amygdala calms", target: "olfactory" },
+          ].map((item, idx) => (
+            <div
+              key={item.step}
+              onClick={() => {
+                const el = document.getElementById(`sense-${item.target}`);
+                if (!el) return;
+                const target = el.getBoundingClientRect().top + window.scrollY;
+                const start = window.scrollY;
+                const distance = target - start;
+                const duration = 800;
+                let startTime: number | null = null;
+
+                function easeInOutCubic(t: number) {
+                  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+
+                function animate(currentTime: number) {
+                  if (!startTime) startTime = currentTime;
+                  const elapsed = currentTime - startTime;
+                  const progress = Math.min(elapsed / duration, 1);
+                  window.scrollTo(0, start + distance * easeInOutCubic(progress));
+                  if (progress < 1) requestAnimationFrame(animate);
+                }
+
+                requestAnimationFrame(animate);
+              }}
+              className="sticky top-0 h-[100dvh] flex items-center justify-center cursor-pointer bg-abyss"
+              style={{ zIndex: (idx + 1) * 10 }}
+            >
+              <div className="text-center px-6">
+                <span className="text-7xl md:text-9xl font-bold text-moonlight/[0.08] font-[family-name:var(--font-display)] block leading-none select-none">{item.step}</span>
+                <span className="text-xs text-moonlight uppercase tracking-[0.2em] font-medium mt-3 block">{item.sense}</span>
+                <p className="text-2xl md:text-5xl text-cream font-semibold mt-2 font-[family-name:var(--font-display)] tracking-tight">{item.action}</p>
+                <p className="text-base text-mist mt-3">&rarr; {item.result}</p>
+              </div>
             </div>
-
-            <div className="space-y-3">
-              {[
-                { step: "01", sense: "Visual", action: "Block blue light", result: "Melatonin begins", target: "visual" },
-                { step: "02", sense: "Auditory", action: "Mask disruptive noise", result: "Arousal threshold rises", target: "auditory" },
-                { step: "03", sense: "Tactile", action: "Apply deep pressure", result: "Parasympathetic activates", target: "tactile" },
-                { step: "04", sense: "Olfactory", action: "Signal safety via scent", result: "Amygdala calms", target: "olfactory" },
-              ].map((item) => (
-                <button
-                  key={item.step}
-                  onClick={() => {
-                    const el = document.getElementById(`sense-${item.target}`);
-                    if (!el) return;
-                    const target = el.getBoundingClientRect().top + window.scrollY;
-                    const start = window.scrollY;
-                    const distance = target - start;
-                    const duration = 800;
-                    let startTime: number | null = null;
-
-                    function easeInOutCubic(t: number) {
-                      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-                    }
-
-                    function animate(currentTime: number) {
-                      if (!startTime) startTime = currentTime;
-                      const elapsed = currentTime - startTime;
-                      const progress = Math.min(elapsed / duration, 1);
-                      window.scrollTo(0, start + distance * easeInOutCubic(progress));
-                      if (progress < 1) requestAnimationFrame(animate);
-                    }
-
-                    requestAnimationFrame(animate);
-                  }}
-                  className="glass-card p-4 flex items-center gap-3 w-full text-left hover:border-moonlight/30 transition-all cursor-pointer"
-                >
-                  <span className="text-xl font-bold text-moonlight/30 font-[family-name:var(--font-display)]">{item.step}</span>
-                  <div className="flex-1">
-                    <span className="text-xs text-moonlight uppercase tracking-[0.1em] font-medium">{item.sense}</span>
-                    <p className="text-sm text-cream font-semibold">{item.action}</p>
-                    <p className="text-xs text-mist">&rarr; {item.result}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -284,7 +295,13 @@ export default function HomePage() {
         style={{ backgroundImage: `url(${bgImages.products})` }}
       >
         <div className="absolute inset-0 bg-abyss/55" />
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-28">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+          className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-28"
+        >
           <div className="text-center mb-12">
             <p className="text-moonlight text-xs uppercase tracking-[0.2em] mb-2">Most Loved</p>
             <h2 className="font-[family-name:var(--font-display)] text-2xl md:text-4xl font-bold tracking-tighter text-cream">
@@ -303,7 +320,7 @@ export default function HomePage() {
               Shop All Products <ArrowRight size={14} className="inline ml-1" />
             </Link>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ============================================
@@ -370,9 +387,15 @@ export default function HomePage() {
 
       {/* NEWSLETTER */}
       <section className="relative bg-abyss border-t border-moonlight/5 py-20 md:py-28 px-6">
-        <div className="max-w-[700px] mx-auto text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+          className="max-w-[700px] mx-auto text-center"
+        >
           <NewsletterForm />
-        </div>
+        </motion.div>
       </section>
     </main>
   );
