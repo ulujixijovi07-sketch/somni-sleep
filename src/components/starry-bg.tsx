@@ -54,9 +54,13 @@ export default function StarryBackground() {
 
     draw();
     window.addEventListener("resize", draw);
+    // Watch for content changes that affect page height
+    const observer = new ResizeObserver(() => draw());
+    observer.observe(document.body);
 
     return () => {
       window.removeEventListener("resize", draw);
+      observer.disconnect();
       cancelAnimationFrame(animId);
     };
   }, []);
