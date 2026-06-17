@@ -150,12 +150,8 @@ export default function HomePage() {
       {/* ============================================
           THE SCIENCE
           ============================================ */}
-      <section
-        className="parallax-section min-h-screen"
-        style={{ backgroundImage: `url(${bgImages.visual})` }}
-      >
-        <div className="absolute inset-0 bg-abyss/50" />
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-20">
+      <section className="relative min-h-screen flex items-center bg-abyss">
+        <div className="relative w-full max-w-[1400px] mx-auto px-6 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-moonlight text-xs uppercase tracking-[0.2em] mb-3">The 4-Sense Protocol</p>
@@ -224,7 +220,7 @@ export default function HomePage() {
           <section
             id={`sense-${sense.id}`}
             key={sense.id}
-            className="parallax-section parallax-half"
+            className={`parallax-section parallax-half ${idx === 0 ? "!mt-0 !rounded-none" : ""}`}
             style={{ backgroundImage: `url(${bgImages[sense.id]})` }}
           >
             {/* Light overlay — just enough for text */}
