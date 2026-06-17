@@ -216,48 +216,52 @@ export default function HomePage() {
       {senses.map((sense, idx) => {
         const Icon = sense.icon;
         const isEven = idx % 2 === 0;
+        const isFirst = idx === 0;
         return (
           <section
             id={`sense-${sense.id}`}
             key={sense.id}
-            className={`parallax-section parallax-half ${idx === 0 ? "!mt-0 !rounded-none" : ""}`}
+            className={`parallax-section ${isFirst ? "parallax-half-first" : "parallax-half"}`}
             style={{ backgroundImage: `url(${bgImages[sense.id]})` }}
           >
-            {/* Light overlay — just enough for text */}
-            <div className="absolute inset-0 bg-abyss/40" />
+            {/* Content wrapper: first section gets rounded container */}
+            <div className={isFirst ? "parallax-inner" : ""}>
+              {/* Light overlay — just enough for text */}
+              <div className="absolute inset-0 bg-abyss/40" />
 
-            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-28">
-              <div className={`grid md:grid-cols-2 gap-14 items-center ${isEven ? "" : "md:[direction:rtl]"}`}>
-                <div className={isEven ? "" : "md:[direction:ltr]"}>
-                  <div className="flex items-center gap-2 mb-4">
-                    <Icon size={20} className="text-moonlight" weight="duotone" />
-                    <span className="text-moonlight text-xs uppercase tracking-[0.2em] font-medium">{sense.name}</span>
+              <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-28">
+                <div className={`grid md:grid-cols-2 gap-14 items-center ${isEven ? "" : "md:[direction:rtl]"}`}>
+                  <div className={isEven ? "" : "md:[direction:ltr]"}>
+                    <div className="flex items-center gap-2 mb-4">
+                      <Icon size={20} className="text-moonlight" weight="duotone" />
+                      <span className="text-moonlight text-xs uppercase tracking-[0.2em] font-medium">{sense.name}</span>
+                    </div>
+                    <h2 className="font-[family-name:var(--font-display)] text-2xl md:text-4xl font-bold tracking-tighter text-cream leading-[1.1]">
+                      {sense.title}{" "}
+                      <span className="text-moonlight">{sense.name}</span>
+                    </h2>
+
+                    <p className="mt-3 text-sm text-cream/80 leading-relaxed max-w-[50ch]">{sense.description}</p>
+
+                    <div className="mt-5 glass-card p-4 inline-block">
+                      <p className="text-2xl font-bold text-moonlight font-[family-name:var(--font-display)]">{sense.stat}</p>
+                      <p className="text-xs text-cream/70 mt-0.5">{sense.statLabel}</p>
+                    </div>
+
+                    <Link
+                      href={sense.href}
+                      className="inline-flex items-center gap-2 mt-5 text-moonlight text-sm uppercase tracking-[0.15em] font-medium hover:text-moonlight-dim transition-colors"
+                    >
+                      Shop {sense.name} <ArrowRight size={14} />
+                    </Link>
                   </div>
-                  <h2 className="font-[family-name:var(--font-display)] text-2xl md:text-4xl font-bold tracking-tighter text-cream leading-[1.1]">
-                    {sense.title}{" "}
-                    <span className="text-moonlight">{sense.name}</span>
-                  </h2>
 
-                  <p className="mt-3 text-sm text-cream/80 leading-relaxed max-w-[50ch]">{sense.description}</p>
-
-                  <div className="mt-5 glass-card p-4 inline-block">
-                    <p className="text-2xl font-bold text-moonlight font-[family-name:var(--font-display)]">{sense.stat}</p>
-                    <p className="text-xs text-cream/70 mt-0.5">{sense.statLabel}</p>
+                  <div className={isEven ? "" : "md:[direction:ltr]"}>
+                    <blockquote className="text-lg md:text-xl text-cream/90 italic leading-relaxed font-[family-name:var(--font-display)]">
+                      &ldquo;{sense.quote}&rdquo;
+                    </blockquote>
+                    <p className="mt-3 text-xs text-cream/60">{sense.scienceBlurb}</p>
                   </div>
-
-                  <Link
-                    href={sense.href}
-                    className="inline-flex items-center gap-2 mt-5 text-moonlight text-sm uppercase tracking-[0.15em] font-medium hover:text-moonlight-dim transition-colors"
-                  >
-                    Shop {sense.name} <ArrowRight size={14} />
-                  </Link>
-                </div>
-
-                <div className={isEven ? "" : "md:[direction:ltr]"}>
-                  <blockquote className="text-lg md:text-xl text-cream/90 italic leading-relaxed font-[family-name:var(--font-display)]">
-                    &ldquo;{sense.quote}&rdquo;
-                  </blockquote>
-                  <p className="mt-3 text-xs text-cream/60">{sense.scienceBlurb}</p>
                 </div>
               </div>
             </div>

@@ -40,6 +40,20 @@
   z-index: 1;
 }
 
+/* First section: background fills past rounded corners */
+.parallax-half-first {
+  min-height: 80vh;
+  position: relative;
+  /* No border-radius here — bg image fills full rectangle */
+}
+.parallax-half-first > .parallax-inner {
+  min-height: 80vh;
+  border-radius: 48px 48px 0 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
 /* ============================================
    BASE
    ============================================ */
