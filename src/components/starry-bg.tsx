@@ -33,12 +33,13 @@ export default function StarryBackground() {
     /* ---- create canvas detached from React tree ---- */
     const canvas = document.createElement("canvas");
     canvas.style.cssText =
-      "position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:0";
+      "position:absolute;top:0;left:0;width:100vw;pointer-events:none;z-index:0";
+    canvas.style.height = document.body.scrollHeight + 'px';
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    document.body.prepend(canvas);
+    document.body.appendChild(canvas);
 
     let W: number, H: number, dpr: number;
     let pulseTimer: ReturnType<typeof setTimeout>;
@@ -142,7 +143,8 @@ export default function StarryBackground() {
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = window.innerWidth;
-      H = window.innerHeight;
+      H = document.body.scrollHeight;
+      canvas.style.height = H + 'px';
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       ctx!.setTransform(1, 0, 0, 1, 0, 0);
@@ -160,11 +162,14 @@ export default function StarryBackground() {
 
     resize();
     window.addEventListener("resize", resize);
+    const bodyObserver = new ResizeObserver(() => resize());
+    bodyObserver.observe(document.body);
     pulseTimer = setTimeout(tick, 200);
 
     return () => {
       clearTimeout(pulseTimer);
       window.removeEventListener("resize", resize);
+      bodyObserver.disconnect();
       canvas.remove();
     };
   }, []);
