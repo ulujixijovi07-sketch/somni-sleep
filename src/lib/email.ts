@@ -25,7 +25,7 @@ export async function sendOrderConfirmation(to: string, data: {
     await resend.emails.send({
       from: FROM,
       to,
-      subject: `Order Confirmed — ${data.orderNumber}`,
+      subject: `Order Confirmed: ${data.orderNumber}`,
       html: `
         <div style="max-width:600px;margin:0 auto;font-family:Georgia,serif;background:#1A1817;color:#F6F2ED;padding:40px">
           <h1 style="font-weight:300;letter-spacing:0.2em;text-align:center;color:#C9A84C">SOMNI</h1>
@@ -40,7 +40,7 @@ export async function sendOrderConfirmation(to: string, data: {
             <tr><td colspan="2" style="text-align:right;padding:4px 0">Total</td><td style="text-align:right;font-size:18px;color:#F6F2ED">$${data.total.toFixed(2)}</td></tr>
           </table>
           <div style="text-align:center;margin:30px 0">
-            <a href="${data.trackingUrl}" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Track Your Order</a>
+            <a href="${data.trackingUrl}" style="background:#C9A84C;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Track Your Order</a>
           </div>
           <p style="font-size:11px;color:#5A524A;text-align:center;margin-top:40px">Discreet packaging • Private billing • SSL encrypted</p>
         </div>`,
@@ -62,7 +62,7 @@ export async function sendShippingNotification(to: string, data: {
     await resend.emails.send({
       from: FROM,
       to,
-      subject: `Your Order Has Shipped — ${data.orderNumber}`,
+      subject: `Your Order Has Shipped: ${data.orderNumber}`,
       html: `
         <div style="max-width:600px;margin:0 auto;font-family:Georgia,serif;background:#1A1817;color:#F6F2ED;padding:40px">
           <h1 style="font-weight:300;letter-spacing:0.2em;text-align:center;color:#C9A84C">SOMNI</h1>
@@ -87,13 +87,13 @@ export async function sendPasswordReset(to: string, resetUrl: string) {
     await resend.emails.send({
       from: FROM,
       to,
-      subject: "Reset Your Password — SOMNI",
+      subject: "Reset Your Password",
       html: `
         <div style="max-width:600px;margin:0 auto;font-family:Georgia,serif;background:#1A1817;color:#F6F2ED;padding:40px">
           <h1 style="font-weight:300;letter-spacing:0.2em;text-align:center;color:#C9A84C">SOMNI</h1>
           <p style="text-align:center;font-size:14px;color:#A69D94;margin-top:30px">You requested a password reset.</p>
           <div style="text-align:center;margin:30px 0">
-            <a href="${resetUrl}" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Reset Password</a>
+            <a href="${resetUrl}" style="background:#C9A84C;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Reset Password</a>
           </div>
           <p style="font-size:11px;color:#5A524A;text-align:center">This link expires in 1 hour. If you didn't request this, ignore this email.</p>
         </div>`,
@@ -124,7 +124,7 @@ export async function sendWelcomeEmail(to: string) {
             </p>
           </div>
           <div style="text-align:center;margin:30px 0">
-            <a href="https://somnisleep.com" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Explore Products</a>
+            <a href="https://somnisleep.com" style="background:#C9A84C;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Explore Products</a>
           </div>
           <p style="font-size:11px;color:#5A524A;text-align:center;margin-top:40px">Discreet packaging • Private billing • SSL encrypted</p>
         </div>`,
@@ -159,7 +159,7 @@ export async function sendAbandonedCartReminder(
     await resend.emails.send({
       from: FROM,
       to,
-      subject: "Your cart is waiting — SOMNI",
+      subject: "Your cart is waiting",
       html: `
         <div style="max-width:600px;margin:0 auto;font-family:Georgia,serif;background:#1A1817;color:#F6F2ED;padding:40px">
           <h1 style="font-weight:300;letter-spacing:0.2em;text-align:center;color:#C9A84C">SOMNI</h1>
@@ -168,7 +168,7 @@ export async function sendAbandonedCartReminder(
             ${itemsHtml}
           </table>
           <div style="text-align:center;margin:30px 0">
-            <a href="${cartUrl}" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Complete Your Order</a>
+            <a href="${cartUrl}" style="background:#C9A84C;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Complete Your Order</a>
           </div>
           <p style="font-size:11px;color:#5A524A;text-align:center">Items in your cart are reserved for a limited time.</p>
         </div>`,
@@ -201,12 +201,12 @@ export async function sendTierUpgradeEmail(to: string, customerName: string, new
     await resend.emails.send({
       from: FROM,
       to,
-      subject: `You've reached ${tierName} Tier — SOMNI`,
+      subject: `You've reached ${tierName} Tier`,
       html: `
         <div style="max-width:600px;margin:0 auto;font-family:Georgia,serif;background:#1A1817;color:#F6F2ED;padding:40px">
           <h1 style="font-weight:300;letter-spacing:0.2em;text-align:center;color:#C9A84C">SOMNI</h1>
           <p style="text-align:center;font-size:14px;color:#A69D94;margin-top:30px">${customerName}, your devotion has been recognized.</p>
-          <div style="background:#2D2520;padding:24px;margin:30px 0;text-align:center;border:1px solid #C9A96E">
+          <div style="background:#2D2520;padding:24px;margin:30px 0;text-align:center;border:1px solid #C9A84C">
             <p style="font-size:10px;color:#A69D94;text-transform:uppercase;letter-spacing:0.15em">You are now</p>
             <p style="font-size:28px;color:#C9A84C;margin:8px 0;letter-spacing:0.05em">${tierName} Tier</p>
           </div>
@@ -215,7 +215,7 @@ export async function sendTierUpgradeEmail(to: string, customerName: string, new
             <p style="font-size:13px;color:#A69D94;line-height:1.8">${benefits.split(" • ").map((b) => `• ${b}<br>`).join("")}</p>
           </div>
           <div style="text-align:center;margin:30px 0">
-            <a href="https://somnisleep.com" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Explore New Arrivals</a>
+            <a href="https://somnisleep.com" style="background:#C9A84C;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Explore New Arrivals</a>
           </div>
         </div>`,
     });
@@ -231,19 +231,19 @@ export async function sendBirthdayGift(to: string, customerName: string, giftCod
     await resend.emails.send({
       from: FROM,
       to,
-      subject: "A gift for your birthday — SOMNI",
+      subject: "A gift for your birthday",
       html: `
         <div style="max-width:600px;margin:0 auto;font-family:Georgia,serif;background:#1A1817;color:#F6F2ED;padding:40px">
           <h1 style="font-weight:300;letter-spacing:0.2em;text-align:center;color:#C9A84C">SOMNI</h1>
           <p style="text-align:center;font-size:14px;color:#A69D94;margin-top:30px">Happy birthday, ${customerName}.</p>
-          <div style="background:#2D2520;padding:24px;margin:30px 0;text-align:center;border:1px solid #C9A96E">
+          <div style="background:#2D2520;padding:24px;margin:30px 0;text-align:center;border:1px solid #C9A84C">
             <p style="font-size:10px;color:#A69D94;text-transform:uppercase;letter-spacing:0.15em">Your Birthday Gift</p>
             <p style="font-size:36px;color:#C9A84C;margin:8px 0">${discountPercent}% Off</p>
             <p style="font-size:13px;color:#A69D94;margin-top:8px">Use code at checkout:</p>
             <p style="font-family:monospace;font-size:20px;color:#F6F2ED;background:#1A1817;padding:8px 20px;display:inline-block;margin-top:4px;letter-spacing:0.1em">${giftCode}</p>
           </div>
           <div style="text-align:center;margin:30px 0">
-            <a href="https://somnisleep.com" style="background:#C9A96E;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Sleep Better Tonight</a>
+            <a href="https://somnisleep.com" style="background:#C9A84C;color:#1A1817;padding:14px 40px;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;display:inline-block">Sleep Better Tonight</a>
           </div>
           <p style="font-size:11px;color:#5A524A;text-align:center">Valid for 30 days. One-time use only.</p>
         </div>`,

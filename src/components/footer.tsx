@@ -102,7 +102,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
             &copy; {new Date().getFullYear()} SOMNI. All rights reserved.
           </p>
           <p className="font-body text-[11px] font-light text-brand-light/20">
-            SSL Encrypted — Your data is always protected
+            SSL Encrypted. Your data is always protected
           </p>
         </div>
       </div>

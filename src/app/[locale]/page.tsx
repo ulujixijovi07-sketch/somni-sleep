@@ -68,7 +68,7 @@ export default function HomePage() {
       {/* ============================================
           HERO
           ============================================ */}
-      <section className="relative min-h-screen flex items-center justify-center bg-abyss overflow-hidden">
+      <section className="relative min-h-[100dvh] flex items-center justify-center bg-abyss overflow-hidden">
         <HeroAmbient />
 
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 text-center py-24">
@@ -123,8 +123,11 @@ export default function HomePage() {
             <Link href="/shop/visual" className="btn-primary text-sm uppercase tracking-[0.15em] px-8 py-3.5">
               Explore the 4 Senses
             </Link>
-            <Link href="/science" className="btn-outline text-sm uppercase tracking-[0.15em] px-8 py-3.5">
-              See the Science <ArrowRight size={14} className="inline ml-2" />
+            <Link href="/science" className="group btn-outline text-sm uppercase tracking-[0.15em] px-8 py-3.5">
+              See the Science{" "}
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-moonlight/10 group-hover:bg-moonlight/20 group-hover:translate-x-0.5 transition-all ml-2">
+                <ArrowRight size={14} />
+              </span>
             </Link>
           </motion.div>
         </div>
@@ -135,7 +138,7 @@ export default function HomePage() {
 
       {/* Founder Snippet */}
       <section className="relative bg-abyss border-b border-moonlight/5">
-        <div className="max-w-[900px] mx-auto px-8 py-10 flex items-center gap-6">
+        <div className="max-w-[900px] mx-auto px-8 py-16 flex items-center gap-6">
           <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-moonlight/20">
             <img src="/founder.jpg" alt="Dr. Adrian Voss" className="w-full h-full object-cover" />
           </div>
@@ -151,7 +154,7 @@ export default function HomePage() {
       {/* ============================================
           THE SCIENCE
           ============================================ */}
-      <section className="relative min-h-screen flex items-center bg-abyss">
+      <section className="relative min-h-[100dvh] flex items-center bg-abyss">
         <div className="relative w-full max-w-[1400px] mx-auto px-6 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -251,9 +254,12 @@ export default function HomePage() {
 
                     <Link
                       href={sense.href}
-                      className="inline-flex items-center gap-2 mt-5 text-moonlight text-sm uppercase tracking-[0.15em] font-medium hover:text-moonlight-dim transition-colors"
+                      className="group inline-flex items-center gap-2 mt-5 text-moonlight text-sm uppercase tracking-[0.15em] font-medium hover:text-moonlight-dim transition-colors"
                     >
-                      Shop {sense.name} <ArrowRight size={14} />
+                      Shop {sense.name}{" "}
+                      <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-moonlight/10 group-hover:bg-moonlight/20 group-hover:translate-x-0.5 transition-all">
+                        <ArrowRight size={14} />
+                      </span>
                     </Link>
                   </div>
 
@@ -278,16 +284,18 @@ export default function HomePage() {
         style={{ backgroundImage: `url(${bgImages.products})` }}
       >
         <div className="absolute inset-0 bg-abyss/55" />
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-20">
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-28">
           <div className="text-center mb-12">
             <p className="text-moonlight text-xs uppercase tracking-[0.2em] mb-2">Most Loved</p>
             <h2 className="font-[family-name:var(--font-display)] text-2xl md:text-4xl font-bold tracking-tighter text-cream">
               The Essentials
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {bestSellers.map((product) => (
-              <ProductCard key={product.id} product={product} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {bestSellers.map((product, idx) => (
+              <div key={product.id} className={idx === 0 ? "md:col-span-2" : "md:col-span-1"}>
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
           <div className="text-center mt-10">
@@ -361,7 +369,7 @@ export default function HomePage() {
       </section>
 
       {/* NEWSLETTER */}
-      <section className="relative bg-abyss border-t border-moonlight/5 py-16 md:py-20 px-6">
+      <section className="relative bg-abyss border-t border-moonlight/5 py-20 md:py-28 px-6">
         <div className="max-w-[700px] mx-auto text-center">
           <NewsletterForm />
         </div>

@@ -30,7 +30,7 @@ export const senseData = {
     description:
       "Your brain has a master clock called the suprachiasmatic nucleus. It cares about one thing: light. A sliver of blue light through your eyelids cuts melatonin by up to 50%. The LUX collection goes after this pathway directly.",
     scienceBlurb:
-      "Blue light after sunset delays melatonin by 3 hours on average, according to Harvard Medical School. Total darkness is not a luxury — it is a biological requirement.",
+      "Blue light after sunset delays melatonin by 3 hours on average, according to Harvard Medical School. Total darkness is not a luxury. It is a biological requirement.",
     color: "from-[#132743] to-[#0B1A2E]",
     accentColor: "#C9A84C",
     icon: "Eye",
@@ -582,7 +582,7 @@ export const products: Product[] = [
       {
         title: "Olfactory Pathway to Sleep",
         detail:
-          "Scent molecules reach the olfactory bulb within 200ms of inhalation. The bulb projects directly to the amygdala, bypassing thalamic relay — faster than any other sensory system.",
+          "Scent molecules reach the olfactory bulb within 200ms of inhalation. The bulb projects directly to the amygdala, bypassing thalamic relay, faster than any other sensory system.",
       },
     ],
     usage: "Fill reservoir with water. Add 5-8 drops of essential oil. Press power button. Clean weekly with mild vinegar solution.",

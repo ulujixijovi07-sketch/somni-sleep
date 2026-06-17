@@ -52,7 +52,7 @@ export default function ProductCard({ product, idx = 0 }: { product: Product; id
             </div>
           )}
           {product.bestSeller && (
-            <div className="absolute top-4 right-4 bg-cream/10 backdrop-blur-sm text-cream/80 text-[10px] uppercase tracking-[0.15em] px-3 py-1 rounded-full">
+            <div className="absolute top-4 right-4 bg-cream/10 text-cream/80 text-[10px] uppercase tracking-[0.15em] px-3 py-1 rounded-full">
               Best Seller
             </div>
           )}
