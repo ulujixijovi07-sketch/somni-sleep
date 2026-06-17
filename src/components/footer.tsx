@@ -11,7 +11,6 @@ const SHOP_LINKS = [
 ];
 
 const INFO_LINKS = [
-  { label: "Size Guide", href: "/size-guide" },
   { label: "Shipping & Returns", href: "/shipping" },
   { label: "Track Order", href: "/en/order/tracking" },
   { label: "Contact", href: "/contact" },
