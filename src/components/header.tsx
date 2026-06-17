@@ -90,7 +90,7 @@ export function Header() {
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
-                href={link.href}
+                href={`/${currentLocale}${link.href}`}
                 className="font-body text-[11px] font-medium uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors"
               >
                 {link.label}
@@ -192,7 +192,7 @@ export function Header() {
           {NAV_LINKS.map((link, i) => (
             <Link
               key={link.label}
-              href={link.href}
+              href={`/${currentLocale}${link.href}`}
               className={cn(
                 "font-display text-3xl font-light tracking-wide text-text-secondary hover:text-text-primary transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
                 mobileMenuOpen
