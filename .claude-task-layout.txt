@@ -1,0 +1,52 @@
+你是一个前端工程师。
+
+## 任务：复制 NOCTURNE 的 providers.tsx 到 SOMNI，并合并 layout.tsx
+
+### 步骤 1: 复制 providers.tsx
+源: D:/projects/nocturne/src/app/providers.tsx
+目标: D:/projects/somni-sleep/src/app/providers.tsx
+- 读源文件，写入目标文件
+
+### 步骤 2: 读取 SOMNI 的 layout.tsx
+文件: D:/projects/somni-sleep/src/app/layout.tsx
+当前使用 DM Sans + DM Serif Display 字体，Header/Footer/LoadingScreen，蓝金配色(#0B1A2E)
+
+### 步骤 3: 重新写 SOMNI 的 layout.tsx — 合并 NOCTURNE 功能到 SOMNI
+需要添加的内容（不改动 SOMNI 原有的字体、metadata title/desc/keywords/openGraph）：
+
+1. 在 imports 最上面加: `import { Providers } from "./providers";`
+2. 添加 viewport export:
+```
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0B1A2E",
+};
+```
+(需要 import type { Viewport } from "next")
+3. 在 metadata 对象中添加（保留原有字段，新增以下）:
+```
+metadataBase: new URL("https://somnisleep.com"),
+alternates: {
+  languages: {
+    en: "/en", fr: "/fr", de: "/de", es: "/es", it: "/it",
+  },
+},
+```
+4. 在 head 标签中添加 GA4 + Meta Pixel 条件脚本（从 D:/projects/nocturne/src/app/layout.tsx 完整复制那个 head 块）
+但注意: 不要覆盖 SOMNI 已有的 font 变量 className，合并 class 名。
+5. 把 `<LoadingScreen /><Header />{children}<Footer />` 用 Providers 包裹:
+```
+<Providers>
+  <LoadingScreen />
+  <Header />
+  {children}
+  <Footer />
+</Providers>
+```
+
+### 步骤 4: 验证
+完成后在终端运行:
+cd D:/projects/somni-sleep && npx next build --webpack 2>&1 | tail -30
+如果有编译错误，修复它们。如果是类型错误，用 any 类型绕过。

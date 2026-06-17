@@ -1,0 +1,13 @@
+修复 D:/projects/somni-sleep/src/app/layout.tsx 的构建错误。
+
+问题：SWC 解析器把用来包裹 GA4 脚本的 React 空标签 fragment `<>` 和 `</>` 误解析为 regex。第 65-73 行和第 76-83 行的两个 fragment。
+
+解决方案：不用 `<>` 和 `</>` 简写，改用显式的 `<React.Fragment>` 和 `</React.Fragment>`。
+
+修改位置：
+- 第 65 行 `<>` → `<React.Fragment>`
+- 第 73 行 `</>` → `</React.Fragment>`  
+- 第 76 行 `<>` → `<React.Fragment>`
+- 第 82 行 `</>` → `</React.Fragment>`
+
+改完后运行验证: cd D:/projects/somni-sleep && npx next build --webpack 2>&1 | tail -10
