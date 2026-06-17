@@ -1,5 +1,6 @@
 import React from "react";
 import { Providers } from "./providers";
+import StarryBackground from "@/components/starry-bg";
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
@@ -82,6 +83,7 @@ export default function RootLayout({
         )}
       </head>
       <body className={`${dmSans.variable} ${dmSerif.variable} antialiased`}>
+        <StarryBackground />
         <Providers>{children}</Providers>
       </body>
     </html>
