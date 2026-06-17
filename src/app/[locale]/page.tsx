@@ -14,6 +14,7 @@ import { senseData, getBestSellers } from "@/data/products";
 import ProductCard from "@/components/product-card";
 import HeroAmbient from "@/components/hero-ambient";
 import SocialProof from "@/components/social-proof";
+import { NewsletterForm } from "@/components/sections/newsletter-form";
 
 const bestSellers = getBestSellers(4);
 
@@ -356,6 +357,13 @@ export default function HomePage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* NEWSLETTER */}
+      <section className="relative bg-abyss border-t border-moonlight/5 py-16 md:py-20 px-6">
+        <div className="max-w-[700px] mx-auto text-center">
+          <NewsletterForm />
         </div>
       </section>
     </main>
