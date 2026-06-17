@@ -12,9 +12,15 @@ interface Star {
   color: string;
 }
 
-const STAR_MIN = 80;
-const STAR_MAX = 120;
-const COLORS = ["#F5F1EB", "#F5F1EB", "#F5F1EB", "#F5F1EB", "#C9A84C"]; // 4:1 cream:gold
+const STAR_MIN = 150;
+const STAR_MAX = 200;
+// Cool blue-white palette with ~8% rare warm gold
+const COLORS = [
+  "#B2B2CC", "#B2B2CC", "#B2B2CC", "#B2B2CC", "#B2B2CC", // ~42% cool blue-white
+  "#C8C8E6", "#C8C8E6", "#C8C8E6",                          // ~25% brighter blue-white
+  "#F0F0FF", "#F0F0FF",                                      // ~17% very bright white
+  "#C9A84C",                                                  //  ~8% warm gold (rare)
+];
 
 export default function StarryBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -48,7 +54,7 @@ export default function StarryBackground() {
       stars = Array.from({ length: count }, () => ({
         x: Math.random() * W,
         y: Math.random() * H,
-        r: 0.6 + Math.random() * 1.4, // 0.6–2.0px
+        r: 0.5 + Math.random() * 1.0, // 0.5–1.5px
         baseAlpha: 0.1 + Math.random() * 0.3, // 0.1–0.4
         phase: Math.random() * Math.PI * 2,
         speed: 0.0003 + Math.random() * 0.0012,
@@ -70,9 +76,7 @@ export default function StarryBackground() {
 
         ctx!.beginPath();
         ctx!.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx!.fillStyle = s.color.replace(")", `, ${alpha.toFixed(3)})`).replace("rgb", "rgba");
-
-        // Hex colors need different handling — parse and rebuild
+        // Parse hex color to rgba with twinkle alpha
         const hexToRgba = (hex: string, a: number) => {
           const r = parseInt(hex.slice(1, 3), 16);
           const g = parseInt(hex.slice(3, 5), 16);
