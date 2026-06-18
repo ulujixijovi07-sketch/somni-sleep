@@ -6,31 +6,41 @@ export default function ProductPage() {
   const htmlPath = path.join(process.cwd(), "public", "product.html");
   const html = fs.readFileSync(htmlPath, "utf-8");
 
-  // Extract style
   const styleMatch = html.match(/<style>([\s\S]*?)<\/style>/);
   const style = styleMatch ? styleMatch[1].trim() : "";
 
-  // Extract body
   const bodyMatch = html.match(/<body>\s*([\s\S]*?)\s*<\/body>/);
   let body = bodyMatch ? bodyMatch[1].trim() : "";
 
-  // Remove nav and breadcrumb (site layout provides header)
   body = body.replace(/<!-- NAV -->[\s\S]*?<\/nav>/, "");
   body = body.replace(/<!-- BREADCRUMB -->[\s\S]*?<\/div>/, "");
-
-  // Extract script content (just swapMain + changeQty, not the IIFE)
-  const scriptMatch = html.match(/<script>\s*(function swapMain[\s\S]*?^  \})\s*<\/script>/m);
-  const coreScript = scriptMatch ? scriptMatch[1].trim() : "";
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: style }} />
       <div className="product-page-content" dangerouslySetInnerHTML={{ __html: body }} />
-      {coreScript && (
-        <Script id="product-page-script" strategy="afterInteractive">
-          {coreScript}
-        </Script>
-      )}
+      <Script id="product-init" strategy="afterInteractive">{`
+        function swapMain(el) {
+          document.getElementById('mainImg').src = el.dataset.full;
+          document.querySelectorAll('.thumbnail-strip img').forEach(function(t) { t.classList.remove('active'); });
+          el.classList.add('active');
+        }
+        function changeQty(delta) {
+          var inp = document.getElementById('qty');
+          var v = parseInt(inp.value) + delta;
+          if (v < 1) v = 1;
+          if (v > 99) v = 99;
+          inp.value = v;
+        }
+        document.getElementById('btn-add-cart').addEventListener('click', function(e) {
+          e.preventDefault();
+          alert('Added to cart!');
+        });
+        document.getElementById('btn-buy-now').addEventListener('click', function(e) {
+          e.preventDefault();
+          alert('Proceeding to checkout...');
+        });
+      `}</Script>
     </>
   );
 }
