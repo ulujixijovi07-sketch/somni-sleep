@@ -112,25 +112,6 @@ export default function SocialProof() {
               </div>
             </div>
           </div>
-
-          {/* Endorsement bar */}
-          <div className="mt-6 pt-5 border-t border-moonlight/5">
-            <span className="text-[10px] uppercase tracking-[0.25em] text-mist/30">Trusted by Sleep Science</span>
-            <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-sm text-cream/70 font-medium">Dr. Adrian Voss</span>
-                <span className="text-[10px] text-mist/40 uppercase tracking-wider">PhD Neuroscience, Founder</span>
-              </div>
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-sm text-cream/70 font-medium">Harvard Medical School</span>
-                <span className="text-[10px] text-mist/40 uppercase tracking-wider">Cited Research</span>
-              </div>
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-sm text-cream/70 font-medium">4-Sense Protocol</span>
-                <span className="text-[10px] text-mist/40 uppercase tracking-wider">Clinical Evidence</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </>

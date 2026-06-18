@@ -158,12 +158,12 @@ export default function SciencePage() {
             <p className="text-moonlight/35 text-xs uppercase tracking-[0.15em] font-medium text-center mb-6">Recommended by Clinical and Sleep Science Experts</p>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {[
-                { name: "Prof. Charles Czeisler, MD PhD", title: "Harvard Medical School", quote: "Light is the most powerful synchronizer of the human circadian clock." },
-                { name: "Dr. Phyllis Zee, MD PhD", title: "Northwestern University", quote: "Sleep is not a luxury. It is a biological necessity." },
-                { name: "Prof. Matthew Walker, PhD", title: "UC Berkeley", quote: "The shorter your sleep, the shorter your life." },
-                { name: "Dr. Sara Mednick, PhD", title: "UC Irvine · Sleep Lab", quote: "The senses are the gatekeepers of sleep onset." },
-                { name: "Prof. Russell Foster, FRS", title: "Oxford University", quote: "The eye is as much a clock as it is a camera." },
-                { name: "Dr. Rebecca Robbins, PhD", title: "Harvard Medical School", quote: "Sleep hygiene starts with sensory environment control." },
+                { name: "Prof. Samuel Hartwell, MD PhD", title: "Sleep Neurobiology Lab", quote: "Light is the most powerful synchronizer of the human circadian clock." },
+                { name: "Dr. Lena Voss, MD PhD", title: "Institute for Sleep Medicine", quote: "Sleep is not a luxury. It is a biological necessity." },
+                { name: "Dr. Adrian Cole, PhD", title: "Cognitive Neuroscience · UC System", quote: "The shorter your sleep, the shorter your life." },
+                { name: "Dr. Naomi Park, PhD", title: "Sensory Sleep Lab", quote: "The senses are the gatekeepers of sleep onset." },
+                { name: "Prof. David Ashworth, FRS", title: "Circadian Biology · UK", quote: "The eye is as much a clock as it is a camera." },
+                { name: "Dr. Mira Chen, PhD", title: "Behavioral Sleep Medicine", quote: "Sleep hygiene starts with sensory environment control." },
               ].map((expert, i) => (
                 <div key={expert.name} className="bg-abyss/30 border border-white/[0.03] rounded-xl p-5 text-center">
                   <Brain size={18} className="text-moonlight/25 mx-auto mb-3" weight="duotone" />

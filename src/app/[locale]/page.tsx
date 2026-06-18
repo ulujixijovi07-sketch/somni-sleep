@@ -154,33 +154,6 @@ export default function HomePage() {
       {/* Social Proof Bar */}
       <SocialProof />
 
-      {/* Founder Snippet */}
-      <section className="relative bg-abyss/30 border-b border-moonlight/5">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-          className="max-w-[900px] mx-auto px-8 py-16 flex items-center gap-6"
-        >
-          <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2 border-moonlight/20">
-            <img src="/founder.jpg" alt="Dr. Adrian Voss" className="w-full h-full object-cover" />
-          </div>
-          <div>
-            <p className="text-sm text-cream/80 italic leading-relaxed">
-              &ldquo;I spent five years staring at the ceiling with a PhD in neuroscience. Turns out knowing how the brain works doesn&apos;t help if your senses won&apos;t shut up.&rdquo;
-            </p>
-            <p className="text-xs text-mist/50 mt-2">Dr. Adrian Voss, Founder</p>
-            <Link
-              href="/story"
-              className="inline-flex items-center gap-1.5 mt-2 text-[11px] uppercase tracking-[0.15em] text-moonlight hover:text-moonlight-dim transition-colors font-medium"
-            >
-              Our Story <ArrowRight size={12} />
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
       {/* ============================================
           THE SCIENCE
           ============================================ */}

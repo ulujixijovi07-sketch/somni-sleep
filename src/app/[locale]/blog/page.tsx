@@ -8,25 +8,25 @@ const POSTS = [
     title: "How White Noise Actually Helps You Sleep",
     date: "June 2026",
     excerpt: "A 2021 meta-analysis of 8,242 participants found white noise reduced sleep onset by 38%. Here's the science behind why steady background noise works.",
-    slug: "#",
+    slug: "/blog/how-white-noise-helps-you-sleep",
   },
   {
     title: "CES Therapy: What 40 Years of Research Tells Us",
     date: "May 2026",
     excerpt: "Cranial Electrotherapy Stimulation has been clinically used for decades. We break down the peer-reviewed evidence behind microcurrent sleep therapy.",
-    slug: "#",
+    slug: "/blog/ces-therapy-research",
   },
   {
     title: "The Four Senses of Sleep: A Complete Guide",
     date: "April 2026",
     excerpt: "Sleep isn't just about closing your eyes. Visual, auditory, tactile, and olfactory pathways all play a role in how fast you fall asleep and how deep you stay.",
-    slug: "#",
+    slug: "/blog/four-senses-of-sleep",
   },
   {
     title: "Why Your Nightstand Light is Ruining Your Sleep",
     date: "March 2026",
     excerpt: "460-480nm blue light kills melatonin twice as fast as warmer wavelengths. Here's how to fix your bedroom lighting for better sleep.",
-    slug: "#",
+    slug: "/blog/nightstand-light-sleep",
   },
 ];
 
