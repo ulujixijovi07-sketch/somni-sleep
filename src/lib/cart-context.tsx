@@ -74,18 +74,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const userIdRef = useRef<string | null>(null);
 
-  // Expose addToCart globally so product page scripts can access it
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      (window as any).__somniAddToCart = addToCart;
-    }
-    return () => {
-      if (typeof window !== "undefined") {
-        delete (window as any).__somniAddToCart;
-      }
-    };
-  }, [addToCart]);
-
   // Hydrate + sync with server
   useEffect(() => {
     const init = async () => {
