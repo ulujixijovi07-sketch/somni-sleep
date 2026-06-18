@@ -38,10 +38,18 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
 
   // Lightbox
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [showPurchaseNotice, setShowPurchaseNotice] = useState(false);
+
+  const handleWriteReview = () => {
+    // TODO: check if user has purchased this product
+    // For now, show purchase notice for everyone
+    setShowPurchaseNotice(true);
+  };
 
   const openForm = () => {
     setFormName("");
     setFormImages([]);
+    setShowPurchaseNotice(false);
     setFormOpen(true);
   };
 
@@ -151,21 +159,34 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
 
       {/* Write review button — always visible */}
       <div className="mt-3">
-        <button
-          onClick={openForm}
-          className="inline-block rounded bg-moonlight/15 border border-moonlight/30 px-5 py-2.5 font-medium text-xs uppercase tracking-widest text-moonlight hover:bg-moonlight/25 transition-colors"
-        >
-          {formOpen ? "Cancel" : "Write a Review"}
-        </button>
+        {formOpen ? (
+          <button
+            onClick={() => { setFormOpen(false); setShowPurchaseNotice(false); }}
+            className="inline-block rounded bg-moonlight/15 border border-moonlight/30 px-5 py-2.5 font-medium text-xs uppercase tracking-widest text-moonlight hover:bg-moonlight/25 transition-colors"
+          >
+            Cancel
+          </button>
+        ) : (
+          <button
+            onClick={handleWriteReview}
+            className="inline-block rounded bg-moonlight/15 border border-moonlight/30 px-5 py-2.5 font-medium text-xs uppercase tracking-widest text-moonlight hover:bg-moonlight/25 transition-colors"
+          >
+            Write a Review
+          </button>
+        )}
       </div>
+
+      {/* Purchase notice */}
+      {showPurchaseNotice && !formOpen && (
+        <div className="mt-4 rounded border border-moonlight/30 bg-moonlight/10 px-5 py-4 text-center">
+          <p className="font-body text-sm text-moonlight">🛡️ 购买后可评价</p>
+          <p className="mt-1 font-body text-xs text-moonlight/60">Please purchase this product before leaving a review.</p>
+        </div>
+      )}
 
       {/* Review Form */}
       {formOpen && (
         <form onSubmit={handleSubmit} className="mt-6 rounded border border-moonlight/20 bg-moonlight/5 p-6 space-y-4">
-          <div className="rounded border border-moonlight/30 bg-moonlight/10 px-4 py-3 text-center">
-            <p className="font-body text-sm text-moonlight">🛡️ Only verified purchasers can leave a review.</p>
-            <p className="mt-0.5 font-body text-xs text-moonlight/60">Your review will appear after purchase verification.</p>
-          </div>
           <div>
             <label className="block font-body text-xs text-text-secondary mb-1">Your Name *</label>
             <input value={formName} onChange={(e) => setFormName(e.target.value)} placeholder="Your name"
