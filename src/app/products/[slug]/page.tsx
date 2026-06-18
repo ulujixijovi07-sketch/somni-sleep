@@ -86,6 +86,16 @@ export default async function ProductPage({
                 <div className="science-icon">{icon}</div>
                 <h3 className="science-card-title">{item.title}</h3>
                 <p className="science-card-detail">{item.detail}</p>
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="science-link"
+                  >
+                    View on PubMed →
+                  </a>
+                )}
               </div>
             ))}
           </div>

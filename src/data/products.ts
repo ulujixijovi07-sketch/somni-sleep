@@ -9,7 +9,7 @@ export interface Product {
   description: string;
   longDescription: string;
   features: string[];
-  science: { title: string; detail: string }[];
+  science: { title: string; detail: string; link?: string }[];
   usage: string;
   weight: string;
   materials: string;
@@ -493,34 +493,42 @@ export const products: Product[] = [
     category: "olfactory",
     senseLabel: "OLFACIO",
     price: 29,
-    description: "Lavender + Chamomile + Vetiver. Clinically tested. The 10-second pre-sleep ritual.",
-    longDescription:
-      "Spray. Breathe. Sleep. Three ingredients. Lavender slows your nervous system. Roman chamomile hooks into GABA receptors, same ones anti-anxiety meds target. Vetiver keeps it grounded so you don't get that synthetic perfume headache.",
-    features: [
-      "100% natural essential oils - no synthetic fragrance",
-      "Clinical formula: Lavender + Chamomile + Vetiver",
-      "50ml bottle - approximately 200 uses",
-      "Amber glass bottle protects oil integrity",
-      "Fine mist sprayer for even distribution",
-    ],
     compareAtPrice: 45,
+    description: "Lavender + Chamomile + Vetiver + Melatonin. The 10-second pre-sleep ritual.",
+    longDescription:
+      "Spray. Breathe. Sleep. Four ingredients, one purpose. Lavender slows your nervous system. Roman chamomile hooks into GABA receptors — same ones targeted by anti-anxiety medications. Vetiver keeps it grounded so you don't get that synthetic perfume headache. Micro-dose melatonin absorbed through inhalation, bypassing digestion for faster onset.",
+    features: [
+      "100% natural essential oils — no synthetic fragrance",
+      "Clinical formula: Lavender + Chamomile + Vetiver + Melatonin",
+      "50ml amber glass bottle — approximately 200 uses",
+      "Fast-acting inhalation delivery — bypasses digestion",
+      "Non-habit forming, no morning grogginess",
+    ],
     science: [
       {
-        title: "Lavender & Sleep Quality (PMC4505755)",
+        title: "Lavender & Sleep Quality",
         detail:
-          "A randomized controlled trial found lavender essential oil significantly improved sleep quality in adults with insomnia. Participants using lavender aromatherapy patches reported 20% higher sleep quality scores and woke less frequently than the placebo group. The effects were strongest in the first week of use.",
+          "A 2025 systematic review of 11 clinical trials found lavender aromatherapy significantly improves sleep quality in adults (SMD = -0.78, p < 0.001). 14 of 19 studies measuring subjective sleep quality showed significant improvement.",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12904233/",
       },
       {
-        title: "GABAergic Activity",
+        title: "GABAergic Mechanism",
         detail:
-          "Roman chamomile contains apigenin, a flavonoid that binds to the same GABA-A receptors targeted by anti-anxiety medications. This produces a mild sedative effect without dependency or morning grogginess.",
+          "Lavender's active compounds (linalool, linalyl acetate) act as GABA-A receptor agonists — the same mechanism as prescription sleep medications, but without dependency risk.",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4505755/",
+      },
+      {
+        title: "Melatonin Absorption",
+        detail:
+          "Inhalation-delivered melatonin reaches bloodstream in under 5 minutes versus 30–60 minutes for oral supplements. Faster onset means spray when you're already in bed.",
+        link: "https://clinicaltrials.gov/study/NCT03093454",
       },
     ],
-    usage: "Spray 2-3 times on pillow 10 minutes before bed. Inhale deeply for 30 seconds. Do not spray directly on skin.",
+    usage: "Spray 2-3 times on pillow 10 minutes before bed. Breathe deeply for 30 seconds.",
     weight: "120g",
-    materials: "Lavender angustifolia oil, Anthemis nobilis oil, Vetiveria zizanioides oil, distilled water, natural emulsifier",
-    images: ["/products/pillow-spray-1.jpg", "/products/pillow-spray-2.jpg"],
-    tags: ["sleep spray", "pillow spray", "lavender", "aromatherapy", "essential oils"],
+    materials: "Lavender essential oil, chamomile, vetiver, melatonin, amber glass bottle",
+    images: ["/products/deep-sleep-pillow-spray/1.jpg", "/products/deep-sleep-pillow-spray/2.jpg", "/products/deep-sleep-pillow-spray/3.jpg", "/products/deep-sleep-pillow-spray/4.jpg", "/products/deep-sleep-pillow-spray/5.jpg"],
+    tags: ["sleep spray", "pillow spray", "lavender", "aromatherapy", "essential oils", "melatonin"],
     stock: 250,
     rating: 4.8,
     reviewCount: 512,
@@ -657,25 +665,28 @@ export const products: Product[] = [
     ],
     science: [
       {
-        title: "Acupressure Meta-Analysis (PMC11884929)",
+        title: "Acupressure & Sleep Quality",
         detail:
-          "A 2025 systematic review and meta-analysis of randomized controlled trials found that acupressure significantly improves sleep quality across multiple patient populations. The pooled effect size showed meaningful improvements in both subjective sleep quality and objective sleep efficiency measures compared to control groups.",
+          "A 2025 systematic review and meta-analysis found acupressure significantly improves sleep quality in adult patients. The Pittsburgh Sleep Quality Index (PSQI) improved by an average of 2.8 points (p < 0.001).",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11884929/",
       },
       {
         title: "Endorphin Release",
         detail:
-          "Acupressure triggers the release of endogenous opioids — your body's natural painkillers. Studies show measurable increases in beta-endorphin levels within 15-20 minutes of acupressure application, leading to reduced pain perception and increased relaxation.",
+          "Acupressure triggers endogenous opioid release within 15-20 minutes of application. A 4-week study found pre-sleep acupressure mat use reduced cortisol by 26%.",
+        link: "https://www.frontiersin.org/journals/sleep/articles/10.3389/frsle.2024.1323967/full",
       },
       {
-        title: "Cortisol Reduction",
+        title: "Parasympathetic Activation",
         detail:
-          "A 4-week study found that regular acupressure mat use before bed reduced evening cortisol levels by approximately 26%, helping the body transition from the stress response to the relaxation response needed for sleep onset.",
+          "Pressure stimulation of the back activates the vagus nerve, shifting the autonomic nervous system from sympathetic (fight-or-flight) to parasympathetic (rest-and-digest) dominance.",
+        link: "https://link.springer.com/article/10.1186/s13063-020-04286-2",
       },
     ],
     usage: "Lie on mat for 20 minutes before bed. Start with a thin shirt; progress to bare skin as you build tolerance. Breathe deeply and slowly. Store in included carry bag.",
     weight: "480g",
     materials: "Organic cotton cover, plant-based foam interior, HIPS plastic acupressure points, nylon carry bag",
-    images: ["/products/acupressure-sleep-mat/1.jpg", "/products/acupressure-sleep-mat/2.jpg"],
+    images: ["/products/acupressure-sleep-mat/1.jpg", "/products/acupressure-sleep-mat/2.jpg", "/products/acupressure-sleep-mat/3.jpg", "/products/acupressure-sleep-mat/4.jpg", "/products/acupressure-sleep-mat/5.jpg"],
     tags: ["acupressure", "sleep mat", "tension relief", "endorphins", "muscle relaxation", "stress relief"],
     stock: 95,
     rating: 4.6,
@@ -704,25 +715,28 @@ export const products: Product[] = [
     ],
     science: [
       {
-        title: "White Noise & Sleep Onset (PMC8838436)",
+        title: "White Noise & Sleep Onset",
         detail:
-          "A 2022 systematic review and meta-analysis found that white noise reduces sleep onset latency by 38% in noisy environments. Across 38 studies, continuous white noise raised the auditory arousal threshold, meaning irregular sounds had to be significantly louder to trigger wakefulness. The effect was strongest in hospital and urban settings where background noise was unpredictable.",
+          "A study in Sleep Medicine (Stanchina et al., 2005) found broadband sound reduced sleep onset latency by 38% in noisy ICU environments. Subjects fell asleep faster and experienced fewer arousals.",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5742584/",
       },
       {
-        title: "Multi-Sensory Synergy",
+        title: "Auditory Masking",
         detail:
-          "Combining auditory masking with olfactory calming signals creates a compound sleep effect. The brain processes sound and scent through parallel pathways — white noise raises the arousal threshold while lavender signals safety to the amygdala. Together, they address two of the four sensory systems that keep you awake.",
+          "Your auditory cortex stays active during sleep. Irregular sounds (doors, traffic, partners) trigger micro-arousals. Continuous broadband noise raises the arousal threshold so those sounds don't register.",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9163611/",
       },
       {
-        title: "Amber Light & Melatonin",
+        title: "Aromatherapy + Sound",
         detail:
-          "The flame-effect LED emits amber light above 530nm, below the threshold that suppresses melatonin. Unlike standard night lights that spike blue at 450-480nm, the amber spectrum lets your pineal gland continue melatonin production uninterrupted through the night.",
+          "Combining auditory stimulation with olfactory input (lavender) produces additive effects on sleep quality. Multi-sensory approaches outperform single-modality interventions.",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8838436/",
       },
     ],
     usage: "Fill water tank, add 5-8 drops essential oil. Select sound profile and volume. Set timer or leave on all night. Place 1-2 meters from bed. Clean tank weekly.",
     weight: "700g",
     materials: "ABS housing, ultrasonic plate, fabric speaker grille, LED array, silicone feet",
-    images: ["/products/white-noise-aroma-machine/1.jpg", "/products/white-noise-aroma-machine/2.jpg"],
+    images: ["/products/white-noise-aroma-machine/1.jpg", "/products/white-noise-aroma-machine/2.jpg", "/products/white-noise-aroma-machine/3.jpg", "/products/white-noise-aroma-machine/4.jpg", "/products/white-noise-aroma-machine/5.jpg"],
     tags: ["white noise", "aroma diffuser", "sleep machine", "night light", "sound therapy", "humidifier", "bluetooth speaker", "premium"],
     stock: 65,
     rating: 4.8,
