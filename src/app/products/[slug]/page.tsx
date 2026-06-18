@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Script from "next/script";
 import { createRoot } from "react-dom/client";
 import { useCart } from "@/lib/cart-context";
@@ -31,6 +31,8 @@ function AddToCartButtons({
 
 export default function ProductPage() {
   const { addToCart } = useCart();
+  const addToCartRef = useRef(addToCart);
+  addToCartRef.current = addToCart; // always current, no re-render trigger
   const [htmlContent, setHtmlContent] = useState<{
     style: string;
     body: string;
@@ -79,7 +81,7 @@ export default function ProductPage() {
       if (!mount) return;
 
       const handleAddToCart = () => {
-        addToCart({
+        addToCartRef.current({
           variantId: 1,
           productId: 1,
           name: "Somni Contour 3D Sleep Mask",
@@ -117,7 +119,7 @@ export default function ProductPage() {
         (mount as any).__cartRoot.unmount();
       }
     };
-  }, [htmlContent?.body, addToCart]);
+  }, [htmlContent?.body]);
 
   // ── Loading state ────────────────────────────────────────────────────
 
