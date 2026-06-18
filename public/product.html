@@ -38,7 +38,17 @@
     font-family: 'Courier New', monospace;
     font-size: 22px; letter-spacing: 4px;
     color: var(--gold); font-weight: 700;
+    text-decoration: none;
   }
+  nav .nav-links {
+    display: flex; gap: 32px;
+  }
+  nav .nav-link {
+    color: var(--text-dim); text-decoration: none;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 1px; transition: color 0.2s;
+  }
+  nav .nav-link:hover { color: var(--gold); }
   nav .cta {
     background: var(--gold); color: #050510;
     border: none; padding: 10px 28px;
@@ -470,12 +480,17 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo">SOMNI</div>
-  <button class="cta" onclick="document.getElementById('buy').scrollIntoView({behavior:'smooth'})">Pre-Order — $49</button>
+  <a href="/" class="logo">SOMNI</a>
+  <div class="nav-links">
+    <a href="/shop/visual" class="nav-link">SHOP</a>
+    <a href="/science" class="nav-link">SCIENCE</a>
+    <a href="/story" class="nav-link">STORY</a>
+  </div>
+  <a href="#buy" class="cta">Pre-Order — $49</a>
 </nav>
 
 <!-- BREADCRUMB -->
-<div class="breadcrumb">Home <span>• Somni Contour – 3D Sleep Mask with Bluetooth 6.0 Audio</span></div>
+<div class="breadcrumb"><a href="/" style="color:var(--text-dim);text-decoration:none;">Home</a> <span>• Somni Contour – 3D Sleep Mask with Bluetooth 6.0 Audio</span></div>
 
 <!-- ══════ PRODUCT DETAIL TOP ══════ -->
 <section class="product-detail">
@@ -739,16 +754,6 @@
         <li>Includes cooling insert for hot sleepers</li>
       </ul>
     </div>
-  </div>
-</section>
-
-<!-- COLORS -->
-<section id="buy">
-  <div class="cta-banner">
-    <h3>Ready for Your Best Sleep?</h3>
-    <p>Free shipping. 30-day trial. CE certified. 1-year warranty.</p>
-    <a href="#" class="btn-primary" style="font-size:16px; padding:16px 48px;">Pre-Order Somni Contour — $49</a>
-    <p style="font-size:12px; color:var(--text-muted); margin-top:12px;">Ships from Shenzhen. Duties & tax included. Estimated delivery: 7-14 days worldwide.</p>
   </div>
 </section>
 
