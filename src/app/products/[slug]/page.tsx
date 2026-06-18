@@ -480,6 +480,32 @@ export default function ProductPage() {
     <>
       <style dangerouslySetInnerHTML={{ __html: productStyle }} />
       <ProductDetailTop product={product} />
+
+      {/* Product demo video (matching product.html format) */}
+      {product.video && (
+        <section>
+          <div className="section-label">See It In Action</div>
+          <h2 className="section-title">Product Demo Video</h2>
+          <div
+            style={{
+              maxWidth: "800px",
+              margin: "32px auto 0",
+              borderRadius: "12px",
+              overflow: "hidden",
+              boxShadow: "0 10px 40px rgba(0,0,0,0.4)",
+            }}
+          >
+            <video
+              controls
+              preload="none"
+              style={{ width: "100%", display: "block" }}
+            >
+              <source src={product.video} type="video/mp4" />
+            </video>
+          </div>
+        </section>
+      )}
+
       <div className="product-page-content">
         <GenericSections product={product} />
       </div>

@@ -42,32 +42,6 @@ export default function AuditoryPage() {
           </div>
         </motion.div>
 
-        {/* Hero Video Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="max-w-[700px] mx-auto mb-20"
-        >
-          <div className="glass-card p-6">
-            <p className="text-moonlight text-xs uppercase tracking-[0.2em] font-medium mb-4 text-center">
-              Product Showcase
-            </p>
-            <div className="rounded-xl overflow-hidden bg-abyss/80">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                controls
-                preload="metadata"
-                className="w-full rounded-xl"
-                src="/videos/sonus-hero.mp4"
-              />
-            </div>
-          </div>
-        </motion.div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {products.map((product, idx) => (
             <motion.div

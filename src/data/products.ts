@@ -25,6 +25,7 @@ export interface Product {
   comparisonTable?: { headers: string[]; rows: { label: string; values: ({ text: string; check: boolean } | string)[] }[] };
   boxContents?: { items: string[]; image: string };
   howItWorks?: { title: string; description: string };
+  video?: string;
 }
 
 export const senseData = {
@@ -273,6 +274,7 @@ export const products: Product[] = [
     rating: 4.8,
     reviewCount: 312,
     bestSeller: true,
+    video: "/videos/sonus-hero.mp4",
   },
   {
     id: 6,
@@ -721,6 +723,7 @@ export const products: Product[] = [
     rating: 4.6,
     reviewCount: 212,
     bestSeller: false,
+    video: "/videos/tactus-hero.mp4",
     modeCards: [
       { icon: "⚡", title: "CES Microcurrent Therapy", description: "Cranial Electrotherapy Stimulation (CES) delivers gentle microcurrent pulses through ear-clip electrodes. These pulses travel via the earlobes to modulate the brain's sleep-wake centers, calming the nervous system and promoting natural deep sleep. Clinically used for over 40 years with minimal side effects.", stats: ["CES Technology", "Vagus Nerve", "40+ Years"] },
       { icon: "🧠", title: "Brainwave Entrainment", description: "Microcurrent pulses gently guide your brain from an alert beta state into the relaxed alpha frequencies associated with rest and meditation. With regular use over 2 weeks, your brain learns this pathway — falling asleep becomes faster and more automatic. Drug-free by design.", stats: ["Alpha Wave", "2-Week", "Drug-Free"] }
