@@ -4,10 +4,11 @@ import path from "path";
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { slug: string } }
+  context: { params: Promise<{ slug: string }> }
 ) {
-  // Only serve product.html for the 3d-contour-sleep-mask slug
-  if (params.slug !== "3d-contour-sleep-mask") {
+  const { slug } = await context.params;
+
+  if (slug !== "3d-contour-sleep-mask") {
     return new Response("Not Found", { status: 404 });
   }
 
