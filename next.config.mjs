@@ -10,7 +10,12 @@ const nextConfig = {
     ],
   },
   async rewrites() {
-    return [];
+    return [
+      {
+        source: "/products/3d-contour-sleep-mask",
+        destination: "/product.html",
+      },
+    ];
   },
 };
 
