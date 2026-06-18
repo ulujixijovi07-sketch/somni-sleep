@@ -1,3 +1,7 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProductsBySense } from "@/data/products";
 import ProductDetailTop from "@/components/product-detail-top";
@@ -15,9 +19,7 @@ const scienceIcons: Record<string, string> = {
 
 // ─── FAQ generator from product data ────────────────────────────────────
 
-function generateFaq(
-  product: ReturnType<typeof getProductBySlug> extends undefined ? never : NonNullable<ReturnType<typeof getProductBySlug>>
-) {
+function generateFaq(product: NonNullable<ReturnType<typeof getProductBySlug>>) {
   return [
     {
       question: "How do I use this product?",
@@ -45,20 +47,9 @@ function generateFaq(
   ];
 }
 
-// ─── Page Component ─────────────────────────────────────────────────────
+// ─── Generic Sections (used for non-mask products) ──────────────────────
 
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const product = getProductBySlug(slug);
-
-  if (!product) {
-    notFound();
-  }
-
+function GenericSections({ product }: { product: NonNullable<ReturnType<typeof getProductBySlug>> }) {
   const relatedProducts = getProductsBySense(product.category)
     .filter((p) => p.slug !== product.slug)
     .slice(0, 3);
@@ -68,121 +59,221 @@ export default async function ProductPage({
 
   return (
     <>
-      <ProductDetailTop product={product} />
+      {/* ── The Science Section ── */}
+      <section className="science-section">
+        <div className="section-label">The Science</div>
+        <h2 className="section-title">Why {product.name} Works</h2>
+        <p className="section-subtitle">
+          Every SOMNI product is grounded in peer-reviewed research. Here is
+          the evidence behind {product.name}.
+        </p>
 
-      <div className="product-page-content">
-        {/* ── The Science Section ── */}
-        <section className="science-section">
-          <div className="section-label">The Science</div>
-          <h2 className="section-title">Why {product.name} Works</h2>
-          <p className="section-subtitle">
-            Every SOMNI product is grounded in peer-reviewed research. Here is
-            the evidence behind {product.name}.
-          </p>
+        <div className="science-grid">
+          {product.science.map((item, i) => (
+            <div key={i} className="science-card">
+              <div className="science-icon">{icon}</div>
+              <h3 className="science-card-title">{item.title}</h3>
+              <p className="science-card-detail">{item.detail}</p>
+              {item.link && (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="science-link"
+                >
+                  View on PubMed →
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
 
-          <div className="science-grid">
-            {product.science.map((item, i) => (
-              <div key={i} className="science-card">
-                <div className="science-icon">{icon}</div>
-                <h3 className="science-card-title">{item.title}</h3>
-                <p className="science-card-detail">{item.detail}</p>
-                {item.link && (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="science-link"
-                  >
-                    View on PubMed →
-                  </a>
-                )}
-              </div>
+      {/* ── Long Description ── */}
+      <section className="description-section">
+        <div className="section-label">Overview</div>
+        <h2 className="section-title">About the {product.name}</h2>
+        <p className="description-text">{product.longDescription}</p>
+      </section>
+
+      {/* ── Usage Instructions ── */}
+      <section className="usage-section">
+        <div className="section-label">How to Use</div>
+        <h2 className="section-title">Getting Started</h2>
+        <p className="usage-text">{product.usage}</p>
+      </section>
+
+      {/* ── Specifications ── */}
+      <section className="specs-section">
+        <div className="section-label">Specifications</div>
+        <h2 className="section-title">Technical Details</h2>
+        <div className="specs-grid">
+          <div className="spec-item">
+            <span className="spec-label">Weight</span>
+            <span className="spec-value">{product.weight}</span>
+          </div>
+          <div className="spec-item">
+            <span className="spec-label">Materials</span>
+            <span className="spec-value">{product.materials}</span>
+          </div>
+          <div className="spec-item">
+            <span className="spec-label">Category</span>
+            <span className="spec-value">
+              {product.senseLabel} — {product.category}
+            </span>
+          </div>
+          <div className="spec-item">
+            <span className="spec-label">Rating</span>
+            <span className="spec-value">
+              {product.rating} ★ ({product.reviewCount} reviews)
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Related Products ── */}
+      {relatedProducts.length > 0 && (
+        <section className="related-section">
+          <div className="section-label">Related</div>
+          <h2 className="section-title">More from {product.senseLabel}</h2>
+          <div className="related-grid">
+            {relatedProducts.map((rp) => (
+              <Link
+                key={rp.slug}
+                href={`/products/${rp.slug}`}
+                className="related-card"
+              >
+                <div className="related-image-wrap">
+                  <img src={rp.images[0]} alt={rp.name} />
+                </div>
+                <div className="related-info">
+                  <h4>{rp.name}</h4>
+                  <span className="related-price">${rp.price}</span>
+                </div>
+              </Link>
             ))}
           </div>
         </section>
+      )}
 
-        {/* ── Long Description ── */}
-        <section className="description-section">
-          <div className="section-label">Overview</div>
-          <h2 className="section-title">About the {product.name}</h2>
-          <p className="description-text">{product.longDescription}</p>
-        </section>
+      {/* ── FAQ ── */}
+      <section className="faq-section">
+        <div className="section-label">FAQ</div>
+        <h2 className="section-title">Common Questions</h2>
+        <FaqAccordion items={faqItems} />
+      </section>
 
-        {/* ── Usage Instructions ── */}
-        <section className="usage-section">
-          <div className="section-label">How to Use</div>
-          <h2 className="section-title">Getting Started</h2>
-          <p className="usage-text">{product.usage}</p>
-        </section>
+      {/* ── Footer ── */}
+      <footer>
+        <p>
+          © {new Date().getFullYear()} Somni. CE Certified. Designed in
+          California. Made with care in Shenzhen.
+        </p>
+        <p style={{ marginTop: "8px", fontSize: "11px" }}>
+          SOMNI and the Somni logo are trademarks of Somni Sleep Technologies.
+        </p>
+      </footer>
+    </>
+  );
+}
 
-        {/* ── Specifications ── */}
-        <section className="specs-section">
-          <div className="section-label">Specifications</div>
-          <h2 className="section-title">Technical Details</h2>
-          <div className="specs-grid">
-            <div className="spec-item">
-              <span className="spec-label">Weight</span>
-              <span className="spec-value">{product.weight}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">Materials</span>
-              <span className="spec-value">{product.materials}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">Category</span>
-              <span className="spec-value">{product.senseLabel} — {product.category}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">Rating</span>
-              <span className="spec-value">
-                {product.rating} ★ ({product.reviewCount} reviews)
-              </span>
-            </div>
-          </div>
-        </section>
+// ─── Page Component ─────────────────────────────────────────────────────
 
-        {/* ── Related Products ── */}
-        {relatedProducts.length > 0 && (
-          <section className="related-section">
-            <div className="section-label">Related</div>
-            <h2 className="section-title">More from {product.senseLabel}</h2>
-            <div className="related-grid">
-              {relatedProducts.map((rp) => (
-                <Link
-                  key={rp.slug}
-                  href={`/products/${rp.slug}`}
-                  className="related-card"
-                >
-                  <div className="related-image-wrap">
-                    <img src={rp.images[0]} alt={rp.name} />
-                  </div>
-                  <div className="related-info">
-                    <h4>{rp.name}</h4>
-                    <span className="related-price">${rp.price}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
+export default function ProductPage() {
+  const params = useParams();
+  const slug = params.slug as string;
+  const product = getProductBySlug(slug);
 
-        {/* ── FAQ ── */}
-        <section className="faq-section">
-          <div className="section-label">FAQ</div>
-          <h2 className="section-title">Common Questions</h2>
-          <FaqAccordion items={faqItems} />
-        </section>
+  // State for HTML content (only used for 3D contour sleep mask)
+  const [htmlContent, setHtmlContent] = useState<{
+    style: string;
+    body: string;
+  } | null>(null);
 
-        {/* ── Footer ── */}
-        <footer>
-          <p>
-            © {new Date().getFullYear()} Somni. CE Certified. Designed in
-            California. Made with care in Shenzhen.
-          </p>
-          <p style={{ marginTop: "8px", fontSize: "11px" }}>
-            SOMNI and the Somni logo are trademarks of Somni Sleep Technologies.
-          </p>
-        </footer>
+  const isMask = slug === "3d-contour-sleep-mask";
+
+  // Fetch and process product.html for the 3D contour sleep mask
+  useEffect(() => {
+    if (!isMask) return;
+
+    fetch("/product.html")
+      .then((r) => r.text())
+      .then((html) => {
+        // Extract <style>
+        const styleMatch = html.match(/<style>([\s\S]*?)<\/style>/);
+        const style = styleMatch ? styleMatch[1].trim() : "";
+
+        // Extract <body>
+        const bodyMatch = html.match(/<body>\s*([\s\S]*?)\s*<\/body>/);
+        let body = bodyMatch ? bodyMatch[1].trim() : "";
+
+        // Strip nav and breadcrumb (rendered by the layout)
+        body = body.replace(/<!-- NAV -->[\s\S]*?<\/nav>/, "");
+        body = body.replace(/<!-- BREADCRUMB -->[\s\S]*?<\/div>/, "");
+
+        // Strip the product detail top section (rendered as React ProductDetailTop)
+        body = body.replace(
+          /<!--\s*═+ PRODUCT DETAIL TOP ═+\s*-->[\s\S]*?<\/section>/,
+          ""
+        );
+
+        // Strip the original Add to Cart / Buy Now buttons (just in case)
+        body = body.replace(
+          /<button id="btn-add-cart"[\s\S]*?<\/button>\s*<button id="btn-buy-now"[\s\S]*?<\/button>/,
+          ""
+        );
+
+        // Strip the inline <script> block (React handles interactivity)
+        body = body.replace(/<script>[\s\S]*?<\/script>/, "");
+
+        setHtmlContent({ style, body });
+      });
+  }, [isMask]);
+
+  // ── Not found ──────────────────────────────────────────────────────
+
+  if (!product) {
+    notFound();
+  }
+
+  // ── Loading state (3D contour mask only) ───────────────────────────
+
+  if (isMask && !htmlContent) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#050510]">
+        <p className="text-[#C9A84C] text-sm tracking-widest animate-pulse">
+          Loading…
+        </p>
+      </div>
+    );
+  }
+
+  // ── 3D Contour Sleep Mask: rich HTML rendering ─────────────────────
+
+  if (isMask && htmlContent) {
+    return (
+      <>
+        <style dangerouslySetInnerHTML={{ __html: htmlContent.style }} />
+
+        {/* React-rendered top section with gallery, info, Add to Cart, toast */}
+        <ProductDetailTop product={product} />
+
+        {/* Bottom sections from product.html (Science, Materials, Specs, etc.) */}
+        <div
+          className="product-page-content"
+          dangerouslySetInnerHTML={{ __html: htmlContent.body }}
+        />
+      </>
+    );
+  }
+
+  // ── All other products: generic React-rendered sections ────────────
+
+  return (
+    <>
+      <ProductDetailTop product={product} />
+      <div className="product-page-content">
+        <GenericSections product={product} />
       </div>
     </>
   );
