@@ -140,7 +140,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
 
   // ── Render ────────────────────────────────────────────────────────
   return (
-    <div className="mt-14 border-t border-border pt-10">
+    <div className="mt-14 border-t border-border pt-10 max-w-[1200px] mx-auto px-10">
       <h2 className="font-display text-2xl font-light text-text-primary">
         Customer Reviews
       </h2>
