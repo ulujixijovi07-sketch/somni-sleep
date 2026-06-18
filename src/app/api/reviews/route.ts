@@ -116,22 +116,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 
-    // ── Purchase verification ───────────────────────────────────────
-    const purchaseOrder = await prisma.order.findFirst({
-      where: {
-        customerEmail: session.user.email!,
-        status: "DELIVERED",
-        items: { some: { productId } },
-      },
-    });
-
-    if (!purchaseOrder) {
-      return NextResponse.json(
-        { error: "You must purchase this product before reviewing" },
-        { status: 403 }
-      );
-    }
-
     // Upload images to Cloudinary
     const imageUrls: string[] = [];
     const imageFiles: File[] = [];

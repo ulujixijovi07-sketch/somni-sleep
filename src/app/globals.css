@@ -64,6 +64,21 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── NOCTURNE theme compat (for ProductReviews & admin pages) ── */
+:root {
+  --text-primary: #F5F1EB;
+  --text-secondary: #8B938A;
+  --text-light: #F5F1EB;
+  --border: rgba(201, 168, 76, 0.15);
+  --bg-brand-primary: #050510;
+  --bg-brand-secondary: #0A0A1A;
+  --brand-dark: #0A0A1A;
+  --brand-gold: #C9A84C;
+  --brand-burgundy: #C94C4C;
+  --brand-primary: #050510;
+  --brand-secondary: #111128;
+}
+
 html { scroll-behavior: smooth; }
 
 footer { position: relative; z-index: 1; }
