@@ -69,15 +69,13 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 
 function PaymentBadges() {
   return (
-    <div className="flex flex-wrap items-center gap-1.5">
-      <span className="rounded-[3px] bg-white px-2 py-0.5 text-[11px] font-bold text-[#1A1F71] tracking-tight">VISA</span>
-      <span className="rounded-[3px] bg-white px-2 py-0.5 text-[11px] font-bold">
-        <span className="text-[#EB001B]">Master</span><span className="text-[#F79E1B]">card</span>
-      </span>
-      <span className="rounded-[3px] bg-[#006FCF] px-2 py-0.5 text-[11px] font-bold text-white">AMEX</span>
-      <span className="rounded-[3px] bg-black px-2 py-0.5 text-[11px] font-medium text-white">Pay</span>
-      <span className="rounded-[3px] bg-white border border-gray-200 px-2 py-0.5 text-[11px] font-medium text-gray-700">G Pay</span>
-      <span className="rounded-[3px] bg-white border border-gray-200 px-2 py-0.5 text-[11px] font-bold text-[#003087]">PayPal</span>
+    <div className="flex flex-wrap items-center gap-2">
+      <img src="/images/payments/visa.png" alt="Visa" className="h-5 w-auto rounded-[3px]" />
+      <img src="/images/payments/mastercard.png" alt="Mastercard" className="h-5 w-auto rounded-[3px]" />
+      <img src="/images/payments/amex.png" alt="Amex" className="h-5 w-auto rounded-[3px]" />
+      <img src="/images/payments/apple-pay.png" alt="Apple Pay" className="h-5 w-auto rounded-[3px]" />
+      <img src="/images/payments/google-pay.png" alt="Google Pay" className="h-5 w-auto rounded-[3px]" />
+      <img src="/images/payments/paypal.png" alt="PayPal" className="h-5 w-auto rounded-[3px]" />
     </div>
   );
 }
