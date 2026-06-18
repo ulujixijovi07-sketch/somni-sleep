@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOCTEAT Melatonin Pillow Spray | Somni</title>
+<style>
+  .product-page-content, .product-page-content * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #050510;
+    --bg-card: #0a0a1a;
+    --gold: #C9A84C;
+    --gold-dim: #A68A3E;
+    --text: #E8E6E3;
+    --text-dim: #989695;
+    --text-muted: #6B6967;
+    --border: rgba(201,168,76,0.15);
+    --accent-blue: #4A7FB5;
+    --red: #E85D5D;
+  }
+
+  .product-page-content {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── Nav ── */
+  .product-page-content nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(5,5,16,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .product-page-content nav .logo {
+    font-family: 'Courier New', monospace;
+    font-size: 22px; letter-spacing: 4px;
+    color: var(--gold); font-weight: 700;
+    text-decoration: none;
+  }
+  .product-page-content nav .nav-links {
+    display: flex; gap: 32px;
+  }
+  .product-page-content nav .nav-link {
+    color: var(--text-dim); text-decoration: none;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 1px; transition: color 0.2s;
+  }
+  .product-page-content nav .nav-link:hover { color: var(--gold); }
+  .product-page-content nav .cta {
+    background: var(--gold); color: #050510;
+    border: none; padding: 10px 28px;
+    font-size: 14px; font-weight: 600;
+    border-radius: 6px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .product-page-content nav .cta:hover { background: #D4B55A; transform: translateY(-1px); }
+
+  /* ── Breadcrumb ── */
+  .breadcrumb {
+    padding: 100px 40px 0;
+    max-width: 1200px; margin: 0 auto;
+    font-size: 12px; color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+  .breadcrumb span { color: var(--text-dim); }
+
+  /* ══════ PRODUCT DETAIL TOP ══════ */
+  .product-detail {
+    display: flex; gap: 60px;
+    max-width: 1200px; margin: 0 auto;
+    padding: 32px 40px 60px;
+  }
+  /* ── Left: Gallery ── */
+  .product-gallery { flex: 1; max-width: 55%; }
+  .main-image {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    position: relative;
+  }
+  .main-image img {
+    width: 100%; display: block;
+    border-radius: 16px;
+  }
+  .main-image .expand-btn {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(0,0,0,0.6); color: var(--text);
+    border: none; width: 32px; height: 32px;
+    border-radius: 6px; cursor: pointer;
+    font-size: 16px; display: flex; align-items: center; justify-content: center;
+  }
+  .thumbnail-strip {
+    display: flex; gap: 10px; margin-top: 14px;
+    overflow-x: auto;
+  }
+  .thumbnail-strip img {
+    width: 72px; height: 72px;
+    object-fit: cover; border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer; opacity: 0.6;
+    transition: all 0.2s;
+  }
+  .thumbnail-strip img.active,
+  .thumbnail-strip img:hover {
+    border-color: var(--gold); opacity: 1;
+  }
+
+  /* ── Right: Product Info ── */
+  .product-info { flex: 1; max-width: 45%; }
+  .product-info h1 {
+    font-size: 26px; font-weight: 400; line-height: 1.3;
+    margin-bottom: 20px; letter-spacing: -0.3px;
+  }
+  .product-info h1 span { color: var(--gold); font-weight: 600; }
+
+  /* Pricing */
+  .pricing {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .current-price { font-size: 36px; font-weight: 700; }
+  .original-price {
+    font-size: 18px; color: var(--text-muted);
+    text-decoration: line-through;
+  }
+  .discount-badge {
+    background: var(--red); color: #fff;
+    font-size: 13px; font-weight: 700;
+    padding: 3px 10px; border-radius: 4px;
+  }
+
+  /* Feature Bullets */
+  .feature-bullets {
+    list-style: none; margin-bottom: 24px;
+  }
+  .feature-bullets li {
+    padding: 10px 0; color: var(--text-dim);
+    font-size: 14px; line-height: 1.5;
+    border-bottom: 1px solid var(--border);
+  }
+  .feature-bullets .icon { margin-right: 10px; }
+
+  /* Social Proof */
+  .social-proof {
+    font-size: 13px; color: var(--gold-dim);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .social-proof .dot {
+    width: 8px; height: 8px; background: #4AE86C;
+    border-radius: 50%; animation: pulse-dot 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* Color Picker */
+  .color-label {
+    font-size: 13px; font-weight: 600; color: var(--text);
+    margin-bottom: 10px;
+  }
+  .color-picker {
+    display: flex; gap: 10px; margin-bottom: 24px;
+  }
+  .color-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 2px solid transparent; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .color-dot.arctic   { background: linear-gradient(135deg, #6B7B8D, #4A5568); }
+  .color-dot.active { border-color: var(--gold); box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--gold); }
+  /* Quantity */
+  .qty-row {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 20px;
+  }
+  .qty-label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .quantity-picker {
+    display: flex; align-items: center;
+    border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden;
+  }
+  .quantity-picker button {
+    background: var(--bg-card); color: var(--text);
+    border: none; width: 40px; height: 40px;
+    font-size: 18px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .quantity-picker button:hover { background: rgba(201,168,76,0.1); }
+  .quantity-picker input {
+    width: 48px; height: 40px; text-align: center;
+    background: transparent; color: var(--text);
+    border: none; border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    font-size: 15px; font-family: inherit;
+  }
+
+  /* Action Buttons */
+  .btn-add-cart {
+    width: 100%; background: var(--gold); color: #050510;
+    border: none; padding: 16px; font-size: 16px; font-weight: 700;
+    border-radius: 8px; cursor: pointer;
+    margin-bottom: 12px; transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn-add-cart:hover { background: #D4B55A; transform: translateY(-1px); }
+  .btn-buy-now {
+    width: 100%; background: transparent; color: var(--text);
+    border: 2px solid var(--gold); padding: 14px;
+    font-size: 16px; font-weight: 600;
+    border-radius: 8px; cursor: pointer;
+    margin-bottom: 20px; transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn-buy-now:hover { background: rgba(201,168,76,0.1); border-color: #D4B55A; }
+
+  /* Trust Stripe */
+  .trust-text {
+    font-size: 12px; color: var(--text-dim);
+    text-align: center; margin-bottom: 12px;
+  }
+  .trust-badges {
+    display: flex; justify-content: center; gap: 24px;
+    flex-wrap: wrap; margin-bottom: 8px;
+  }
+  .trust-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: var(--text-muted);
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .trust-badge .t-icon { font-size: 15px; }
+
+  /* Shipping Banner */
+  .shipping-banner {
+    text-align: center; font-size: 13px; color: var(--gold-dim);
+    background: rgba(201,168,76,0.06);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px; margin-top: 8px;
+  }
+
+  /* ══════ BUNDLE SECTION ══════ */
+  .bundle-section {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+  .bundle-header {
+    text-align: center; margin-bottom: 32px;
+  }
+  .bundle-header h3 { font-size: 22px; font-weight: 400; margin-bottom: 6px; }
+  .bundle-header p { font-size: 13px; color: var(--text-dim); }
+  .bundle-grid {
+    display: flex; gap: 20px; align-items: stretch;
+    margin-bottom: 24px;
+  }
+  .bundle-item {
+    flex: 1; background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 20px;
+    text-align: center; position: relative;
+    transition: all 0.2s;
+  }
+  .bundle-item:hover { border-color: rgba(201,168,76,0.4); }
+  .bundle-item img {
+    width: 120px; height: 120px; object-fit: contain;
+    margin-bottom: 14px;
+  }
+  .bundle-item .bundle-name {
+    font-size: 14px; font-weight: 500; margin-bottom: 4px;
+  }
+  .bundle-item .bundle-variant {
+    font-size: 12px; color: var(--text-dim); margin-bottom: 8px;
+  }
+  .bundle-item .bundle-current { font-size: 20px; font-weight: 700; color: var(--gold); }
+  .bundle-item .bundle-original {
+    font-size: 13px; color: var(--text-muted);
+    text-decoration: line-through; margin-left: 6px;
+  }
+  .bundle-plus {
+    display: flex; align-items: center;
+    font-size: 20px; color: var(--text-muted);
+    flex-shrink: 0;
+  }
+  .bundle-total {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0; border-top: 1px solid var(--border);
+  }
+  .bundle-total .total-label { font-size: 15px; color: var(--text-dim); }
+  .bundle-total .total-price { font-size: 28px; font-weight: 700; }
+  .bundle-total .total-original {
+    font-size: 15px; color: var(--text-muted);
+    text-decoration: line-through; margin-right: 10px;
+  }
+  .btn-bundle {
+    width: 100%; background: #3A5C4A; color: #fff;
+    border: none; padding: 16px; font-size: 16px; font-weight: 700;
+    border-radius: 8px; cursor: pointer;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .btn-bundle:hover { background: #4A7258; transform: translateY(-1px); }
+
+  /* ══════ SECTIONS (kept from original) ══════ */
+  .product-page-content section {
+    max-width: 1200px; margin: 0 auto;
+    padding: 100px 40px;
+  }
+  .section-label {
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: 40px; font-weight: 300;
+    letter-spacing: -0.5px; margin-bottom: 16px;
+  }
+  .section-desc {
+    color: var(--text-dim); font-size: 17px;
+    max-width: 600px; line-height: 1.7;
+  }
+
+  /* Mode Cards */
+  .modes-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 24px; margin-top: 48px;
+  }
+  .mode-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 36px;
+    transition: all 0.3s;
+  }
+  .mode-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-2px); }
+  .mode-icon { font-size: 32px; margin-bottom: 16px; }
+  .mode-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--gold); }
+  .mode-card p { color: var(--text-dim); font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+  .mode-stat { display: flex; gap: 16px; flex-wrap: wrap; }
+  .mode-stat span {
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    font-size: 13px; padding: 6px 14px;
+    border-radius: 50px; color: var(--gold);
+  }
+
+  /* Feature Split */
+  .feature-split {
+    display: flex; gap: 80px; align-items: center;
+    margin-top: 60px;
+  }
+  .feature-split.reverse { flex-direction: row-reverse; }
+  .feature-text { flex: 1; }
+  .feature-text h3 { font-size: 28px; font-weight: 300; margin-bottom: 16px; }
+  .feature-text h3 span { color: var(--gold); font-weight: 600; }
+  .feature-text p { color: var(--text-dim); font-size: 16px; line-height: 1.7; margin-bottom: 20px; }
+  .feature-list { list-style: none; }
+  .feature-list li {
+    padding: 10px 0; color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .feature-list li::before {
+    content: '◆'; color: var(--gold);
+    margin-right: 12px; font-size: 8px;
+    vertical-align: middle;
+  }
+  .feature-image { flex: 1; text-align: center; }
+  .feature-image .placeholder {
+    width: 100%; aspect-ratio: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); font-size: 14px;
+  }
+
+  /* Comparison Table */
+  .comparison { overflow-x: auto; margin-top: 48px; }
+  .comparison table {
+    width: 100%; border-collapse: collapse;
+    font-size: 14px;
+  }
+  .comparison th {
+    text-align: left; padding: 16px;
+    border-bottom: 2px solid var(--border);
+    color: var(--gold); font-weight: 600;
+    font-size: 13px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .comparison th:first-child { color: var(--text-dim); }
+  .comparison td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  .comparison td:first-child { color: var(--text); font-weight: 500; }
+  .check { color: var(--gold); }
+  .cross { color: var(--text-muted); }
+
+  /* Specs Grid */
+  .specs-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; margin-top: 48px;
+  }
+  .spec-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 28px;
+    text-align: center;
+  }
+  .spec-card .spec-icon { font-size: 28px; margin-bottom: 12px; }
+  .spec-card .spec-val { font-size: 22px; font-weight: 600; color: var(--gold); }
+  .spec-card .spec-label {
+    font-size: 12px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* Reviews */
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+  .review-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px;
+  }
+  .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 12px; }
+  .review-card p { color: var(--text-dim); font-size: 14px; line-height: 1.6; font-style: italic; }
+  .review-author { color: var(--text); font-size: 13px; margin-top: 16px; font-weight: 600; }
+
+  /* FAQ */
+  .faq { margin-top: 48px; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+  .faq-q { font-size: 16px; font-weight: 600; color: var(--text); cursor: pointer; }
+  .faq-a { color: var(--text-dim); font-size: 14px; margin-top: 8px; line-height: 1.6; }
+
+  /* CTA Banner */
+  .cta-banner {
+    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.02));
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 60px;
+    text-align: center; margin-top: 60px;
+  }
+  .cta-banner h3 { font-size: 32px; font-weight: 300; margin-bottom: 12px; }
+  .cta-banner p { color: var(--text-dim); margin-bottom: 28px; }
+
+  /* Footer */
+  .product-page-content footer {
+    border-top: 1px solid var(--border);
+    padding: 40px; text-align: center;
+    color: var(--text-muted); font-size: 13px;
+  }
+
+  .btn-primary {
+    background: var(--gold); color: #050510;
+    border: none; padding: 14px 36px;
+    font-size: 15px; font-weight: 600;
+    border-radius: 8px; cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: #D4B55A; transform: translateY(-2px); }
+
+  @media (max-width: 768px) {
+    .product-detail { flex-direction: column; padding: 24px 16px 40px; }
+    .product-gallery, .product-info { max-width: 100%; }
+    .product-info h1 { font-size: 22px; }
+    .bundle-grid { flex-direction: column; }
+    .bundle-plus { transform: rotate(90deg); justify-content: center; }
+    .modes-grid { grid-template-columns: 1fr; }
+    .feature-split { flex-direction: column; gap: 40px; }
+    .feature-split.reverse { flex-direction: column; }
+    .specs-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .comparison { font-size: 12px; }
+    .comparison th, .comparison td { padding: 10px 8px; }
+    .breadcrumb { padding: 90px 16px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo">SOMNI</a>
+  <div class="nav-links">
+    <a href="/shop/visual" class="nav-link">SHOP</a>
+    <a href="/science" class="nav-link">SCIENCE</a>
+    <a href="/story" class="nav-link">STORY</a>
+  </div>
+  <a href="/products/deep-sleep-pillow-spray" class="cta">Pre-Order — $29</a>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb"><a href="/" style="color:var(--text-dim);text-decoration:none;">Home</a> <span>• DOCTEAT Melatonin Pillow Spray</span></div>
+
+<!-- ══════ PRODUCT DETAIL TOP ══════ -->
+<section class="product-detail">
+
+  <!-- LEFT: Gallery -->
+  <div class="product-gallery">
+    <div class="main-image">
+      <img id="mainImg" src="/products/deep-sleep-pillow-spray/product_0.webp" alt="DOCTEAT Melatonin Pillow Spray — 30ML Fast-Acting Sleep Spray" />
+    </div>
+    <div class="thumbnail-strip">
+      <img class="active" src="/products/deep-sleep-pillow-spray/product_0.webp" data-full="/products/deep-sleep-pillow-spray/product_0.webp" onclick="swapMain(this)" alt="Main product" />
+      <img src="/products/deep-sleep-pillow-spray/product_1.webp" data-full="/products/deep-sleep-pillow-spray/product_1.webp" onclick="swapMain(this)" alt="Angle 2" />
+      <img src="/products/deep-sleep-pillow-spray/product_6.webp" data-full="/products/deep-sleep-pillow-spray/product_6.webp" onclick="swapMain(this)" alt="Angle 3" />
+      <img src="/products/deep-sleep-pillow-spray/img_6.webp" data-full="/products/deep-sleep-pillow-spray/img_6.webp" onclick="swapMain(this)" alt="Angle 4" />
+      <img src="/products/deep-sleep-pillow-spray/img_7.webp" data-full="/products/deep-sleep-pillow-spray/img_7.webp" onclick="swapMain(this)" alt="Angle 5" />
+    </div>
+  </div>
+
+  <!-- RIGHT: Product Info -->
+  <div class="product-info">
+    <h1>DOCTEAT — <span>Melatonin Pillow Spray</span> for Deep Sleep</h1>
+
+    <div class="pricing">
+      <span class="current-price">$29</span>
+      <span class="original-price">$45</span>
+      <span class="discount-badge">-36%</span>
+    </div>
+
+    <ul class="feature-bullets">
+      <li><span class="icon">🌿</span> 2-3 pumps on your pillow — fall asleep in 15 minutes without pills</li>
+      <li><span class="icon">🧪</span> Pharmaceutical-grade melatonin absorbed through inhalation — bypasses digestion</li>
+      <li><span class="icon">🌸</span> Lavender + chamomile dual sensory formula — calms mind and body simultaneously</li>
+      <li><span class="icon">🫙</span> 30ML amber glass bottle with 0.15ml metered spray — 200 sprays, ~2 months</li>
+    </ul>
+
+    <div class="social-proof">
+      <span class="dot"></span> 32 people are viewing this right now
+    </div>
+
+    <div class="qty-row">
+      <span class="qty-label">Quantity</span>
+      <div class="quantity-picker">
+        <button onclick="changeQty(-1)">−</button>
+        <input type="text" id="qty" value="1" readonly />
+        <button onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+
+    <button id="btn-add-cart" class="btn-add-cart" onclick="alert('Added to cart!')">Add to Cart</button>
+    <button id="btn-buy-now" class="btn-buy-now" onclick="alert('Proceeding to checkout...')">Buy Now</button>
+
+    <p class="trust-text">Plant-based melatonin. Clinically tested. Non-habit forming.</p>
+    <div class="trust-badges">
+      <div class="trust-badge"><span class="t-icon">🛡️</span> CE Certified</div>
+      <div class="trust-badge"><span class="t-icon">🔄</span> 30-Day Trial</div>
+      <div class="trust-badge"><span class="t-icon">🌿</span> Plant-Based</div>
+      <div class="trust-badge"><span class="t-icon">✅</span> Non-GMO</div>
+      <div class="trust-badge"><span class="t-icon">♻️</span> Recyclable</div>
+    </div>
+
+    <div class="shipping-banner">
+      🚚 Free Worldwide Shipping | Duties & Tax Included | 30-Day Money-Back Guarantee
+    </div>
+  </div>
+</section>
+
+<!-- ══════ HOW IT WORKS ══════ -->
+<section id="how-it-works">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">2-3 Pumps. 15 Minutes. Deep Sleep.</h2>
+  <p class="section-desc">
+    Spray onto your pillow before bed. Melatonin absorbs through inhalation and skin contact — faster than pills because it bypasses digestion.
+  </p>
+</section>
+
+<!-- ══════ SCIENCE SECTION ══════ -->
+<section id="science">
+  <div class="section-label">The Science of Sleep</div>
+  <h2 class="section-title">Fast-Acting Dual Pathway Formula</h2>
+  <p class="section-desc">
+    Unlike pills that must survive stomach acid and liver metabolism, DOCTEAT's spray delivers melatonin through two faster routes — inhalation and dermal absorption — while essential oils calm your nervous system through your olfactory pathway.
+  </p>
+
+  <div class="modes-grid">
+    <div class="mode-card">
+      <div class="mode-icon">🌿</div>
+      <h3>Melatonin Absorption</h3>
+      <p>Melatonin absorbs through inhalation, bypassing the digestive system. 30ML spray format delivers consistent 0.15ml dosing. Fast-acting formula reaches peak concentration within 15 minutes.</p>
+      <div class="mode-stat">
+        <span>0.15ml Metered Spray</span>
+        <span>15min Peak</span>
+        <span>No Digestion</span>
+      </div>
+    </div>
+
+    <div class="mode-card">
+      <div class="mode-icon">😴</div>
+      <h3>Dual Sensory Sleep</h3>
+      <p>Lavender + chamomile essential oils activate the olfactory pathway while melatonin works systemically. Two independent mechanisms for deeper, faster sleep onset.</p>
+      <div class="mode-stat">
+        <span>-7min Sleep Onset</span>
+        <span>Dual Pathway</span>
+        <span>Non-Habit Forming</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ MATERIALS SECTION ══════ -->
+<section>
+  <div class="section-label">Materials & Craft</div>
+  <h2 class="section-title">What's Inside the Bottle</h2>
+
+  <div class="feature-split">
+    <div class="feature-text">
+      <h3><span>Plant-Based</span> Formula</h3>
+      <p>Pharmaceutical-grade melatonin from natural plant sources. Cold-pressed lavender and chamomile essential oils. Zero synthetic chemicals. Zero artificial fragrances.</p>
+      <ul class="feature-list">
+        <li>Pharmaceutical-grade melatonin</li>
+        <li>Cold-pressed lavender oil</li>
+        <li>Chamomile extract</li>
+        <li>No artificial additives</li>
+      </ul>
+    </div>
+    <div class="feature-image"><img src="/products/deep-sleep-pillow-spray/product_0.webp" loading="lazy" alt="DOCTEAT Plant-Based Formula — Natural Melatonin Pillow Spray" style="max-width:100%; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);" /></div>
+  </div>
+
+  <div class="feature-split reverse" style="margin-top:80px;">
+    <div class="feature-text">
+      <h3><span>30ML Precision</span> Bottle</h3>
+      <p>Fine mist nozzle: 0.15ml per spray. 200 sprays per bottle (~2 months). Amber glass protects formula from UV degradation. TSA-friendly travel size.</p>
+      <ul class="feature-list">
+        <li>0.15ml metered spray</li>
+        <li>200 sprays per bottle</li>
+        <li>Amber glass UV protection</li>
+        <li>TSA-friendly 30ML</li>
+      </ul>
+    </div>
+    <div class="feature-image"><img src="/products/deep-sleep-pillow-spray/product_6.webp" loading="lazy" alt="DOCTEAT 30ML Precision Bottle — Amber Glass UV Protection" style="max-width:100%; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);" /></div>
+  </div>
+</section>
+
+<!-- ══════ WHAT'S IN THE BOX ══════ -->
+<section>
+  <div class="section-label">Unboxing</div>
+  <h2 class="section-title">What's in the Box</h2>
+  <p class="section-desc">Every DOCTEAT Melatonin Pillow Spray comes complete with everything you need for better sleep — right out of the box.</p>
+
+  <div class="feature-split" style="margin-top:48px;">
+    <div class="feature-text">
+      <ul class="feature-list">
+        <li>DOCTEAT Melatonin Spray ×1</li>
+        <li>Travel Pouch ×1</li>
+        <li>Instruction Card ×1</li>
+      </ul>
+    </div>
+    <div class="feature-image">
+      <img src="/products/deep-sleep-pillow-spray/img_6.webp" loading="lazy" alt="DOCTEAT Melatonin Pillow Spray — What's in the Box" style="max-width:100%; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);" />
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SPECS ══════ -->
+<section>
+  <div class="section-label">Technical Specifications</div>
+  <h2 class="section-title">By the Numbers</h2>
+
+  <div class="specs-grid">
+    <div class="spec-card"><div class="spec-icon">⚖️</div><div class="spec-val">30ML</div><div class="spec-label">Volume</div></div>
+    <div class="spec-card"><div class="spec-icon">🎯</div><div class="spec-val">0.15ml/spray</div><div class="spec-label">Dose Per Spray</div></div>
+    <div class="spec-card"><div class="spec-icon">🌿</div><div class="spec-val">Plant-Based</div><div class="spec-label">Formula Type</div></div>
+    <div class="spec-card"><div class="spec-icon">🌸</div><div class="spec-val">Lavender + Chamomile</div><div class="spec-label">Essential Oils</div></div>
+    <div class="spec-card"><div class="spec-icon">🔢</div><div class="spec-val">200 Sprays</div><div class="spec-label">Per Bottle</div></div>
+    <div class="spec-card"><div class="spec-icon">📅</div><div class="spec-val">2-Month Supply</div><div class="spec-label">Duration</div></div>
+    <div class="spec-card"><div class="spec-icon">🫙</div><div class="spec-val">Amber Glass</div><div class="spec-label">Bottle Material</div></div>
+    <div class="spec-card"><div class="spec-icon">✅</div><div class="spec-val">Export Quality</div><div class="spec-label">Grade</div></div>
+  </div>
+</section>
+
+<!-- ══════ COMPARISON ══════ -->
+<section>
+  <div class="section-label">Why DOCTEAT Spray</div>
+  <h2 class="section-title">Comparison</h2>
+  <div class="comparison">
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>SOMNI Spray</th><th>Melatonin Pills</th><th>Sleep Gummies</th><th>Prescription</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Onset Time</td><td class="check">◆ 15 min ✓</td><td class="cross">45 min</td><td class="cross">30 min</td><td class="cross">20-60 min</td></tr>
+        <tr><td>Digestion Needed</td><td class="check">◆ No ✓</td><td class="cross">Yes ✗</td><td class="cross">Yes ✗</td><td class="cross">Yes ✗</td></tr>
+        <tr><td>Portable</td><td class="check">◆ Yes ✓</td><td class="check">◆ Yes ✓</td><td class="check">◆ Yes ✓</td><td class="cross">Varies</td></tr>
+        <tr><td>Non-Habit Forming</td><td class="check">◆ Yes ✓</td><td class="cross">Sometimes</td><td class="cross">Sometimes</td><td class="cross">No ✗</td></tr>
+        <tr><td>Natural Ingredients</td><td class="check">◆ Yes ✓</td><td class="cross">Varies</td><td class="cross">Varies</td><td class="cross">No ✗</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════ FAQ ══════ -->
+<section>
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Common Questions</h2>
+  <div class="faq">
+    <div class="faq-item"><div class="faq-q">How do I use DOCTEAT Melatonin Pillow Spray?</div><div class="faq-a">Spray 2-3 pumps onto your pillow 15 minutes before bed. The fine mist delivers melatonin and essential oils that absorb through inhalation and skin contact as you rest your head on the pillow.</div></div>
+    <div class="faq-item"><div class="faq-q">Is it safe for nightly use?</div><div class="faq-a">Yes. DOCTEAT uses pharmaceutical-grade plant-based melatonin at a consistent 0.15ml metered dose. It is non-habit forming and contains no synthetic chemicals or artificial fragrances. If you have specific medical concerns, consult your doctor.</div></div>
+    <div class="faq-item"><div class="faq-q">How long does one bottle last?</div><div class="faq-a">Each 30ML bottle delivers approximately 200 sprays — about 2 months of nightly use at 2-3 sprays per night. The amber glass bottle protects the formula from UV degradation, maintaining potency throughout its use.</div></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Somni. CE Certified. Designed in California. Made with care in Shenzhen.</p>
+  <p style="margin-top:8px;font-size:11px;">SOMNI and the Somni logo are trademarks of Somni Sleep Technologies.</p>
+</footer>
+
+<script>
+  function swapMain(el) {
+    document.getElementById('mainImg').src = el.dataset.full;
+    document.querySelectorAll('.thumbnail-strip img').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+  function changeQty(delta) {
+    const inp = document.getElementById('qty');
+    let v = parseInt(inp.value) + delta;
+    if (v < 1) v = 1;
+    if (v > 99) v = 99;
+    inp.value = v;
+  }
+
+  // Wire up Add to Cart / Buy Now buttons (inline onclick stripped by React)
+  (function() {
+    function initButtons() {
+      var addCart = document.getElementById('btn-add-cart');
+      var buyNow = document.getElementById('btn-buy-now');
+      if (addCart) {
+        addCart.addEventListener('click', function(e) {
+          e.preventDefault();
+          alert('Added to cart!');
+        });
+      }
+      if (buyNow) {
+        buyNow.addEventListener('click', function(e) {
+          e.preventDefault();
+          alert('Proceeding to checkout...');
+        });
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initButtons);
+    } else {
+      initButtons();
+    }
+  })();
+</script>
+
+</body>
+</html>

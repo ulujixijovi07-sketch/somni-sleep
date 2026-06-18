@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const SHOP_LINKS = [
+  { label: "Shop All", href: "/shop" },
   { label: "Visual / LUX", href: "/shop/visual" },
   { label: "Auditory / SONUS", href: "/shop/auditory" },
   { label: "Tactile / TACTUS", href: "/shop/tactile" },

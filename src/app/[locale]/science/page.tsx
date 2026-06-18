@@ -184,7 +184,7 @@ export default function SciencePage() {
 
         {/* CTA */}
         <div className="text-center px-6">
-          <Link href="/shop/visual" className="btn-primary inline-block text-sm uppercase tracking-[0.1em]">
+          <Link href="/shop" className="btn-primary inline-block text-sm uppercase tracking-[0.1em]">
             Explore the 4 Senses <ArrowRight size={14} className="inline ml-1" />
           </Link>
         </div>

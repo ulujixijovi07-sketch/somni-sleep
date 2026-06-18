@@ -179,7 +179,7 @@ export default function StoryPage() {
           </div>
 
           <div className="mt-8">
-            <Link href="/shop/visual" className="btn-primary inline-block text-sm uppercase tracking-[0.1em]">
+            <Link href="/shop" className="btn-primary inline-block text-sm uppercase tracking-[0.1em]">
               Explore Our Products <ArrowRight size={14} className="inline ml-1" />
             </Link>
           </div>

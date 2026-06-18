@@ -29,7 +29,7 @@ const senses = [
   {
     ...senseData.visual,
     icon: Eye,
-    href: "/shop/visual",
+    href: "/shop",
     stat: "3 hrs",
     statLabel: "Melatonin delay from blue light",
     quote: "Complete darkness is not a luxury. It is a biological requirement.",
