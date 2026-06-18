@@ -2,30 +2,8 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Script from "next/script";
-import { createRoot } from "react-dom/client";
 import { useCart } from "@/lib/cart-context";
 import { AnimatePresence, motion } from "framer-motion";
-
-// ─── Inline Buttons Component (rendered inside the HTML placeholder) ─────
-
-function AddToCartButtons({
-  onAddToCart,
-  onBuyNow,
-}: {
-  onAddToCart: () => void;
-  onBuyNow: () => void;
-}) {
-  return (
-    <>
-      <button className="btn-add-cart" onClick={onAddToCart} type="button">
-        Add to Cart
-      </button>
-      <button className="btn-buy-now" onClick={onBuyNow} type="button">
-        Buy Now
-      </button>
-    </>
-  );
-}
 
 // ─── Page Component ──────────────────────────────────────────────────────
 
@@ -56,11 +34,11 @@ export default function ProductPage() {
         body = body.replace(/<!-- NAV -->[\s\S]*?<\/nav>/, "");
         body = body.replace(/<!-- BREADCRUMB -->[\s\S]*?<\/div>/, "");
 
-        // Strip the original Add to Cart / Buy Now buttons
-        // and replace with a mount point for React-rendered buttons
+        // Strip the original Add to Cart / Buy Now buttons entirely
+        // (React renders them as direct JSX below)
         body = body.replace(
           /<button id="btn-add-cart"[\s\S]*?<\/button>\s*<button id="btn-buy-now"[\s\S]*?<\/button>/,
-          '<div id="react-cart-mount"></div>'
+          ""
         );
 
         // Strip the inline <script> block (React handles interactivity now)
@@ -70,56 +48,27 @@ export default function ProductPage() {
       });
   }, []);
 
-  // After the HTML body is committed to the DOM, mount React buttons
-  // into the placeholder div so they live inside the product-info column.
-  useEffect(() => {
-    if (!htmlContent?.body) return;
+  // ── Cart action handlers (stable via useRef, no stale closure) ────────
 
-    // Small delay to let React commit the dangerouslySetInnerHTML DOM
-    const raf = requestAnimationFrame(() => {
-      const mount = document.getElementById("react-cart-mount");
-      if (!mount) return;
-
-      const handleAddToCart = () => {
-        addToCartRef.current({
-          variantId: 1,
-          productId: 1,
-          name: "Somni Contour 3D Sleep Mask",
-          slug: "3d-contour-sleep-mask",
-          image: "/images/model_wearing.png",
-          color: "Arctic",
-          colorHex: "#6B7B8D",
-          size: "One Size",
-          price: 49,
-        });
-        setToast("Added to cart — Somni Contour 3D Sleep Mask");
-        setTimeout(() => setToast(null), 3000);
-      };
-
-      const handleBuyNow = () => {
-        handleAddToCart();
-      };
-
-      const root = createRoot(mount);
-      root.render(
-        <AddToCartButtons
-          onAddToCart={handleAddToCart}
-          onBuyNow={handleBuyNow}
-        />
-      );
-
-      // Store root so we can clean up (via a closure variable)
-      (mount as any).__cartRoot = root;
+  const handleAddToCart = useCallback(() => {
+    addToCartRef.current({
+      variantId: 1,
+      productId: 1,
+      name: "Somni Contour 3D Sleep Mask",
+      slug: "3d-contour-sleep-mask",
+      image: "/images/model_wearing.png",
+      color: "Arctic",
+      colorHex: "#6B7B8D",
+      size: "One Size",
+      price: 49,
     });
+    setToast("Added to cart — Somni Contour 3D Sleep Mask");
+    setTimeout(() => setToast(null), 3000);
+  }, []);
 
-    return () => {
-      // Cleanup on unmount
-      const mount = document.getElementById("react-cart-mount");
-      if (mount && (mount as any).__cartRoot) {
-        (mount as any).__cartRoot.unmount();
-      }
-    };
-  }, [htmlContent?.body]);
+  const handleBuyNow = useCallback(() => {
+    handleAddToCart();
+  }, [handleAddToCart]);
 
   // ── Loading state ────────────────────────────────────────────────────
 
@@ -142,6 +91,18 @@ export default function ProductPage() {
         className="product-page-content"
         dangerouslySetInnerHTML={{ __html: htmlContent.body }}
       />
+
+      {/* Add to Cart buttons rendered as direct JSX, below the product detail */}
+      <div className="product-page-content" style={{maxWidth:1200, margin:'0 auto', padding:'0 40px 60px'}}>
+        <div style={{maxWidth:'45%', marginLeft:'auto'}}>
+          <button className="btn-add-cart" onClick={handleAddToCart} type="button">
+            Add to Cart
+          </button>
+          <button className="btn-buy-now" onClick={handleBuyNow} type="button">
+            Buy Now
+          </button>
+        </div>
+      </div>
 
       {/* Thumbnail swap and quantity changer (vanilla, works with the static HTML) */}
       <Script id="product-init" strategy="afterInteractive">
