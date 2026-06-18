@@ -73,6 +73,10 @@ export default function ProductDetailTop({ product }: ProductDetailTopProps) {
 
   const handleBuyNow = useCallback(() => {
     handleAddToCart();
+    // Navigate to checkout after adding
+    setTimeout(() => {
+      window.location.href = "/en/checkout";
+    }, 500);
   }, [handleAddToCart]);
 
   return (
