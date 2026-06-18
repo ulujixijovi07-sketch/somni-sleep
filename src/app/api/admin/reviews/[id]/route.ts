@@ -47,10 +47,7 @@ export async function GET(
 
   const review = await prisma.review.findUnique({
     where: { id },
-    include: {
-      images: true,
-      product: { select: { name: true, slug: true } },
-    },
+    include: { images: true },
   });
 
   if (!review) {
