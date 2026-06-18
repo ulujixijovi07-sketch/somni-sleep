@@ -29,6 +29,7 @@ export default function StoryPage() {
           {[
             {
               initials: "EC", name: "Elara Chen", role: "Cofounder & CEO",
+              img: "/images/team-elara.webp",
               bio: "Sleep researcher turned entrepreneur. Six years at the Stanford Sleep Epidemiology Research Center, where she published eight papers on sensory modulation of sleep architecture. Left academia in 2023 after noticing a pattern: every clinical study found that multi-sensory interventions outperformed single-pathway approaches — but no consumer product implemented this. Founded SOMNI to bridge that gap.",
               linkedin: true, scholar: true,
             },
@@ -39,9 +40,15 @@ export default function StoryPage() {
             },
           ].map((person, i) => (
             <div key={person.name} className="text-center">
-              <div className="w-36 h-36 rounded-2xl mx-auto mb-6 flex items-center justify-center ring-1 ring-white/[0.05] bg-white/[0.02]">
-                <span className="font-display text-3xl text-moonlight/30 font-bold tracking-tight">{person.initials}</span>
-              </div>
+              {person.img ? (
+                <div className="w-36 h-36 rounded-2xl overflow-hidden mx-auto mb-6 ring-1 ring-white/[0.08]">
+                  <img src={person.img} alt={person.name} className="w-full h-full object-cover" />
+                </div>
+              ) : (
+                <div className="w-36 h-36 rounded-2xl mx-auto mb-6 flex items-center justify-center ring-1 ring-white/[0.05] bg-white/[0.02]">
+                  <span className="font-display text-3xl text-moonlight/30 font-bold tracking-tight">{person.initials}</span>
+                </div>
+              )}
               <h3 className="font-display text-lg text-cream font-bold">{person.name}</h3>
               <p className="text-moonlight/60 text-xs uppercase tracking-[0.12em] font-medium mt-1 mb-4">{person.role}</p>
               <p className="text-cream/40 text-sm leading-relaxed max-w-[44ch] mx-auto mb-4">{person.bio}</p>
