@@ -9,6 +9,14 @@ const nextConfig = {
       { protocol: "https", hostname: "**.1688.com" },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/products/3d-contour-sleep-mask",
+        destination: "/product.html",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
