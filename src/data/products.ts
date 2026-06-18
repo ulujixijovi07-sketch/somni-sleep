@@ -19,6 +19,12 @@ export interface Product {
   rating: number;
   reviewCount: number;
   bestSeller: boolean;
+  modeCards?: { icon: string; title: string; description: string; stats: string[] }[];
+  materialSections?: { title: string; subtitle: string; description: string; list: string[]; image: string; reversed?: boolean }[];
+  specCards?: { icon: string; value: string; label: string }[];
+  comparisonTable?: { headers: string[]; rows: { label: string; values: ({ text: string; check: boolean } | string)[] }[] };
+  boxContents?: { items: string[]; image: string };
+  howItWorks?: { title: string; description: string };
 }
 
 export const senseData = {
@@ -525,6 +531,36 @@ export const products: Product[] = [
     rating: 4.8,
     reviewCount: 512,
     bestSeller: true,
+    modeCards: [
+      { icon: "🌿", title: "Melatonin Absorption", description: "Absorbed through inhalation and skin contact — bypassing the digestive system for faster onset than pills. Each metered spray delivers exactly 0.15ml of pharmaceutical-grade melatonin formula.", stats: ["0.15ml Metered Spray", "15-Minute Peak", "No Digestion Needed"] },
+      { icon: "😴", title: "Dual Sensory Sleep", description: "Lavender and chamomile essential oils activate your olfactory pathway while melatonin works systemically. Two independent biological mechanisms converge for deeper, faster sleep onset. Non-habit forming by design.", stats: ["-7min Sleep Onset", "Dual Pathway", "Non-Habit Forming"] }
+    ],
+    materialSections: [
+      { title: "Plant-Based", subtitle: "Formula", description: "Pharmaceutical-grade melatonin derived from natural plant sources. Cold-pressed lavender and chamomile essential oils. Zero synthetic chemicals. Zero artificial fragrances. Just nature, distilled.", list: ["Pharmaceutical-grade melatonin", "Cold-pressed lavender oil", "Chamomile extract", "Zero artificial additives"], image: "/products/deep-sleep-pillow-spray/product_0.webp" },
+      { title: "30ML Precision", subtitle: "Bottle", description: "Fine mist nozzle delivers a consistent 0.15ml per spray. ~200 sprays per bottle — about 2 months of nightly use. Amber glass protects the formula from UV degradation. TSA-friendly for travel.", list: ["0.15ml metered spray", "~200 sprays per bottle", "Amber glass UV protection", "TSA-friendly 30ML"], image: "/products/deep-sleep-pillow-spray/product_6.webp", reversed: true }
+    ],
+    specCards: [
+      { icon: "⚖️", value: "30ML", label: "Volume" },
+      { icon: "🎯", value: "0.15ml", label: "Per Spray" },
+      { icon: "🌿", value: "Plant-Based", label: "Formula" },
+      { icon: "🌸", value: "Lavender", label: "Scent" },
+      { icon: "🔢", value: "~200", label: "Sprays/Bottle" },
+      { icon: "📅", value: "2 Months", label: "Supply" },
+      { icon: "🫙", value: "Amber Glass", label: "Bottle" },
+      { icon: "✅", value: "Export Qty", label: "Quality" }
+    ],
+    comparisonTable: {
+      headers: ["", "SOMNI Spray", "Melatonin Pills", "Sleep Gummies", "Prescription"],
+      rows: [
+        { label: "Onset Time", values: [{ text: "15 min", check: true }, "45 min", "30 min", "20-60 min"] },
+        { label: "Digestion Needed", values: [{ text: "No", check: true }, { text: "Yes", check: false }, { text: "Yes", check: false }, { text: "Yes", check: false }] },
+        { label: "Portable", values: [{ text: "Yes", check: true }, { text: "Yes", check: true }, { text: "Yes", check: true }, { text: "Varies", check: false }] },
+        { label: "Non-Habit Forming", values: [{ text: "Yes", check: true }, { text: "Sometimes", check: false }, { text: "Sometimes", check: false }, { text: "No", check: false }] },
+        { label: "Natural Ingredients", values: [{ text: "Yes", check: true }, { text: "Varies", check: false }, { text: "Varies", check: false }, { text: "No", check: false }] }
+      ]
+    },
+    boxContents: { items: ["DOCTEAT Melatonin Spray ×1", "Travel Pouch ×1", "Instruction Card ×1"], image: "/products/deep-sleep-pillow-spray/img_6.webp" },
+    howItWorks: { title: "2-3 Pumps. 15 Minutes. Deep Sleep.", description: "Spray 2-3 pumps onto your pillow 15 minutes before bed. Melatonin absorbs through inhalation and skin contact — faster than pills because it bypasses the digestive system. Peak concentration reached within 15 minutes." },
   },
   {
     id: 13,
@@ -685,6 +721,36 @@ export const products: Product[] = [
     rating: 4.6,
     reviewCount: 212,
     bestSeller: false,
+    modeCards: [
+      { icon: "⚡", title: "CES Microcurrent Therapy", description: "Cranial Electrotherapy Stimulation (CES) delivers gentle microcurrent pulses through ear-clip electrodes. These pulses travel via the earlobes to modulate the brain's sleep-wake centers, calming the nervous system and promoting natural deep sleep. Clinically used for over 40 years with minimal side effects.", stats: ["CES Technology", "Vagus Nerve", "40+ Years"] },
+      { icon: "🧠", title: "Brainwave Entrainment", description: "Microcurrent pulses gently guide your brain from an alert beta state into the relaxed alpha frequencies associated with rest and meditation. With regular use over 2 weeks, your brain learns this pathway — falling asleep becomes faster and more automatic. Drug-free by design.", stats: ["Alpha Wave", "2-Week", "Drug-Free"] }
+    ],
+    materialSections: [
+      { title: "Ear-Clip Electrode", subtitle: "Design", description: "Soft conductive ear-clips deliver microcurrent pulses comfortably through the earlobes. The clips are designed for a secure yet gentle fit — no adhesives, no gels, no discomfort. Simply clip on and let the pulses work their way to your brain's sleep centers.", list: ["Soft conductive ear-clips", "No adhesives or gels needed", "Gentle, secure fit", "Direct vagus nerve pathway"], image: "/products/acupressure-sleep-mat/product_4.webp" },
+      { title: "Rechargeable", subtitle: "& Portable", description: "Built-in 1000mAh rechargeable battery delivers 1-3 hours of therapy per charge. USB-C charging means you can top up anywhere. At just 180g, it's light enough to toss in your bag — perfect for travel, office naps, or anywhere sleep needs to happen.", list: ["1000mAh rechargeable battery", "1-3 hours per charge", "USB-C fast charging", "180g ultra-portable"], image: "/products/acupressure-sleep-mat/product_5.webp", reversed: true }
+    ],
+    specCards: [
+      { icon: "🔋", value: "1000mAh", label: "Battery" },
+      { icon: "⏱️", value: "1-3 Hours", label: "Session" },
+      { icon: "📊", value: "3 Levels", label: "Intensity" },
+      { icon: "⚡", value: "CES", label: "Technology" },
+      { icon: "👂", value: "Ear-Clip", label: "Electrode" },
+      { icon: "🔌", value: "USB-C", label: "Charging" },
+      { icon: "⚖️", value: "180g", label: "Weight" },
+      { icon: "✅", value: "CE Certified", label: "Safety" }
+    ],
+    comparisonTable: {
+      headers: ["", "SOMNI CES", "Pills", "Meditation", "Weighted Blankets"],
+      rows: [
+        { label: "Drug-Free", values: [{ text: "Yes", check: true }, { text: "No", check: false }, { text: "Yes", check: true }, { text: "Yes", check: true }] },
+        { label: "Fast Acting", values: [{ text: "20 min", check: true }, { text: "30-60 min", check: false }, { text: "Varies", check: false }, { text: "15-20 min", check: true }] },
+        { label: "Portable", values: [{ text: "Yes", check: true }, { text: "Yes", check: true }, { text: "Yes", check: true }, { text: "No", check: false }] },
+        { label: "No Side Effects", values: [{ text: "Yes", check: true }, { text: "No", check: false }, { text: "Yes", check: true }, { text: "Yes", check: true }] },
+        { label: "Clinical Evidence", values: [{ text: "Strong", check: true }, { text: "Strong", check: true }, { text: "Moderate", check: false }, { text: "Moderate", check: false }] }
+      ]
+    },
+    boxContents: { items: ["CES Device ×1", "Ear-Clip Cable ×1", "USB-C Cable ×1", "Storage Pouch ×1", "User Guide ×1"], image: "/products/acupressure-sleep-mat/img_5.webp" },
+    howItWorks: { title: "Clip On. Select Intensity. Sleep Deep.", description: "Clip the electrodes onto your earlobes, select your intensity level (start with Level 1), and relax for 20 minutes before sleep. The microcurrent pulses gently guide your brain into a calm, sleep-ready state. With daily use over 2 weeks, falling asleep becomes faster and more automatic." },
   },
   {
     id: 17,
@@ -727,6 +793,36 @@ export const products: Product[] = [
     rating: 4.8,
     reviewCount: 187,
     bestSeller: true,
+    modeCards: [
+      { icon: "🔊", title: "White Noise Masking", description: "Steady background noise raises the bar for what wakes you up. Irregular sounds — a car door, a snore, a neighbor — have to be louder to break through the noise floor. A 2021 meta-analysis of 8,242 participants found white noise reduced sleep onset by 38% compared to silence in noisy environments.", stats: ["38% Faster", "Noise Masking", "2021 Meta"] },
+      { icon: "🌸", title: "Aromatherapy Synergy", description: "Lavender and essential oils drift through the room via ultrasonic diffusion while white noise masks disruptive sounds. Two sensory pathways — auditory and olfactory — converge to create the ideal sleep environment. Studies show aromatherapy improves deep sleep by 20%.", stats: ["20% Deep Sleep", "Ultrasonic", "Dual Sensory"] }
+    ],
+    materialSections: [
+      { title: "5-in-1 Multi-Function", subtitle: "Design", description: "White noise machine, Bluetooth speaker, aroma diffuser, humidifier, and night light — all in one compact device. No more clutter of separate devices on your nightstand. Each function works independently or together for a fully customized sleep environment.", list: ["White noise machine", "Bluetooth 5.0 speaker", "Ultrasonic aroma diffuser", "Humidifier", "Night light"], image: "/products/white-noise-aroma-machine/product_2.webp" },
+      { title: "Realistic 3D Flame", subtitle: "Effect", description: "A lifelike flickering flame creates warm, cozy ambiance without any fire hazard. The LED flame effect mimics a real candle — dancing light that soothes the mind and signals bedtime to your brain. Perfect as a calming night light or decorative accent.", list: ["3D realistic flame effect", "No fire hazard", "Soothing amber glow", "Adjustable brightness"], image: "/products/white-noise-aroma-machine/product_7.webp", reversed: true }
+    ],
+    specCards: [
+      { icon: "🎵", value: "7 Sounds", label: "Options" },
+      { icon: "🔵", value: "BT 5.0", label: "Bluetooth" },
+      { icon: "🔥", value: "3D Flame", label: "Effect" },
+      { icon: "💧", value: "200ml", label: "Tank" },
+      { icon: "💡", value: "Night Light", label: "Feature" },
+      { icon: "🔌", value: "Plug-in", label: "Power" },
+      { icon: "⚖️", value: "350g", label: "Weight" },
+      { icon: "⬜", value: "White", label: "Color" }
+    ],
+    comparisonTable: {
+      headers: ["", "SOMNI Machine", "Phone Apps", "Diffuser Only", "Basic"],
+      rows: [
+        { label: "Sound Options", values: [{ text: "7+ Sounds", check: true }, { text: "Varies", check: false }, { text: "None", check: false }, { text: "Limited", check: false }] },
+        { label: "Aromatherapy", values: [{ text: "Yes", check: true }, { text: "No", check: false }, { text: "Yes", check: true }, { text: "No", check: false }] },
+        { label: "Flame Effect", values: [{ text: "3D Realistic", check: true }, { text: "No", check: false }, { text: "No", check: false }, { text: "No", check: false }] },
+        { label: "Bluetooth Speaker", values: [{ text: "BT 5.0", check: true }, { text: "Built-in", check: true }, { text: "No", check: false }, { text: "No", check: false }] },
+        { label: "Night Light", values: [{ text: "Warm Amber", check: true }, { text: "Screen Only", check: false }, { text: "Some Models", check: false }, { text: "No", check: false }] }
+      ]
+    },
+    boxContents: { items: ["White Noise Machine ×1", "Water Tank ×1", "USB Cable ×1", "User Guide ×1"], image: "/products/white-noise-aroma-machine/img_5.webp" },
+    howItWorks: { title: "Fill. Select. Sleep.", description: "Fill the 200ml water tank and add 5-8 drops of your favorite essential oil. Select your preferred sound profile from 7 options. Set the flame effect brightness to your liking. Place 1-2 meters from your bed and let the combined sensory experience guide you into deep, uninterrupted sleep." },
   },
 ];
 
