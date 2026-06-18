@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getProductsBySense } from "@/data/products";
 import ProductDetailTop from "@/components/product-detail-top";
+import { ProductReviews } from "@/components/product/product-reviews";
 import FaqAccordion from "@/components/faq-accordion";
 import Link from "next/link";
 
@@ -470,6 +471,9 @@ export default function ProductPage() {
           className="product-page-content"
           dangerouslySetInnerHTML={{ __html: htmlBody }}
         />
+
+        {/* Reviews */}
+        <ProductReviews productId={product.id} />
       </>
     );
   }
@@ -509,6 +513,9 @@ export default function ProductPage() {
       <div className="product-page-content">
         <GenericSections product={product} />
       </div>
+
+      {/* Reviews */}
+      <ProductReviews productId={product.id} />
     </>
   );
 }
