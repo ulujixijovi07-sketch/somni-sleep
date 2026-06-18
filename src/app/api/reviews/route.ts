@@ -6,6 +6,13 @@ export const runtime = "nodejs";
 // Valid product IDs from static data (products.ts)
 const VALID_PRODUCT_IDS = [1, 16, 17, 12];
 
+const PRODUCT_NAMES_MAP: Record<number, string> = {
+  1: "3D Contour Sleep Mask",
+  16: "CES Sleep Therapy Device",
+  17: "White Noise + Aroma Machine",
+  12: "Deep Sleep Pillow Spray",
+};
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const productId = searchParams.get("productId");
@@ -55,6 +62,18 @@ export async function POST(request: NextRequest) {
     if (!VALID_PRODUCT_IDS.includes(productId)) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
+
+    // Ensure product exists in DB (for FK constraint)
+    await prisma.product.upsert({
+      where: { id: productId },
+      update: {},
+      create: {
+        id: productId,
+        name: PRODUCT_NAMES_MAP[productId] || `Product #${productId}`,
+        slug: `product-${productId}`,
+        price: 0,
+      },
+    });
 
     const review = await prisma.review.create({
       data: { productId, authorName, rating, title, body },

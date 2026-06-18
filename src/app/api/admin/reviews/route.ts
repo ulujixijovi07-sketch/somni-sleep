@@ -46,7 +46,10 @@ export async function GET(request: NextRequest) {
       ...(productId ? { productId: parseInt(productId) } : {}),
     },
     orderBy: { createdAt: "desc" },
-    include: { images: true },
+    include: {
+      product: { select: { name: true, slug: true } },
+      images: true,
+    },
   });
 
   return NextResponse.json(reviews);
