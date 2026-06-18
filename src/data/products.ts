@@ -274,7 +274,6 @@ export const products: Product[] = [
     rating: 4.8,
     reviewCount: 312,
     bestSeller: true,
-    video: "/videos/sonus-hero.mp4",
   },
   {
     id: 6,
@@ -796,6 +795,7 @@ export const products: Product[] = [
     rating: 4.8,
     reviewCount: 187,
     bestSeller: true,
+    video: "/videos/sonus-hero.mp4",
     modeCards: [
       { icon: "🔊", title: "White Noise Masking", description: "Steady background noise raises the bar for what wakes you up. Irregular sounds — a car door, a snore, a neighbor — have to be louder to break through the noise floor. A 2021 meta-analysis of 8,242 participants found white noise reduced sleep onset by 38% compared to silence in noisy environments.", stats: ["38% Faster", "Noise Masking", "2021 Meta"] },
       { icon: "🌸", title: "Aromatherapy Synergy", description: "Lavender and essential oils drift through the room via ultrasonic diffusion while white noise masks disruptive sounds. Two sensory pathways — auditory and olfactory — converge to create the ideal sleep environment. Studies show aromatherapy improves deep sleep by 20%.", stats: ["20% Deep Sleep", "Ultrasonic", "Dual Sensory"] }
