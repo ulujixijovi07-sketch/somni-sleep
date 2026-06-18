@@ -22,18 +22,18 @@ const COMPANY_LINKS = [
 ];
 
 const POLICY_LINKS = [
-  { label: "Shipping Policy", href: "/shipping" },
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms of Service", href: "/terms" },
-  { label: "Refund Policy", href: "/shipping" },
-  { label: "Payment Methods", href: "/shipping" },
+  { label: "Shipping Policy", href: "/shipping-policy" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms of Service", href: "/terms-of-service" },
+  { label: "Refund Policy", href: "/refund-policy" },
+  { label: "Payment Methods", href: "/payment-methods" },
 ];
 
 const SUPPORT_LINKS = [
   { label: "Contact Us", href: "/contact" },
-  { label: "Track Your Order", href: "/en/order/tracking" },
+  { label: "Track Your Order", href: "/track-order" },
   { label: "FAQ", href: "/faq" },
-  { label: "Affiliate & Collab", href: "/contact" },
+  { label: "Affiliate & Collab", href: "/affiliate-collab" },
 ];
 
 const SOCIAL_LINKS = [
@@ -159,7 +159,7 @@ export function Footer() {
 
             <p className="mt-3 text-[11px] text-brand-light/25">
               We care about protecting your data. Read our{" "}
-              <Link href="/privacy" className="underline hover:text-brand-gold transition-colors">
+              <Link href="/privacy-policy" className="underline hover:text-brand-gold transition-colors">
                 Privacy Policy
               </Link>
               .
