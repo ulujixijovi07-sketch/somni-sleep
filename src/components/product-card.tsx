@@ -33,17 +33,12 @@ export default function ProductCard({ product, idx = 0 }: { product: Product; id
     <div className="group">
       <Link href={`/products/${product.slug}`} className="block">
         <div className={`relative aspect-[4/5] bg-gradient-to-br ${gradient} rounded-2xl overflow-hidden mb-5 border border-white/[0.04] group-hover:border-moonlight/15 transition-all duration-700`}>
-          {/* Abstract geometric placeholder */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative">
-              <div className="w-20 h-20 rounded-full bg-moonlight/[0.06] group-hover:bg-moonlight/[0.1] transition-all duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-3xl opacity-40 group-hover:opacity-60 transition-opacity duration-700">
-                  {product.category === "visual" ? "◉" : product.category === "auditory" ? "◒" : product.category === "tactile" ? "◐" : "❋"}
-                </span>
-              </div>
-            </div>
-          </div>
+          {/* Product image */}
+          <img
+            src={product.images[0]}
+            alt={product.name}
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
 
           {/* Badges */}
           {product.compareAtPrice && (

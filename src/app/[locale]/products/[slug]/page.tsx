@@ -87,20 +87,18 @@ export default function ProductPage() {
 
         {/* ========== 1. HERO ========== */}
         <section className="text-center mb-24">
-          {/* Product image placeholder */}
+          {/* Product image */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="aspect-[16/9] max-w-2xl mx-auto mb-12 bg-gradient-to-br from-deep to-ocean rounded-2xl border border-moonlight/10 flex items-center justify-center overflow-hidden relative"
+            className="aspect-[16/9] max-w-2xl mx-auto mb-12 rounded-2xl border border-moonlight/10 overflow-hidden relative"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,168,76,0.08),transparent_60%)]" />
-            <div className="text-center relative z-10">
-              <div className="w-28 h-28 rounded-full bg-moonlight/[0.06] flex items-center justify-center mx-auto mb-4">
-                <span className="text-6xl">◉</span>
-              </div>
-              <p className="text-mist/50 text-xs uppercase tracking-[0.2em]">{product.senseLabel} Collection</p>
-            </div>
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              className="w-full h-full object-cover"
+            />
           </motion.div>
 
           {/* Category badge */}
