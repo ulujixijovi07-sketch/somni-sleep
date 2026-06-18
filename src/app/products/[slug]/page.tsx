@@ -487,6 +487,7 @@ export default function ProductPage() {
 
       {/* Product demo video (matching product.html format) */}
       {product.video && (
+        <div className="product-page-content">
         <section>
           <div className="section-label">See It In Action</div>
           <h2 className="section-title">Product Demo Video</h2>
@@ -508,6 +509,7 @@ export default function ProductPage() {
             </video>
           </div>
         </section>
+        </div>
       )}
 
       <div className="product-page-content">
