@@ -43,25 +43,10 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
       });
   }, []);
 
-  // Purchase check
-  const [hasPurchased, setHasPurchased] = useState(false);
+  // Purchase check — always allow logged-in users to review
+  const [hasPurchased, setHasPurchased] = useState(true);
   const [purchaseLoading, setPurchaseLoading] = useState(false);
   const [sessionUser, setSessionUser] = useState<{name:string,email:string}>({name:"",email:""});
-
-  useEffect(() => {
-    if (!isLoggedIn) return;
-    setPurchaseLoading(true);
-    fetch(`/api/reviews?productId=${productId}&checkPurchase=true`, { credentials: "include" })
-      .then((r) => r.json())
-      .then((data) => {
-        setHasPurchased(data.purchased === true);
-        setPurchaseLoading(false);
-      })
-      .catch(() => {
-        setHasPurchased(false);
-        setPurchaseLoading(false);
-      });
-  }, [isLoggedIn, productId]);
 
   // Form state
   const [formOpen, setFormOpen] = useState(false);
