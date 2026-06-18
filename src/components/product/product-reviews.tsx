@@ -145,8 +145,8 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
 
   // ── Render ────────────────────────────────────────────────────────
   return (
-    <div className="mt-14 border-t border-brand-gold/20 pt-10 max-w-[1200px] mx-auto px-10">
-      <h2 className="font-display text-2xl font-light text-brand-gold">
+    <div className="mt-14 border-t border-moonlight/20 pt-10 max-w-[1200px] mx-auto px-10">
+      <h2 className="font-display text-2xl font-light text-moonlight">
         Customer Reviews
       </h2>
 
@@ -154,7 +154,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
       <div className="mt-3">
         <button
           onClick={openForm}
-          className="inline-block rounded bg-brand-gold/15 border border-brand-gold/30 px-5 py-2.5 font-medium text-xs uppercase tracking-widest text-brand-gold hover:bg-brand-gold/25 transition-colors"
+          className="inline-block rounded bg-moonlight/15 border border-moonlight/30 px-5 py-2.5 font-medium text-xs uppercase tracking-widest text-moonlight hover:bg-moonlight/25 transition-colors"
         >
           {formOpen ? "Cancel" : "Write a Review"}
         </button>
@@ -162,7 +162,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
 
       {/* Review Form */}
       {formOpen && (
-        <form onSubmit={handleSubmit} className="mt-6 rounded border border-brand-gold/20 bg-brand-gold/5 p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-6 rounded border border-moonlight/20 bg-moonlight/5 p-6 space-y-4">
           <div>
             <label className="block font-body text-xs text-text-secondary mb-1">Order Number *</label>
             <input value={formOrderNumber} onChange={(e) => setFormOrderNumber(e.target.value)}
@@ -181,7 +181,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
             <div className="flex gap-0.5">
               {[1,2,3,4,5].map((n) => (
                 <button key={n} type="button" onClick={() => setFormRating(n)}
-                  className={cn("text-xl", n <= formRating ? "text-brand-gold" : "text-text-secondary/20")}>♥</button>
+                  className={cn("text-xl", n <= formRating ? "text-moonlight" : "text-text-secondary/20")}>♥</button>
               ))}
             </div>
           </div>
@@ -201,7 +201,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
             <div className="flex items-center gap-2 mb-2">
               <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={handleFileSelect} />
               <button type="button" onClick={() => fileInputRef.current?.click()} disabled={uploading || formImages.length >= 3}
-                className="flex items-center gap-1.5 rounded border border-dashed border-border px-3 py-1.5 font-body text-xs text-text-secondary hover:text-text-primary hover:border-brand-gold/50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                className="flex items-center gap-1.5 rounded border border-dashed border-border px-3 py-1.5 font-body text-xs text-text-secondary hover:text-text-primary hover:border-moonlight/50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                 <UploadSimple className="h-3.5 w-3.5" />
                 {uploading ? "Processing…" : "Add Photos"}
               </button>
@@ -221,7 +221,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
             )}
           </div>
           <button type="submit" disabled={submitting}
-            className="w-full rounded bg-brand-gold py-2.5 font-semibold text-xs uppercase tracking-widest text-abyss hover:bg-brand-gold/90 disabled:opacity-50">
+            className="w-full rounded bg-moonlight py-2.5 font-semibold text-xs uppercase tracking-widest text-abyss hover:bg-moonlight/90 disabled:opacity-50">
             {submitting ? "Submitting…" : "Submit Review"}
           </button>
         </form>
@@ -239,8 +239,8 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
         <>
           {/* Summary */}
           <div className="mt-6 flex flex-col gap-6 sm:flex-row">
-            <div className="flex flex-col items-center rounded-sm border border-brand-gold/30 bg-brand-gold/5 px-8 py-6">
-              <p className="font-display text-4xl font-light text-brand-gold">
+            <div className="flex flex-col items-center rounded-sm border border-moonlight/30 bg-moonlight/5 px-8 py-6">
+              <p className="font-display text-4xl font-light text-moonlight">
                 {avgRating.toFixed(1)}
               </p>
               <div className="mt-1 flex">
@@ -249,7 +249,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
                     key={n}
                     className={cn(
                       "text-sm",
-                      n <= Math.round(avgRating) ? "text-brand-gold" : "text-text-secondary/30"
+                      n <= Math.round(avgRating) ? "text-moonlight" : "text-text-secondary/30"
                     )}
                   >
                     ♥
@@ -269,7 +269,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
                   </span>
                   <div className="h-2 flex-1 overflow-hidden rounded-full bg-brand-secondary">
                     <div
-                      className="h-full rounded-full bg-brand-gold transition-all"
+                      className="h-full rounded-full bg-moonlight transition-all"
                       style={{ width: `${b.pct}%` }}
                     />
                   </div>
@@ -309,13 +309,13 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
 
           {/* Review list */}
           {sorted.length === 0 ? (
-            <p className="mt-6 font-body text-sm text-brand-gold/50">
+            <p className="mt-6 font-body text-sm text-moonlight/50">
               No reviews yet. Be the first to review this product.
             </p>
           ) : (
             <div className="mt-6 divide-y divide-border">
               {sorted.map((review) => (
-                <div key={review.id} className="bg-brand-gold/[0.03] rounded-lg px-4 py-4">
+                <div key={review.id} className="bg-moonlight/[0.03] rounded-lg px-4 py-4">
                   <div className="flex items-center gap-2">
                     <div className="flex">
                       {[1, 2, 3, 4, 5].map((n) => (
@@ -323,18 +323,18 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
                           key={n}
                           className={cn(
                             "text-xs",
-                            n <= review.rating ? "text-brand-gold" : "text-text-secondary/30"
+                            n <= review.rating ? "text-moonlight" : "text-text-secondary/30"
                           )}
                         >
                           ♥
                         </span>
                       ))}
                     </div>
-                    <span className="font-body text-sm font-medium text-brand-gold">
+                    <span className="font-body text-sm font-medium text-moonlight">
                       {review.authorName}
                     </span>
                     {review.isVerified && (
-                      <span className="rounded-sm bg-brand-gold/15 px-1.5 py-0.5 font-body text-[10px] text-brand-gold border border-brand-gold/30">
+                      <span className="rounded-sm bg-moonlight/15 px-1.5 py-0.5 font-body text-[10px] text-moonlight border border-moonlight/30">
                         Verified
                       </span>
                     )}
@@ -362,7 +362,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
                       ))}
                     </div>
                   )}
-                  <p className="mt-2 font-body text-sm text-brand-gold/50">
+                  <p className="mt-2 font-body text-sm text-moonlight/50">
                     {new Date(review.createdAt).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
