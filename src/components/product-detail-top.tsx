@@ -3,41 +3,52 @@
 import { useState, useCallback } from "react";
 import { useCart } from "@/lib/cart-context";
 import { AnimatePresence, motion } from "framer-motion";
+import { Product } from "@/data/products";
 
-// ─── Product Data ────────────────────────────────────────────────────────
+// ─── Props ──────────────────────────────────────────────────────────────
 
-const PRODUCT = {
-  name: "Somni Contour 3D Sleep Mask with Bluetooth 6.0 Audio",
-  price: 49,
-  compareAtPrice: 79,
-  discountPercent: 38,
-  images: [
-    "/images/model_wearing.webp",
-    "/images/O1CN01hga2kT2E2hlTCrWoY.jpg",
-    "/images/exploded_view_en.webp",
-    "/images/O1CN01wzJLby2E2hlOXWR3s.jpg",
-    "/images/adjustable_speakers_en.webp",
-  ],
-  cartItem: {
-    variantId: 1,
-    productId: 1,
-    name: "Somni Contour 3D Sleep Mask",
-    slug: "3d-contour-sleep-mask",
-    image: "/images/model_wearing.webp",
-    color: "Arctic",
-    colorHex: "#6B7B8D",
-    size: "One Size",
-    price: 49,
-  },
+interface ProductDetailTopProps {
+  product: Product;
+}
+
+// ─── Helper: sense accent color map ─────────────────────────────────────
+
+const senseAccentColors: Record<string, string> = {
+  visual: "#C9A84C",
+  auditory: "#7EB8C9",
+  tactile: "#B8917E",
+  olfactory: "#9FAF8E",
 };
+
+// ─── Helper: compute discount percent ───────────────────────────────────
+
+function discountPercent(price: number, compareAt?: number): number {
+  if (!compareAt || compareAt <= price) return 0;
+  return Math.round(((compareAt - price) / compareAt) * 100);
+}
 
 // ─── Component ───────────────────────────────────────────────────────────
 
-export default function ProductDetailTop() {
+export default function ProductDetailTop({ product }: ProductDetailTopProps) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [qty, setQty] = useState(1);
   const [toast, setToast] = useState<string | null>(null);
   const { addToCart } = useCart();
+
+  const accColor = senseAccentColors[product.category] ?? "#C9A84C";
+  const discPct = discountPercent(product.price, product.compareAtPrice);
+
+  const cartItem = {
+    variantId: product.id,
+    productId: product.id,
+    name: product.name,
+    slug: product.slug,
+    image: product.images[0] ?? "",
+    color: product.senseLabel,
+    colorHex: accColor,
+    size: "One Size",
+    price: product.price,
+  };
 
   const handleThumbnailClick = useCallback((index: number) => {
     setSelectedImage(index);
@@ -54,11 +65,11 @@ export default function ProductDetailTop() {
 
   const handleAddToCart = useCallback(() => {
     for (let i = 0; i < qty; i++) {
-      addToCart(PRODUCT.cartItem);
+      addToCart(cartItem);
     }
-    setToast(`Added to cart — ${PRODUCT.cartItem.name}`);
+    setToast(`Added to cart \u2014 ${product.name}`);
     setTimeout(() => setToast(null), 3000);
-  }, [addToCart, qty]);
+  }, [addToCart, qty, cartItem, product.name]);
 
   const handleBuyNow = useCallback(() => {
     handleAddToCart();
@@ -82,7 +93,7 @@ export default function ProductDetailTop() {
               transform: "translateX(-50%)",
               zIndex: 9999,
               background: "linear-gradient(135deg, #0a0a1a 0%, #050510 100%)",
-              border: "1px solid rgba(201,168,76,0.25)",
+              border: `1px solid ${accColor}40`,
               borderRadius: "10px",
               padding: "14px 28px",
               color: "#E8E6E3",
@@ -97,7 +108,7 @@ export default function ProductDetailTop() {
               pointerEvents: "none",
             }}
           >
-            <span style={{ color: "#C9A84C", fontSize: "16px" }}>✦</span>
+            <span style={{ color: accColor, fontSize: "16px" }}>✦</span>
             {toast}
           </motion.div>
         )}
@@ -109,18 +120,18 @@ export default function ProductDetailTop() {
         <div className="product-gallery">
           <div className="main-image">
             <img
-              src={PRODUCT.images[selectedImage]}
-              alt="Somni Contour 3D Sleep Mask"
+              src={product.images[selectedImage] ?? product.images[0]}
+              alt={product.name}
             />
           </div>
           <div className="thumbnail-strip">
-            {PRODUCT.images.map((src, i) => (
+            {product.images.map((src, i) => (
               <img
                 key={i}
                 className={i === selectedImage ? "active" : ""}
                 src={src}
                 onClick={() => handleThumbnailClick(i)}
-                alt={`View ${i + 1}`}
+                alt={`${product.name} view ${i + 1}`}
               />
             ))}
           </div>
@@ -129,36 +140,35 @@ export default function ProductDetailTop() {
         {/* RIGHT: Product Info */}
         <div className="product-info">
           <h1>
-            Somni Contour – <span>3D Sleep Mask</span> with Bluetooth 6.0 Audio
+            {product.senseLabel} –{" "}
+            <span>{product.name}</span>
           </h1>
 
           <div className="pricing">
-            <span className="current-price">${PRODUCT.price}</span>
-            <span className="original-price">${PRODUCT.compareAtPrice}</span>
-            <span className="discount-badge">-{PRODUCT.discountPercent}%</span>
+            <span className="current-price">${product.price}</span>
+            {product.compareAtPrice && (
+              <>
+                <span className="original-price">${product.compareAtPrice}</span>
+                {discPct > 0 && (
+                  <span className="discount-badge">-{discPct}%</span>
+                )}
+              </>
+            )}
           </div>
 
           <ul className="feature-bullets">
-            <li>
-              <span className="icon">🌑</span> 100% Blackout with 3D Nasal
-              Baffle – zero light, zero eye pressure, side-sleeper optimized
-            </li>
-            <li>
-              <span className="icon">🎵</span> Bluetooth 6.0 Built-in
-              Ultra-Thin Speakers – adjustable to your exact ear position
-            </li>
-            <li>
-              <span className="icon">🧼</span> Modular Detach & Wash –
-              3-second removal, machine washable up to 50 cycles
-            </li>
-            <li>
-              <span className="icon">🔋</span> 6-Hour Battery – hidden Type-C
-              charging behind protective zipper
-            </li>
+            {product.features.map((feat, i) => (
+              <li key={i}>
+                <span className="icon">✦</span> {feat}
+              </li>
+            ))}
           </ul>
 
           <div className="social-proof">
-            <span className="dot"></span> 47 people are viewing this right now
+            <span className="dot"></span>{" "}
+            {product.stock > 0
+              ? `${Math.min(product.stock, 47)} people are viewing this right now`
+              : "Limited stock available"}
           </div>
 
           <div className="qty-row">
