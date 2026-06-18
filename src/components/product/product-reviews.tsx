@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -55,26 +55,10 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
   const [formRating, setFormRating] = useState(5);
   const [formTitle, setFormTitle] = useState("");
   const [formBody, setFormBody] = useState("");
-  const [formImages, setFormImages] = useState<{file:File,preview:string}[]>([]);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const openForm = () => {
     setFormName(sessionUser.name || "");
     setFormOpen(true);
-  };
-
-  const addFiles = (files: FileList | File[]) => {
-    const remaining = 3 - formImages.length;
-    if (remaining <= 0) return;
-    const arr = Array.from(files).slice(0, remaining);
-    setFormImages((prev) => [...prev, ...arr.map((f) => ({ file: f, preview: URL.createObjectURL(f) }))]);
-  };
-
-  const removeFile = (i: number) => {
-    setFormImages((prev) => {
-      URL.revokeObjectURL(prev[i].preview);
-      return prev.filter((_, idx) => idx !== i);
-    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -82,15 +66,17 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
     if (!formBody.trim()) return;
     setSubmitting(true);
     try {
-      const fd = new FormData();
-      fd.append("productId", String(productId));
-      fd.append("authorName", formName.trim() || "Anonymous");
-      fd.append("rating", String(formRating));
-      if (formTitle.trim()) fd.append("title", formTitle.trim());
-      fd.append("body", formBody.trim());
-      formImages.forEach((img) => fd.append("images", img.file));
-
-      const res = await fetch("/api/reviews", { method: "POST", body: fd, credentials: "include" });
+      const res = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId,
+          authorName: formName.trim() || "Anonymous",
+          rating: formRating,
+          title: formTitle.trim() || null,
+          body: formBody.trim(),
+        }),
+      });
       if (!res.ok) {
         const d = await res.json();
         throw new Error(d.error || "Failed");
@@ -100,8 +86,6 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
       setFormBody("");
       setFormTitle("");
       setFormRating(5);
-      formImages.forEach((img) => URL.revokeObjectURL(img.preview));
-      setFormImages([]);
       // Refresh
       fetch(`/api/reviews?productId=${productId}`)
         .then((r) => r.json())
@@ -214,26 +198,6 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
             <label className="block font-body text-xs text-text-secondary mb-1">Your Review *</label>
             <textarea value={formBody} onChange={(e) => setFormBody(e.target.value)} placeholder="Share your thoughts…" rows={4}
               className="w-full rounded border border-border bg-brand-primary px-3 py-2 font-body text-sm text-text-primary resize-none" required maxLength={2000} />
-          </div>
-          <div>
-            <label className="block font-body text-xs text-text-secondary mb-1">Images <span className="text-text-secondary/50">(up to 3)</span></label>
-            <div onClick={() => fileInputRef.current?.click()}
-              className="cursor-pointer rounded border border-dashed border-border p-4 text-center hover:border-brand-gold/50 transition-colors">
-              <p className="font-body text-xs text-text-secondary/60">Click to upload images</p>
-              <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden"
-                onChange={(e) => { if (e.target.files) addFiles(e.target.files); e.target.value = ""; }} />
-            </div>
-            {formImages.length > 0 && (
-              <div className="mt-3 flex gap-2 flex-wrap">
-                {formImages.map((img, i) => (
-                  <div key={i} className="relative group">
-                    <img src={img.preview} alt="" className="h-20 w-20 rounded border border-border object-cover" />
-                    <button type="button" onClick={() => removeFile(i)}
-                      className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-burgundy text-white text-[10px] opacity-0 group-hover:opacity-100">✕</button>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
           <button type="submit" disabled={submitting}
             className="w-full rounded bg-brand-dark py-2.5 font-medium text-xs uppercase tracking-widest text-text-light hover:bg-brand-dark/90 disabled:opacity-50">
