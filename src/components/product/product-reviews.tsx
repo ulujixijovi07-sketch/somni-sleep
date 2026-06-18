@@ -32,6 +32,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
   const [formTitle, setFormTitle] = useState("");
   const [formBody, setFormBody] = useState("");
   const [formImages, setFormImages] = useState<string[]>([]); // base64 data URLs
+  const [formOrderNumber, setFormOrderNumber] = useState("");
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -77,6 +78,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           productId,
+          orderNumber: formOrderNumber.trim(),
           authorName: formName.trim() || "Anonymous",
           rating: formRating,
           title: formTitle.trim() || null,
@@ -161,6 +163,14 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
       {/* Review Form */}
       {formOpen && (
         <form onSubmit={handleSubmit} className="mt-6 rounded border border-border bg-brand-secondary/50 p-6 space-y-4">
+          <div>
+            <label className="block font-body text-xs text-text-secondary mb-1">Order Number *</label>
+            <input value={formOrderNumber} onChange={(e) => setFormOrderNumber(e.target.value)}
+              placeholder="e.g. SOMNI-2024-0001"
+              className="w-full rounded border border-border bg-brand-primary px-3 py-2 font-body text-sm text-text-primary"
+              required maxLength={100} />
+            <p className="mt-0.5 font-body text-[10px] text-text-secondary/50">Only delivered orders can leave a review.</p>
+          </div>
           <div>
             <label className="block font-body text-xs text-text-secondary mb-1">Your Name *</label>
             <input value={formName} onChange={(e) => setFormName(e.target.value)} placeholder="Your name"
@@ -346,7 +356,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
                           key={img.id}
                           src={img.url}
                           alt="Review"
-                          className="h-24 w-24 rounded border border-border object-cover cursor-pointer hover:opacity-80 transition-opacity"
+                          className="h-36 w-36 rounded border border-border object-cover cursor-pointer hover:opacity-80 transition-opacity"
                           onClick={() => setLightboxImage(img.url)}
                         />
                       ))}
