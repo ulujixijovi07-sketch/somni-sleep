@@ -8,11 +8,15 @@ import { UploadSimple, X } from "@phosphor-icons/react";
 type Review = {
   id: number; productId: number; authorName: string; rating: number;
   title: string | null; body: string | null; isVerified: boolean; createdAt: string;
-  product: { name: string };
   images?: { id: number; url: string }[];
 };
 
 type Product = { id: number; name: string };
+
+const PRODUCT_NAMES: Record<number, string> = {
+  1: "3D Contour Sleep Mask", 16: "CES Sleep Therapy Device",
+  17: "White Noise + Aroma Machine", 12: "Deep Sleep Pillow Spray",
+};
 
 // ─── Helpers ───────────────────────────────────────────────────────────
 
@@ -279,7 +283,7 @@ export default function AdminReviewsPage() {
   const [reviewRatingFilter, setReviewRatingFilter] = useState("0");
 
   const filteredReviews = reviews.filter((r) => {
-    if (reviewSearch && !r.product.name.toLowerCase().includes(reviewSearch.toLowerCase()) && !r.authorName.toLowerCase().includes(reviewSearch.toLowerCase())) return false;
+    if (reviewSearch && !PRODUCT_NAMES[r.productId]?.toLowerCase().includes(reviewSearch.toLowerCase()) && !r.authorName.toLowerCase().includes(reviewSearch.toLowerCase())) return false;
     if (reviewProductFilter !== "0" && r.productId !== parseInt(reviewProductFilter)) return false;
     if (reviewRatingFilter !== "0" && r.rating !== parseInt(reviewRatingFilter)) return false;
     return true;
@@ -347,7 +351,7 @@ export default function AdminReviewsPage() {
             <tbody>
               {filteredReviews.map((r) => (
                 <tr key={r.id} className="border-b border-border">
-                  <td className="py-2 pr-4 text-text-primary">{r.product.name}</td>
+                  <td className="py-2 pr-4 text-text-primary">{PRODUCT_NAMES[r.productId] || `#${r.productId}`}</td>
                   <td className="py-2 pr-4 text-text-secondary">
                     {r.authorName}{" "}
                     {r.isVerified && <span className="text-brand-gold">✓</span>}
