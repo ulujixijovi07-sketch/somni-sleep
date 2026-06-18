@@ -327,28 +327,28 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
                     )}
                   </div>
                   {review.title && (
-                    <p className="mt-1 font-body text-sm font-medium text-text-primary">
+                    <p className="mt-1 font-body text-base font-medium text-text-primary">
                       {review.title}
                     </p>
                   )}
                   {review.body && (
-                    <p className="mt-1 font-body text-sm leading-relaxed text-text-secondary">
+                    <p className="mt-1 font-body text-base leading-relaxed text-text-secondary">
                       {review.body}
                     </p>
                   )}
                   {review.images && review.images.length > 0 && (
-                    <div className="mt-2 flex gap-1.5 flex-wrap">
+                    <div className="mt-3 flex gap-2 flex-wrap">
                       {review.images.map((img) => (
                         <img
                           key={img.id}
                           src={img.url}
                           alt="Review"
-                          className="h-16 w-16 rounded border border-border object-cover"
+                          className="h-24 w-24 rounded border border-border object-cover"
                         />
                       ))}
                     </div>
                   )}
-                  <p className="mt-2 font-body text-xs text-text-secondary/60">
+                  <p className="mt-2 font-body text-sm text-text-secondary/60">
                     {new Date(review.createdAt).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",

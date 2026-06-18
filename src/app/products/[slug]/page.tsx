@@ -473,7 +473,9 @@ export default function ProductPage() {
         />
 
         {/* Reviews */}
-        <ProductReviews productId={product.id} />
+        <div className="product-page-content">
+          <ProductReviews productId={product.id} />
+        </div>
       </>
     );
   }
@@ -517,7 +519,9 @@ export default function ProductPage() {
       </div>
 
       {/* Reviews */}
-      <ProductReviews productId={product.id} />
+      <div className="product-page-content">
+        <ProductReviews productId={product.id} />
+      </div>
     </>
   );
 }
