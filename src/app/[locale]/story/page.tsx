@@ -10,8 +10,8 @@ export default function StoryPage() {
       {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative pt-44 pb-24 overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/images/brain-model.webp" alt="" className="w-full h-full object-cover opacity-15" />
-          <div className="absolute inset-0 bg-gradient-to-b from-abyss/85 via-abyss/50 to-abyss" />
+          <img src="/images/sleep-bedroom.webp" alt="" className="w-full h-full object-cover opacity-25" />
+          <div className="absolute inset-0 bg-gradient-to-b from-abyss/80 via-abyss/50 to-abyss" />
         </div>
         <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -35,6 +35,7 @@ export default function StoryPage() {
             },
             {
               initials: "MW", name: "Dr. Marcus Webb", role: "Cofounder & Chief Science Officer",
+              img: "/images/team-marcus.webp",
               bio: "PhD in Chronobiology from the University of Basel. Postdoctoral fellow at the Max Planck Institute for Biophysical Chemistry in Göttingen, researching how circadian disruption affects metabolic health. Leads SOMNI's clinical validation protocols, research partnerships, and evidence standards. Published twelve papers on chronobiology and sensory neuroscience.",
               linkedin: true, scholar: true,
             },
