@@ -392,26 +392,25 @@ export default function ProductPage() {
   const slug = params.slug as string;
   const product = getProductBySlug(slug);
 
-  // State for HTML content (only used for 3D contour sleep mask)
-  const [htmlContent, setHtmlContent] = useState<{
-    style: string;
-    body: string;
-  } | null>(null);
+  const [productStyle, setProductStyle] = useState<string>("");
+  // HTML body from product.html (only used for 3D contour sleep mask)
+  const [htmlBody, setHtmlBody] = useState<string | null>(null);
 
   const isMask = slug === "3d-contour-sleep-mask";
 
-  // Fetch and process product.html for the 3D contour sleep mask
+  // Fetch product.html CSS — needed for all product pages
   useEffect(() => {
-    if (!isMask) return;
-
     fetch("/product.html")
       .then((r) => r.text())
       .then((html) => {
-        // Extract <style>
+        // Extract <style> — always needed for all products
         const styleMatch = html.match(/<style>([\s\S]*?)<\/style>/);
         const style = styleMatch ? styleMatch[1].trim() : "";
+        setProductStyle(style);
 
-        // Extract <body>
+        if (!isMask) return;
+
+        // Extract <body> — only for the 3D contour sleep mask
         const bodyMatch = html.match(/<body>\s*([\s\S]*?)\s*<\/body>/);
         let body = bodyMatch ? bodyMatch[1].trim() : "";
 
@@ -434,7 +433,7 @@ export default function ProductPage() {
         // Strip the inline <script> block (React handles interactivity)
         body = body.replace(/<script>[\s\S]*?<\/script>/, "");
 
-        setHtmlContent({ style, body });
+        setHtmlBody(body);
       });
   }, [isMask]);
 
@@ -446,7 +445,7 @@ export default function ProductPage() {
 
   // ── Loading state (3D contour mask only) ───────────────────────────
 
-  if (isMask && !htmlContent) {
+  if (isMask && !htmlBody) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#050510]">
         <p className="text-[#C9A84C] text-sm tracking-widest animate-pulse">
@@ -458,10 +457,10 @@ export default function ProductPage() {
 
   // ── 3D Contour Sleep Mask: rich HTML rendering ─────────────────────
 
-  if (isMask && htmlContent) {
+  if (isMask && htmlBody) {
     return (
       <>
-        <style dangerouslySetInnerHTML={{ __html: htmlContent.style }} />
+        <style dangerouslySetInnerHTML={{ __html: productStyle }} />
 
         {/* React-rendered top section with gallery, info, Add to Cart, toast */}
         <ProductDetailTop product={product} />
@@ -469,7 +468,7 @@ export default function ProductPage() {
         {/* Bottom sections from product.html (Science, Materials, Specs, etc.) */}
         <div
           className="product-page-content"
-          dangerouslySetInnerHTML={{ __html: htmlContent.body }}
+          dangerouslySetInnerHTML={{ __html: htmlBody }}
         />
       </>
     );
@@ -479,6 +478,7 @@ export default function ProductPage() {
 
   return (
     <>
+      <style dangerouslySetInnerHTML={{ __html: productStyle }} />
       <ProductDetailTop product={product} />
       <div className="product-page-content">
         <GenericSections product={product} />
