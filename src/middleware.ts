@@ -9,7 +9,7 @@ const intlMiddleware = createMiddleware({
 });
 
 // Pages that should NOT go through the intl middleware
-const SKIP_INTL = ["/auth", "/admin", "/login"];
+const SKIP_INTL = ["/auth", "/admin", "/login", "/products"];
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
