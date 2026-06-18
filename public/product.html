@@ -29,41 +29,41 @@
   }
 
   /* ── Nav ── */
-  nav {
+  .product-page-content nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(5,5,16,0.85); backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     padding: 16px 40px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  nav .logo {
+  .product-page-content nav .logo {
     font-family: 'Courier New', monospace;
     font-size: 22px; letter-spacing: 4px;
     color: var(--gold); font-weight: 700;
     text-decoration: none;
   }
-  nav .nav-links {
+  .product-page-content nav .nav-links {
     display: flex; gap: 32px;
   }
-  nav .nav-link {
+  .product-page-content nav .nav-link {
     color: var(--text-dim); text-decoration: none;
     font-size: 13px; font-weight: 500;
     letter-spacing: 1px; transition: color 0.2s;
   }
-  nav .nav-link:hover { color: var(--gold); }
-  nav .cta {
+  .product-page-content nav .nav-link:hover { color: var(--gold); }
+  .product-page-content nav .cta {
     background: var(--gold); color: #050510;
     border: none; padding: 10px 28px;
     font-size: 14px; font-weight: 600;
     border-radius: 6px; cursor: pointer;
     transition: all 0.2s;
   }
-  nav .cta:hover { background: #D4B55A; transform: translateY(-1px); }
+  .product-page-content nav .cta:hover { background: #D4B55A; transform: translateY(-1px); }
 
   /* ── Breadcrumb ── */
   .breadcrumb {
     padding: 100px 40px 0;
-    max-width: 1300px; margin: 0 auto;
+    max-width: 1200px; margin: 0 auto;
     font-size: 12px; color: var(--text-muted);
     letter-spacing: 0.5px;
   }
@@ -72,7 +72,7 @@
   /* ══════ PRODUCT DETAIL TOP ══════ */
   .product-detail {
     display: flex; gap: 60px;
-    max-width: 1300px; margin: 0 auto;
+    max-width: 1200px; margin: 0 auto;
     padding: 32px 40px 60px;
   }
   /* ── Left: Gallery ── */
@@ -246,7 +246,7 @@
 
   /* ══════ BUNDLE SECTION ══════ */
   .bundle-section {
-    max-width: 1300px; margin: 0 auto;
+    max-width: 1200px; margin: 0 auto;
     padding: 0 40px 80px;
   }
   .bundle-header {
@@ -305,7 +305,7 @@
   .btn-bundle:hover { background: #4A7258; transform: translateY(-1px); }
 
   /* ══════ SECTIONS (kept from original) ══════ */
-  section {
+  .product-page-content section {
     max-width: 1200px; margin: 0 auto;
     padding: 100px 40px;
   }
@@ -445,7 +445,7 @@
   .cta-banner p { color: var(--text-dim); margin-bottom: 28px; }
 
   /* Footer */
-  footer {
+  .product-page-content footer {
     border-top: 1px solid var(--border);
     padding: 40px; text-align: center;
     color: var(--text-muted); font-size: 13px;
@@ -541,8 +541,8 @@
       </div>
     </div>
 
-    <button class="btn-add-cart" onclick="alert('Added to cart!')">Add to Cart</button>
-    <button class="btn-buy-now" onclick="alert('Proceeding to checkout...')">Buy Now</button>
+    <button id="btn-add-cart" class="btn-add-cart">Add to Cart</button>
+    <button id="btn-buy-now" class="btn-buy-now">Buy Now</button>
 
     <p class="trust-text">Clinically tested with robust data. Globally certified for safety.</p>
     <div class="trust-badges">
@@ -801,6 +801,45 @@
     if (v > 99) v = 99;
     inp.value = v;
   }
+
+  // Wire up Add to Cart / Buy Now buttons (inline onclick stripped by React)
+  (function() {
+    function initButtons() {
+      var addCart = document.getElementById('btn-add-cart');
+      var buyNow = document.getElementById('btn-buy-now');
+      if (addCart) {
+        addCart.addEventListener('click', function(e) {
+          e.preventDefault();
+          alert('Added to cart!');
+          // Also try to use CartProvider if available on window
+          if (window.__somniAddToCart) {
+            window.__somniAddToCart({
+              variantId: 1001,
+              productId: 1,
+              name: 'Somni Contour 3D Sleep Mask',
+              slug: '3d-contour-sleep-mask',
+              image: '/images/model_wearing.png',
+              color: 'Arctic',
+              colorHex: '#6B7B8D',
+              size: 'One Size',
+              price: 49
+            });
+          }
+        });
+      }
+      if (buyNow) {
+        buyNow.addEventListener('click', function(e) {
+          e.preventDefault();
+          alert('Proceeding to checkout...');
+        });
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initButtons);
+    } else {
+      initButtons();
+    }
+  })();
 </script>
 
 </body>
