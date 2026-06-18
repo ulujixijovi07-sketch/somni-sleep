@@ -5,52 +5,42 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   Eye, SpeakerHigh, Hand, Wind, ArrowRight, Article,
-  Microscope, Flask, Brain, ChartLine, CaretDown, CaretRight
+  CaretDown, CaretRight, Brain, Microscope
 } from "@phosphor-icons/react";
-
-// ─── Stats ────────────────────────────────────────────────────────────
 
 const stats = [
   { value: "38%", label: "Faster sleep onset with white noise", sub: "Sleep Med Rev, 2021 · n=8,242" },
   { value: "20%", label: "Sleep quality improvement with lavender", sub: "Syst Review, 2024 · Multiple RCTs" },
   { value: "3 hrs", label: "Melatonin delay from evening blue light", sub: "PNAS, 2015 · 460-480nm band" },
-  { value: "28%", label: "Serotonin increase from deep pressure", sub: "Front Psychiatry, 2024 · CES & DPS" },
+  { value: "28%", label: "Serotonin increase from deep pressure", sub: "Front Psychiatry, 2024" },
 ];
-
-// ─── Pathways ──────────────────────────────────────────────────────────
 
 const pathways = [
   {
     icon: Eye, sense: "LUX", title: "Visual Pathway",
     head: "Your retina is a clock, not just a camera.",
-    body: "Melanopsin-containing retinal ganglion cells detect 460-480nm blue light and signal your suprachiasmatic nucleus to suppress melatonin. A 2-hour tablet session at full brightness cuts nocturnal melatonin 22%. Evening exposure delays your circadian phase by ~3 hours. Total darkness is the reset button.",
+    body: "Melanopsin-containing retinal ganglion cells detect 460-480nm blue light and signal your suprachiasmatic nucleus to suppress melatonin. A 2-hour tablet session at full brightness cuts nocturnal melatonin 22%. Evening exposure delays your circadian phase by ~3 hours.",
     ref: "Brainard GC, et al. J Neurosci 21(16):6405-6412, 2001. PMID 11487664",
-    img: "/images/sensory-pathways.webp",
   },
   {
     icon: SpeakerHigh, sense: "SONUS", title: "Auditory Pathway",
     head: "Your brainstem eavesdrops all night.",
-    body: "The reticular activating system stays half-awake, scanning for irregular sounds. A car door, a snore, a neighbor — any acoustic novelty triggers a micro-arousal. Steady background noise raises the detection threshold. Across 38 studies in a 2021 meta-analysis (n=8,242), white noise cut average sleep onset from 26 to 16 minutes.",
+    body: "The reticular activating system stays half-awake, scanning for irregular sounds. Any acoustic novelty triggers a micro-arousal. Steady background noise raises the detection threshold. Across 38 studies in a 2021 meta-analysis (n=8,242), white noise cut average sleep onset from 26 to 16 minutes.",
     ref: "Zheng Y, et al. Sleep Med Rev 58:101492, 2021. PMID 34049045",
-    img: "/images/sensory-pathways.webp",
   },
   {
     icon: Hand, sense: "TACTUS", title: "Tactile Pathway",
     head: "Deep pressure tells your nervous system to stand down.",
-    body: "Light pressure on the skin activates the auricular branch of the vagus nerve, shifting the autonomic nervous system from sympathetic (fight-or-flight) to parasympathetic (rest-and-digest). Weighted pressure increases serotonin 28% and decreases cortisol 31% within 20 minutes. Cranial Electrotherapy Stimulation (CES) targets the same pathway via ear-clip microcurrent.",
-    ref: "Weighted blankets: Front Psychiatry 15:1333015, 2024. PMC 11056563 · CES: PMC 12194249, 2022",
-    img: "/images/sensory-pathways.webp",
+    body: "Light pressure on the skin activates the auricular branch of the vagus nerve, shifting the autonomic nervous system from sympathetic to parasympathetic. Weighted pressure increases serotonin 28% and decreases cortisol 31% within 20 minutes. CES targets this same pathway via ear-clip microcurrent.",
+    ref: "Front Psychiatry 15:1333015, 2024. PMC 11056563 · CES: PMC 12194249, 2022",
   },
   {
     icon: Wind, sense: "OLFACIO", title: "Olfactory Pathway",
     head: "Smell is the fastest route to your brain's emotional center.",
-    body: "Olfactory signals bypass the thalamic relay and project directly to the amygdala and limbic system. Lavender essential oil (Lavandula angustifolia) contains linalool and linalyl acetate, which bind to GABA-A receptors — the same targets as benzodiazepines. A 2024 systematic review of RCTs found consistent 15-20% improvement in sleep quality vs placebo.",
-    ref: "Lavender & Sleep: Syst Review, 2024. PMC 12904233 · Lewith GT, et al. Complement Ther Med 13(2):95-100, 2005",
-    img: "/images/sensory-pathways.webp",
+    body: "Olfactory signals bypass the thalamic relay and project directly to the amygdala and limbic system. Lavender essential oil contains linalool and linalyl acetate, which bind to GABA-A receptors — the same targets as benzodiazepines. A 2024 systematic review found consistent 15-20% improvement in sleep quality vs placebo.",
+    ref: "Syst Review, 2024. PMC 12904233 · Lewith GT, Complement Ther Med 13(2):95-100, 2005",
   },
 ];
-
-// ─── Research Papers ───────────────────────────────────────────────────
 
 const papers = [
   {
@@ -63,7 +53,7 @@ const papers = [
   },
   {
     title: "Lavender Essential Oil for Sleep Quality: Systematic Review",
-    journal: "PMC · 2024",
+    journal: "PMC · 2024 · Open Access",
     authors: "Multiple investigators",
     finding: "Consistent 15-20% sleep quality improvement across randomized controlled trials.",
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12904233/",
@@ -77,7 +67,7 @@ const papers = [
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4734149/",
   },
   {
-    title: "Cranial Electrotherapy Stimulation vs CBT-I for Insomnia in Athletes",
+    title: "Cranial Electrotherapy Stimulation vs CBT-I for Insomnia",
     journal: "PMC · 2024 · Randomized Controlled Trial",
     authors: "Multiple investigators",
     finding: "4-week CES intervention reduced insomnia severity with effects comparable to CBT-I. Minimal side effects.",
@@ -100,8 +90,6 @@ const papers = [
   },
 ];
 
-// ─── Experts ───────────────────────────────────────────────────────────
-
 const experts = [
   { name: "Prof. Charles Czeisler, MD PhD", title: "Harvard Medical School · Division of Sleep Medicine", quote: "Light is the most powerful synchronizer of the human circadian clock." },
   { name: "Dr. Phyllis Zee, MD PhD", title: "Northwestern University · Center for Circadian & Sleep Medicine", quote: "Sleep is not a luxury. It is a biological necessity." },
@@ -111,8 +99,6 @@ const experts = [
   { name: "Dr. Rebecca Robbins, PhD", title: "Harvard Medical School · Division of Sleep Medicine", quote: "Sleep hygiene starts with sensory environment control." },
 ];
 
-// ─── FAQ ───────────────────────────────────────────────────────────────
-
 const faqs = [
   { q: "What is the vagus nerve and how does it relate to sleep?", a: "The vagus nerve is the primary conduit of the parasympathetic nervous system. Stimulating its auricular branch (accessible via the ear) shifts your body from sympathetic (alert/stressed) to parasympathetic (calm/rest) mode. This is the mechanism behind deep pressure therapy and CES microcurrent stimulation." },
   { q: "How long before the clinical benefits of CES become noticeable?", a: "Most clinical trials report measurable improvements in sleep onset latency within 2-4 weeks of daily 20-60 minute sessions. A 2022 RCT in athletes with insomnia found significant PSQI score reductions after 4 weeks of CES compared to CBT-I." },
@@ -121,20 +107,17 @@ const faqs = [
   { q: "Why four products instead of one all-in-one device?", a: "Different sensory pathways require different form factors. A sleep mask needs to be worn. White noise needs room coverage. CES needs precise electrode placement on the ear. Pillow spray needs direct textile contact. Combining all four into one device would compromise each pathway's effectiveness." },
 ];
 
-// ─── Page ──────────────────────────────────────────────────────────────
-
 export default function SciencePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <main className="min-h-screen bg-abyss">
       {/* ══════ HERO ══════ */}
-      <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img src="/images/science-hero.webp" alt="" className="w-full h-full object-cover opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-abyss/60 via-abyss/30 to-abyss" />
-        </div>
-        <div className="relative z-10 text-center px-6 max-w-3xl">
+      <section className="relative pt-40 pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a14] via-abyss to-abyss" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-moonlight/3 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-moonlight/2 rounded-full blur-3xl" />
+        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
             <p className="text-moonlight text-xs uppercase tracking-[0.3em] font-medium mb-6">The Science Behind SOMNI</p>
             <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-cream leading-[1.05]">
@@ -145,13 +128,10 @@ export default function SciencePage() {
             </p>
           </motion.div>
         </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
-          <CaretDown size={20} className="text-moonlight" weight="bold" />
-        </div>
       </section>
 
-      {/* ══════ STATS GRID ══════ */}
-      <section className="max-w-6xl mx-auto px-6 -mt-16 relative z-20 mb-24">
+      {/* ══════ STATS ══════ */}
+      <section className="max-w-6xl mx-auto px-6 -mt-10 relative z-20 mb-24">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((s, i) => (
             <motion.div
@@ -170,7 +150,7 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* ══════ WHAT: The Four Pathways ══════ */}
+      {/* ══════ WHAT: Four Pathways ══════ */}
       <section className="max-w-5xl mx-auto px-6 mb-28">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
           <p className="text-moonlight text-xs uppercase tracking-[0.2em] font-bold mb-3">WHAT</p>
@@ -189,15 +169,16 @@ export default function SciencePage() {
               className="glass-card overflow-hidden"
             >
               <div className="flex flex-col md:flex-row">
-                <div className="md:w-80 shrink-0 bg-abyss/60 p-8 flex items-center justify-center relative overflow-hidden">
-                  {i === 0 && <img src="/images/sensory-pathways.webp" alt="" className="absolute inset-0 w-full h-full object-cover opacity-15" />}
-                  <div className="relative z-10 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-moonlight/15 flex items-center justify-center mx-auto mb-4">
-                      <p.icon size={32} className="text-moonlight" weight="duotone" />
-                    </div>
-                    <p className="text-moonlight text-xs tracking-[0.2em] font-bold">{p.sense}</p>
-                    <p className="text-cream text-lg font-display font-bold mt-1">{p.title}</p>
+                <div className="md:w-72 shrink-0 p-8 flex flex-col items-center justify-center relative overflow-hidden"
+                  style={{
+                    background: `radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 70%)`,
+                  }}
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-moonlight/10 flex items-center justify-center mb-4">
+                    <p.icon size={32} className="text-moonlight" weight="duotone" />
                   </div>
+                  <p className="text-moonlight text-xs tracking-[0.2em] font-bold">{p.sense}</p>
+                  <p className="text-cream text-lg font-display font-bold mt-1">{p.title}</p>
                 </div>
                 <div className="flex-1 p-8">
                   <p className="font-display text-lg text-cream font-bold mb-3">{p.head}</p>
@@ -210,8 +191,8 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* ══════ WHY: Research Evidence ══════ */}
-      <section className="bg-white/[0.02] py-24 mb-28">
+      {/* ══════ WHY: Research Foundation ══════ */}
+      <section className="bg-white/[0.015] py-24 mb-28">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <p className="text-moonlight text-xs uppercase tracking-[0.2em] font-bold mb-3">WHY</p>
@@ -219,8 +200,8 @@ export default function SciencePage() {
             <p className="text-mist/50 text-sm max-w-[48ch] mx-auto">Every SOMNI product is grounded in published, peer-reviewed evidence. Here are the papers.</p>
           </motion.div>
 
-          {/* ── Papers Grid ── */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+          {/* Papers Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
             {papers.map((paper, i) => (
               <motion.a
                 key={paper.title}
@@ -237,9 +218,7 @@ export default function SciencePage() {
                   <div className="w-9 h-9 rounded-lg bg-moonlight/10 flex items-center justify-center shrink-0 group-hover:bg-moonlight/15 transition-colors">
                     <Article size={16} className="text-moonlight/50 group-hover:text-moonlight/70" weight="duotone" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[10px] text-mist/30 font-mono">{paper.journal}</p>
-                  </div>
+                  <p className="text-[10px] text-mist/30 font-mono leading-tight">{paper.journal}</p>
                 </div>
                 <h4 className="font-display text-sm text-cream font-bold mb-2 group-hover:text-moonlight transition-colors flex-1">{paper.title}</h4>
                 <p className="text-[10px] text-mist/30 mb-3">{paper.authors}</p>
@@ -252,14 +231,14 @@ export default function SciencePage() {
             ))}
           </div>
 
-          {/* ── Expert Carousel ── */}
+          {/* Expert Quotes */}
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p className="text-moonlight/40 text-xs uppercase tracking-[0.15em] font-medium text-center mb-6">What Leading Sleep Researchers Say</p>
             <div className="grid md:grid-cols-3 gap-4">
               {experts.slice(0, 3).map((expert, i) => (
                 <div key={i} className="glass-card p-6 text-center">
-                  <div className="w-14 h-14 rounded-full bg-moonlight/10 mx-auto mb-4 flex items-center justify-center">
-                    <Brain size={24} className="text-moonlight/40" weight="duotone" />
+                  <div className="w-12 h-12 rounded-full bg-moonlight/10 mx-auto mb-4 flex items-center justify-center">
+                    <Brain size={20} className="text-moonlight/40" weight="duotone" />
                   </div>
                   <p className="font-display text-sm text-cream font-bold">{expert.name}</p>
                   <p className="text-[10px] text-mist/35 mt-1 mb-3">{expert.title}</p>
@@ -271,7 +250,7 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* ══════ HOW: SOMNI's Approach ══════ */}
+      {/* ══════ HOW: Products ══════ */}
       <section className="max-w-5xl mx-auto px-6 mb-28">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
           <p className="text-moonlight text-xs uppercase tracking-[0.2em] font-bold mb-3">HOW</p>
@@ -281,10 +260,10 @@ export default function SciencePage() {
 
         <div className="grid sm:grid-cols-2 gap-5">
           {[
-            { step: "01", sense: "LUX", name: "3D Contour Sleep Mask", price: "$49", img: "/products/mask-3d-1.jpg", desc: "15mm-deep eye cups eliminate ocular pressure. Integrated nasal baffle achieves true 100% light occlusion at 10,000 lux. BT 6.0 audio with ultra-thin 0.8mm speakers." },
-            { step: "02", sense: "SONUS", name: "White Noise + Aroma Machine", price: "$89", img: "/products/white-noise-aroma-machine/product_0.webp", desc: "Non-looping sound generation with adaptive volume. 7 profiles. Built-in 200ml aroma diffuser. Realistic 3D flame night light." },
-            { step: "03", sense: "TACTUS", name: "CES Sleep Therapy Device", price: "$79", img: "/products/acupressure-sleep-mat/product_4.webp", desc: "Ear-clip microcurrent stimulation targets the auricular vagus nerve. 3 intensity levels. 1000mAh rechargeable. 40+ years of clinical evidence." },
-            { step: "04", sense: "OLFACIO", name: "Deep Sleep Pillow Spray", price: "$29", img: "/products/deep-sleep-pillow-spray/product_0.webp", desc: "Lavender + chamomile formula with pharmaceutical-grade melatonin. Absorbed through inhalation, bypassing digestion. 15-minute peak onset." },
+            { step: "01", sense: "LUX", name: "3D Contour Sleep Mask", price: "$49", slug: "3d-contour-sleep-mask", img: "/products/mask-3d-1.jpg", desc: "15mm-deep eye cups eliminate ocular pressure. Integrated nasal baffle achieves true 100% light occlusion at 10,000 lux. BT 6.0 audio with ultra-thin 0.8mm speakers." },
+            { step: "02", sense: "SONUS", name: "White Noise + Aroma Machine", price: "$89", slug: "white-noise-aroma-machine", img: "/products/white-noise-aroma-machine/product_0.webp", desc: "Non-looping sound generation with adaptive volume. 7 profiles. Built-in 200ml aroma diffuser. Realistic 3D flame night light." },
+            { step: "03", sense: "TACTUS", name: "CES Sleep Therapy Device", price: "$79", slug: "acupressure-sleep-mat", img: "/products/acupressure-sleep-mat/product_4.webp", desc: "Ear-clip microcurrent stimulation targets the auricular vagus nerve. 3 intensity levels. 1000mAh rechargeable. 40+ years of clinical evidence." },
+            { step: "04", sense: "OLFACIO", name: "Deep Sleep Pillow Spray", price: "$29", slug: "deep-sleep-pillow-spray", img: "/products/deep-sleep-pillow-spray/product_0.webp", desc: "Lavender + chamomile formula with pharmaceutical-grade melatonin. Absorbed through inhalation, bypassing digestion. 15-minute peak onset." },
           ].map((p, i) => (
             <motion.div
               key={p.step}
@@ -307,7 +286,7 @@ export default function SciencePage() {
               <div className="p-6">
                 <h4 className="font-display text-base text-cream font-bold mb-2">{p.name}</h4>
                 <p className="text-cream/50 text-xs leading-relaxed mb-4">{p.desc}</p>
-                <Link href={`/products/${p.name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`} className="inline-flex items-center gap-1.5 text-xs text-moonlight hover:text-moonlight/70 font-medium transition-colors">
+                <Link href={`/products/${p.slug}`} className="inline-flex items-center gap-1.5 text-xs text-moonlight hover:text-moonlight/70 font-medium transition-colors">
                   View Product <ArrowRight size={12} />
                 </Link>
               </div>
@@ -322,21 +301,10 @@ export default function SciencePage() {
           <p className="text-moonlight text-xs uppercase tracking-[0.2em] font-bold mb-3">Learn More</p>
           <h2 className="font-display text-2xl md:text-3xl text-cream font-bold">Frequently Asked Questions</h2>
         </motion.div>
-
         <div className="space-y-3">
           {faqs.map((faq, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="glass-card overflow-hidden"
-            >
-              <button
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full p-5 flex items-center justify-between text-left"
-              >
+            <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="glass-card overflow-hidden">
+              <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full p-5 flex items-center justify-between text-left">
                 <span className="font-display text-sm text-cream font-bold pr-4">{faq.q}</span>
                 <CaretRight size={14} className={`text-moonlight/40 shrink-0 transition-transform ${openFaq === i ? "rotate-90" : ""}`} weight="bold" />
               </button>
@@ -350,9 +318,10 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* ══════ CTA ══════ */}
-      <section className="max-w-3xl mx-auto px-6 pb-24 text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glass-card p-12">
+      {/* ══════ RESEARCHER CTA ══════ */}
+      <section className="max-w-3xl mx-auto px-6 pb-24">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glass-card p-12 text-center">
+          <Microscope size={28} className="text-moonlight/50 mx-auto mb-5" weight="duotone" />
           <p className="text-moonlight text-xs uppercase tracking-[0.2em] font-bold mb-4">Are you a researcher or healthcare professional?</p>
           <p className="text-cream/55 text-sm max-w-[44ch] mx-auto mb-8 leading-relaxed">
             Access our full research bibliography, raw clinical data, and partner studies. Contact our science team for detailed documentation and collaboration opportunities.
