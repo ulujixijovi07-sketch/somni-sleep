@@ -164,6 +164,7 @@ footer { position: relative; z-index: 1; }
     letter-spacing: 0.2em;
     color: var(--color-moonlight);
     margin-bottom: 8px;
+    text-align: center;
   }
 
   .product-page-content .section-title {
@@ -174,6 +175,7 @@ footer { position: relative; z-index: 1; }
     margin-bottom: 12px;
     letter-spacing: -0.5px;
     line-height: 1.2;
+    text-align: center;
   }
 
   .product-page-content .section-subtitle {
@@ -182,7 +184,47 @@ footer { position: relative; z-index: 1; }
     margin-bottom: 32px;
     max-width: 600px;
     line-height: 1.6;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
+
+  .product-page-content .section-desc {
+    font-size: 15px;
+    color: var(--color-mist);
+    line-height: 1.8;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  /* ── Mode Cards (GenericSections) ── */
+  .modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  .mode-card {
+    background: linear-gradient(135deg, #0a0a1a 0%, #111128 100%);
+    border: 1px solid rgba(201, 168, 76, 0.1);
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+  }
+
+  .mode-card:hover {
+    border-color: rgba(201, 168, 76, 0.25);
+  }
+
+  .mode-icon { font-size: 32px; margin-bottom: 12px; }
+  .mode-card h3 { font-size: 18px; color: var(--color-moonlight); margin-bottom: 8px; }
+  .mode-card p { font-size: 14px; color: var(--color-mist); line-height: 1.6; }
+  .mode-stat { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .mode-stat span { font-size: 12px; color: var(--color-moonlight); background: rgba(201,168,76,0.1); padding: 4px 10px; border-radius: 20px; }
 
   /* ── Science Grid ── */
   .science-section {
@@ -257,6 +299,9 @@ footer { position: relative; z-index: 1; }
     color: var(--color-cream);
     line-height: 1.8;
     max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
 
   /* ── Usage Section ── */
@@ -270,10 +315,13 @@ footer { position: relative; z-index: 1; }
     color: var(--color-cream);
     line-height: 1.8;
     max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
     background: rgba(201, 168, 76, 0.05);
     border: 1px solid rgba(201, 168, 76, 0.1);
     border-radius: 12px;
     padding: 24px;
+    text-align: center;
   }
 
   /* ── Specs Section ── */
