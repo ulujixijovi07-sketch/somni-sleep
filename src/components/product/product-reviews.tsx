@@ -35,6 +35,9 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Lightbox
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
   const openForm = () => {
     setFormName("");
     setFormImages([]);
@@ -343,7 +346,8 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
                           key={img.id}
                           src={img.url}
                           alt="Review"
-                          className="h-24 w-24 rounded border border-border object-cover"
+                          className="h-24 w-24 rounded border border-border object-cover cursor-pointer hover:opacity-80 transition-opacity"
+                          onClick={() => setLightboxImage(img.url)}
                         />
                       ))}
                     </div>
@@ -360,6 +364,27 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
             </div>
           )}
         </>
+      )}
+
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white/60 hover:text-white text-2xl transition-colors"
+            onClick={() => setLightboxImage(null)}
+          >
+            ✕
+          </button>
+          <img
+            src={lightboxImage}
+            alt="Review full size"
+            className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
       )}
     </div>
   );
