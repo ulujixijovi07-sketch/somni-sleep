@@ -78,7 +78,6 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           productId,
-          orderNumber: formOrderNumber.trim(),
           authorName: formName.trim() || "Anonymous",
           rating: formRating,
           title: formTitle.trim() || null,
@@ -163,13 +162,9 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
       {/* Review Form */}
       {formOpen && (
         <form onSubmit={handleSubmit} className="mt-6 rounded border border-moonlight/20 bg-moonlight/5 p-6 space-y-4">
-          <div>
-            <label className="block font-body text-xs text-text-secondary mb-1">Order Number *</label>
-            <input value={formOrderNumber} onChange={(e) => setFormOrderNumber(e.target.value)}
-              placeholder="e.g. SOMNI-2024-0001"
-              className="w-full rounded border border-border bg-brand-primary px-3 py-2 font-body text-sm text-text-primary"
-              required maxLength={100} />
-            <p className="mt-0.5 font-body text-[10px] text-text-secondary/50">Only delivered orders can leave a review.</p>
+          <div className="rounded border border-moonlight/30 bg-moonlight/10 px-4 py-3 text-center">
+            <p className="font-body text-sm text-moonlight">🛡️ Only verified purchasers can leave a review.</p>
+            <p className="mt-0.5 font-body text-xs text-moonlight/60">Your review will appear after purchase verification.</p>
           </div>
           <div>
             <label className="block font-body text-xs text-text-secondary mb-1">Your Name *</label>
