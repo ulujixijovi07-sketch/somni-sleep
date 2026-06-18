@@ -9,7 +9,10 @@ export default function StoryPage() {
     <main className="min-h-screen bg-abyss">
       {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative pt-44 pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(201,168,76,0.04),transparent_50%),radial-gradient(ellipse_at_70%_80%,rgba(126,184,201,0.03),transparent_50%)]" />
+        <div className="absolute inset-0">
+          <img src="/images/brain-model.webp" alt="" className="w-full h-full object-cover opacity-15" />
+          <div className="absolute inset-0 bg-gradient-to-b from-abyss/85 via-abyss/50 to-abyss" />
+        </div>
         <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <p className="text-moonlight text-xs uppercase tracking-[0.3em] font-medium mb-6">Because sleep shouldn&apos;t be hard.</p>

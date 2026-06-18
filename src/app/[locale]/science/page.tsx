@@ -15,7 +15,10 @@ export default function SciencePage() {
     <main className="min-h-screen bg-abyss">
       {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative pt-44 pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(201,168,76,0.04),transparent_50%),radial-gradient(ellipse_at_70%_80%,rgba(126,184,201,0.03),transparent_50%)]" />
+        <div className="absolute inset-0">
+          <img src="/images/brain-model.webp" alt="" className="w-full h-full object-cover opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-abyss/80 via-abyss/40 to-abyss" />
+        </div>
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
             <p className="text-moonlight text-xs uppercase tracking-[0.3em] font-medium mb-6">The Science Behind SOMNI</p>
