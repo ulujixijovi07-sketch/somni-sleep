@@ -13,22 +13,22 @@ const nextConfig = {
     return [
       {
         source: '/:locale/shop/visual',
-        destination: '/:locale/products/3d-contour-sleep-mask',
+        destination: '/products/3d-contour-sleep-mask',
         permanent: true,
       },
       {
         source: '/:locale/shop/auditory',
-        destination: '/:locale/products/white-noise-aroma-machine',
+        destination: '/products/white-noise-aroma-machine',
         permanent: true,
       },
       {
         source: '/:locale/shop/tactile',
-        destination: '/:locale/products/acupressure-sleep-mat',
+        destination: '/products/acupressure-sleep-mat',
         permanent: true,
       },
       {
         source: '/:locale/shop/olfactory',
-        destination: '/:locale/products/deep-sleep-pillow-spray',
+        destination: '/products/deep-sleep-pillow-spray',
         permanent: true,
       },
     ];
