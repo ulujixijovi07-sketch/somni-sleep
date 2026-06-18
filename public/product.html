@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Somni Contour | 3D Sleep Mask with Bluetooth Audio</title>
+<style>
+  :root {
+    --bg: #050510;
+    --bg-card: #0a0a1a;
+    --gold: #C9A84C;
+    --gold-dim: #A68A3E;
+    --text: #E8E6E3;
+    --text-dim: #989695;
+    --text-muted: #6B6967;
+    --border: rgba(201,168,76,0.15);
+    --accent-blue: #4A7FB5;
+    --red: #E85D5D;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(5,5,16,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  nav .logo {
+    font-family: 'Courier New', monospace;
+    font-size: 22px; letter-spacing: 4px;
+    color: var(--gold); font-weight: 700;
+  }
+  nav .cta {
+    background: var(--gold); color: #050510;
+    border: none; padding: 10px 28px;
+    font-size: 14px; font-weight: 600;
+    border-radius: 6px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  nav .cta:hover { background: #D4B55A; transform: translateY(-1px); }
+
+  /* ── Breadcrumb ── */
+  .breadcrumb {
+    padding: 100px 40px 0;
+    max-width: 1300px; margin: 0 auto;
+    font-size: 12px; color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+  .breadcrumb span { color: var(--text-dim); }
+
+  /* ══════ PRODUCT DETAIL TOP ══════ */
+  .product-detail {
+    display: flex; gap: 60px;
+    max-width: 1300px; margin: 0 auto;
+    padding: 32px 40px 60px;
+  }
+  /* ── Left: Gallery ── */
+  .product-gallery { flex: 1; max-width: 55%; }
+  .main-image {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    position: relative;
+  }
+  .main-image img {
+    width: 100%; display: block;
+    border-radius: 16px;
+  }
+  .main-image .expand-btn {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(0,0,0,0.6); color: var(--text);
+    border: none; width: 32px; height: 32px;
+    border-radius: 6px; cursor: pointer;
+    font-size: 16px; display: flex; align-items: center; justify-content: center;
+  }
+  .thumbnail-strip {
+    display: flex; gap: 10px; margin-top: 14px;
+    overflow-x: auto;
+  }
+  .thumbnail-strip img {
+    width: 72px; height: 72px;
+    object-fit: cover; border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer; opacity: 0.6;
+    transition: all 0.2s;
+  }
+  .thumbnail-strip img.active,
+  .thumbnail-strip img:hover {
+    border-color: var(--gold); opacity: 1;
+  }
+
+  /* ── Right: Product Info ── */
+  .product-info { flex: 1; max-width: 45%; }
+  .product-info h1 {
+    font-size: 26px; font-weight: 400; line-height: 1.3;
+    margin-bottom: 20px; letter-spacing: -0.3px;
+  }
+  .product-info h1 span { color: var(--gold); font-weight: 600; }
+
+  /* Pricing */
+  .pricing {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .current-price { font-size: 36px; font-weight: 700; }
+  .original-price {
+    font-size: 18px; color: var(--text-muted);
+    text-decoration: line-through;
+  }
+  .discount-badge {
+    background: var(--red); color: #fff;
+    font-size: 13px; font-weight: 700;
+    padding: 3px 10px; border-radius: 4px;
+  }
+
+  /* Feature Bullets */
+  .feature-bullets {
+    list-style: none; margin-bottom: 24px;
+  }
+  .feature-bullets li {
+    padding: 10px 0; color: var(--text-dim);
+    font-size: 14px; line-height: 1.5;
+    border-bottom: 1px solid var(--border);
+  }
+  .feature-bullets .icon { margin-right: 10px; }
+
+  /* Social Proof */
+  .social-proof {
+    font-size: 13px; color: var(--gold-dim);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .social-proof .dot {
+    width: 8px; height: 8px; background: #4AE86C;
+    border-radius: 50%; animation: pulse-dot 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* Color Picker */
+  .color-label {
+    font-size: 13px; font-weight: 600; color: var(--text);
+    margin-bottom: 10px;
+  }
+  .color-picker {
+    display: flex; gap: 10px; margin-bottom: 24px;
+  }
+  .color-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 2px solid transparent; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .color-dot.arctic   { background: linear-gradient(135deg, #6B7B8D, #4A5568); }
+  .color-dot.active { border-color: var(--gold); box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--gold); }
+  /* Quantity */
+  .qty-row {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 20px;
+  }
+  .qty-label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .quantity-picker {
+    display: flex; align-items: center;
+    border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden;
+  }
+  .quantity-picker button {
+    background: var(--bg-card); color: var(--text);
+    border: none; width: 40px; height: 40px;
+    font-size: 18px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .quantity-picker button:hover { background: rgba(201,168,76,0.1); }
+  .quantity-picker input {
+    width: 48px; height: 40px; text-align: center;
+    background: transparent; color: var(--text);
+    border: none; border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    font-size: 15px; font-family: inherit;
+  }
+
+  /* Action Buttons */
+  .btn-add-cart {
+    width: 100%; background: var(--gold); color: #050510;
+    border: none; padding: 16px; font-size: 16px; font-weight: 700;
+    border-radius: 8px; cursor: pointer;
+    margin-bottom: 12px; transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn-add-cart:hover { background: #D4B55A; transform: translateY(-1px); }
+  .btn-buy-now {
+    width: 100%; background: transparent; color: var(--text);
+    border: 2px solid var(--gold); padding: 14px;
+    font-size: 16px; font-weight: 600;
+    border-radius: 8px; cursor: pointer;
+    margin-bottom: 20px; transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn-buy-now:hover { background: rgba(201,168,76,0.1); border-color: #D4B55A; }
+
+  /* Trust Stripe */
+  .trust-text {
+    font-size: 12px; color: var(--text-dim);
+    text-align: center; margin-bottom: 12px;
+  }
+  .trust-badges {
+    display: flex; justify-content: center; gap: 24px;
+    flex-wrap: wrap; margin-bottom: 8px;
+  }
+  .trust-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: var(--text-muted);
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .trust-badge .t-icon { font-size: 15px; }
+
+  /* Shipping Banner */
+  .shipping-banner {
+    text-align: center; font-size: 13px; color: var(--gold-dim);
+    background: rgba(201,168,76,0.06);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px; margin-top: 8px;
+  }
+
+  /* ══════ BUNDLE SECTION ══════ */
+  .bundle-section {
+    max-width: 1300px; margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+  .bundle-header {
+    text-align: center; margin-bottom: 32px;
+  }
+  .bundle-header h3 { font-size: 22px; font-weight: 400; margin-bottom: 6px; }
+  .bundle-header p { font-size: 13px; color: var(--text-dim); }
+  .bundle-grid {
+    display: flex; gap: 20px; align-items: stretch;
+    margin-bottom: 24px;
+  }
+  .bundle-item {
+    flex: 1; background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 20px;
+    text-align: center; position: relative;
+    transition: all 0.2s;
+  }
+  .bundle-item:hover { border-color: rgba(201,168,76,0.4); }
+  .bundle-item img {
+    width: 120px; height: 120px; object-fit: contain;
+    margin-bottom: 14px;
+  }
+  .bundle-item .bundle-name {
+    font-size: 14px; font-weight: 500; margin-bottom: 4px;
+  }
+  .bundle-item .bundle-variant {
+    font-size: 12px; color: var(--text-dim); margin-bottom: 8px;
+  }
+  .bundle-item .bundle-current { font-size: 20px; font-weight: 700; color: var(--gold); }
+  .bundle-item .bundle-original {
+    font-size: 13px; color: var(--text-muted);
+    text-decoration: line-through; margin-left: 6px;
+  }
+  .bundle-plus {
+    display: flex; align-items: center;
+    font-size: 20px; color: var(--text-muted);
+    flex-shrink: 0;
+  }
+  .bundle-total {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0; border-top: 1px solid var(--border);
+  }
+  .bundle-total .total-label { font-size: 15px; color: var(--text-dim); }
+  .bundle-total .total-price { font-size: 28px; font-weight: 700; }
+  .bundle-total .total-original {
+    font-size: 15px; color: var(--text-muted);
+    text-decoration: line-through; margin-right: 10px;
+  }
+  .btn-bundle {
+    width: 100%; background: #3A5C4A; color: #fff;
+    border: none; padding: 16px; font-size: 16px; font-weight: 700;
+    border-radius: 8px; cursor: pointer;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .btn-bundle:hover { background: #4A7258; transform: translateY(-1px); }
+
+  /* ══════ SECTIONS (kept from original) ══════ */
+  section {
+    max-width: 1200px; margin: 0 auto;
+    padding: 100px 40px;
+  }
+  .section-label {
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: 40px; font-weight: 300;
+    letter-spacing: -0.5px; margin-bottom: 16px;
+  }
+  .section-desc {
+    color: var(--text-dim); font-size: 17px;
+    max-width: 600px; line-height: 1.7;
+  }
+
+  /* Mode Cards */
+  .modes-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 24px; margin-top: 48px;
+  }
+  .mode-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 36px;
+    transition: all 0.3s;
+  }
+  .mode-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-2px); }
+  .mode-icon { font-size: 32px; margin-bottom: 16px; }
+  .mode-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--gold); }
+  .mode-card p { color: var(--text-dim); font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+  .mode-stat { display: flex; gap: 16px; flex-wrap: wrap; }
+  .mode-stat span {
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    font-size: 13px; padding: 6px 14px;
+    border-radius: 50px; color: var(--gold);
+  }
+
+  /* Feature Split */
+  .feature-split {
+    display: flex; gap: 80px; align-items: center;
+    margin-top: 60px;
+  }
+  .feature-split.reverse { flex-direction: row-reverse; }
+  .feature-text { flex: 1; }
+  .feature-text h3 { font-size: 28px; font-weight: 300; margin-bottom: 16px; }
+  .feature-text h3 span { color: var(--gold); font-weight: 600; }
+  .feature-text p { color: var(--text-dim); font-size: 16px; line-height: 1.7; margin-bottom: 20px; }
+  .feature-list { list-style: none; }
+  .feature-list li {
+    padding: 10px 0; color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .feature-list li::before {
+    content: '◆'; color: var(--gold);
+    margin-right: 12px; font-size: 8px;
+    vertical-align: middle;
+  }
+  .feature-image { flex: 1; text-align: center; }
+  .feature-image .placeholder {
+    width: 100%; aspect-ratio: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); font-size: 14px;
+  }
+
+  /* Comparison Table */
+  .comparison { overflow-x: auto; margin-top: 48px; }
+  .comparison table {
+    width: 100%; border-collapse: collapse;
+    font-size: 14px;
+  }
+  .comparison th {
+    text-align: left; padding: 16px;
+    border-bottom: 2px solid var(--border);
+    color: var(--gold); font-weight: 600;
+    font-size: 13px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .comparison th:first-child { color: var(--text-dim); }
+  .comparison td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  .comparison td:first-child { color: var(--text); font-weight: 500; }
+  .check { color: var(--gold); }
+  .cross { color: var(--text-muted); }
+
+  /* Specs Grid */
+  .specs-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; margin-top: 48px;
+  }
+  .spec-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 28px;
+    text-align: center;
+  }
+  .spec-card .spec-icon { font-size: 28px; margin-bottom: 12px; }
+  .spec-card .spec-val { font-size: 22px; font-weight: 600; color: var(--gold); }
+  .spec-card .spec-label {
+    font-size: 12px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* Reviews */
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+  .review-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px;
+  }
+  .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 12px; }
+  .review-card p { color: var(--text-dim); font-size: 14px; line-height: 1.6; font-style: italic; }
+  .review-author { color: var(--text); font-size: 13px; margin-top: 16px; font-weight: 600; }
+
+  /* FAQ */
+  .faq { margin-top: 48px; }
+  .faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+  .faq-q { font-size: 16px; font-weight: 600; color: var(--text); cursor: pointer; }
+  .faq-a { color: var(--text-dim); font-size: 14px; margin-top: 8px; line-height: 1.6; }
+
+  /* CTA Banner */
+  .cta-banner {
+    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.02));
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 60px;
+    text-align: center; margin-top: 60px;
+  }
+  .cta-banner h3 { font-size: 32px; font-weight: 300; margin-bottom: 12px; }
+  .cta-banner p { color: var(--text-dim); margin-bottom: 28px; }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px; text-align: center;
+    color: var(--text-muted); font-size: 13px;
+  }
+
+  .btn-primary {
+    background: var(--gold); color: #050510;
+    border: none; padding: 14px 36px;
+    font-size: 15px; font-weight: 600;
+    border-radius: 8px; cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: #D4B55A; transform: translateY(-2px); }
+
+  @media (max-width: 768px) {
+    .product-detail { flex-direction: column; padding: 24px 16px 40px; }
+    .product-gallery, .product-info { max-width: 100%; }
+    .product-info h1 { font-size: 22px; }
+    .bundle-grid { flex-direction: column; }
+    .bundle-plus { transform: rotate(90deg); justify-content: center; }
+    .modes-grid { grid-template-columns: 1fr; }
+    .feature-split { flex-direction: column; gap: 40px; }
+    .feature-split.reverse { flex-direction: column; }
+    .specs-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .comparison { font-size: 12px; }
+    .comparison th, .comparison td { padding: 10px 8px; }
+    .breadcrumb { padding: 90px 16px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">SOMNI</div>
+  <button class="cta" onclick="document.getElementById('buy').scrollIntoView({behavior:'smooth'})">Pre-Order — $49</button>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">Home <span>• Somni Contour – 3D Sleep Mask with Bluetooth 6.0 Audio</span></div>
+
+<!-- ══════ PRODUCT DETAIL TOP ══════ -->
+<section class="product-detail">
+
+  <!-- LEFT: Gallery -->
+  <div class="product-gallery">
+    <div class="main-image">
+      <img id="mainImg" src="images/model_wearing.png" alt="Somni Contour 3D Sleep Mask — Worn by Real User, Zero Eye Pressure, 100% Blackout" />
+    </div>
+    <div class="thumbnail-strip">
+      <img class="active" src="images/model_wearing.png" data-full="images/model_wearing.png" onclick="swapMain(this)" alt="Model wearing" />
+      <img src="images/O1CN01hga2kT2E2hlTCrWoY.jpg" data-full="images/O1CN01hga2kT2E2hlTCrWoY.jpg" onclick="swapMain(this)" alt="Multi-angle" />
+      <img src="images/exploded_view_en.png" data-full="images/exploded_view_en.png" onclick="swapMain(this)" alt="Exploded view" />
+      <img src="images/O1CN01wzJLby2E2hlOXWR3s.jpg" data-full="images/O1CN01wzJLby2E2hlOXWR3s.jpg" onclick="swapMain(this)" alt="Arctic Blue" />
+      <img src="images/adjustable_speakers_en.png" data-full="images/adjustable_speakers_en.png" onclick="swapMain(this)" alt="Adjustable speakers" />
+    </div>
+  </div>
+
+  <!-- RIGHT: Product Info -->
+  <div class="product-info">
+    <h1>Somni Contour – <span>3D Sleep Mask</span> with Bluetooth 6.0 Audio</h1>
+
+    <div class="pricing">
+      <span class="current-price">$49</span>
+      <span class="original-price">$79</span>
+      <span class="discount-badge">-38%</span>
+    </div>
+
+    <ul class="feature-bullets">
+      <li><span class="icon">🌑</span> 100% Blackout with 3D Nasal Baffle – zero light, zero eye pressure, side-sleeper optimized</li>
+      <li><span class="icon">🎵</span> Bluetooth 6.0 Built-in Ultra-Thin Speakers – adjustable to your exact ear position</li>
+      <li><span class="icon">🧼</span> Modular Detach & Wash – 3-second removal, machine washable up to 50 cycles</li>
+      <li><span class="icon">🔋</span> 6-Hour Battery – hidden Type-C charging behind protective zipper</li>
+    </ul>
+
+    <div class="social-proof">
+      <span class="dot"></span> 47 people are viewing this right now
+    </div>
+
+    <div class="qty-row">
+      <span class="qty-label">Quantity</span>
+      <div class="quantity-picker">
+        <button onclick="changeQty(-1)">−</button>
+        <input type="text" id="qty" value="1" readonly />
+        <button onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+
+    <button class="btn-add-cart" onclick="alert('Added to cart!')">Add to Cart</button>
+    <button class="btn-buy-now" onclick="alert('Proceeding to checkout...')">Buy Now</button>
+
+    <p class="trust-text">Clinically tested with robust data. Globally certified for safety.</p>
+    <div class="trust-badges">
+      <div class="trust-badge"><span class="t-icon">🛡️</span> CE Certified</div>
+      <div class="trust-badge"><span class="t-icon">🔄</span> 30-Day Trial</div>
+      <div class="trust-badge"><span class="t-icon">✅</span> OEKO-TEX</div>
+      <div class="trust-badge"><span class="t-icon">📡</span> FCC</div>
+      <div class="trust-badge"><span class="t-icon">♻️</span> RoHS</div>
+    </div>
+
+    <div class="shipping-banner">
+      🚚 Free Worldwide Shipping | Duties & Tax Included | 30-Day Money-Back Guarantee
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PRODUCT VIDEO ══════ -->
+<section>
+  <div class="section-label">See It In Action</div>
+  <h2 class="section-title">Product Demo Video</h2>
+  <div style="max-width:800px; margin:32px auto 0; border-radius:12px; overflow:hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.4);">
+    <video controls poster="images/O1CN01hga2kT2E2hlTCrWoY.jpg" style="width:100%; display:block;">
+      <source src="images/product_video.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<!-- ══════ SCIENCE SECTION ══════ -->
+<section id="science">
+  <div class="section-label">The Science of Sleep</div>
+  <h2 class="section-title">Engineered for Deep Rest</h2>
+  <p class="section-desc">
+    Every detail of Somni Contour is backed by sleep science. From the 15mm-deep 3D eye cups that eliminate ocular pressure
+    to the integrated nasal baffle that achieves true 100% light occlusion — this is sleep engineering at its finest.
+  </p>
+
+  <div class="modes-grid">
+    <div class="mode-card">
+      <div class="mode-icon">🌑</div>
+      <h3>3D Contour Relief</h3>
+      <p>Patented 15mm-deep eye cavities create a zero-pressure zone around your eyes. Blink freely. No lash contact. No morning creases. The memory foam shell molds to your unique facial geometry while maintaining structural integrity wash after wash.</p>
+      <div class="mode-stat">
+        <span>0 mmHg Eye Pressure</span>
+        <span>100% Lash Clearance</span>
+        <span>Side-Sleeper Optimized</span>
+      </div>
+    </div>
+
+    <div class="mode-card">
+      <div class="mode-icon">🔇</div>
+      <h3>Absolute Blackout</h3>
+      <p>The integrated 3D nasal baffle — inspired by aviation oxygen mask seals — conforms to your nose bridge for a light-free seal. Unlike flat masks that leak from the sides, Somni Contour creates a personal darkness chamber. Tested at 10,000 lux ambient light with zero penetration.</p>
+      <div class="mode-stat">
+        <span>100% Light Block</span>
+        <span>Nasal Baffle Seal</span>
+        <span>10,000 lux Tested</span>
+      </div>
+    </div>
+
+    <div class="mode-card">
+      <div class="mode-icon">🎵</div>
+      <h3>Bluetooth 6.0 Audio</h3>
+      <p>Ultra-thin 0.8mm stereo speakers embedded in the mask body — not your ears. Listen to white noise, sleep stories, or meditation guides without earbud discomfort. Bluetooth 6.0 ensures instant pairing, 10m range, and crystal-clear audio with magnetic speaker alignment for precise ear positioning.</p>
+      <div class="mode-stat">
+        <span>BT 6.0</span>
+        <span>0.8mm Speakers</span>
+        <span>10m Range</span>
+      </div>
+    </div>
+
+    <div class="mode-card">
+      <div class="mode-icon">🧼</div>
+      <h3>Detachable & Washable</h3>
+      <p>The industry-first modular design: the electronic core module detaches in 3 seconds. Toss the fabric shell into the washing machine. No more hygiene anxiety — your sleep mask stays fresh, clean, and bacteria-free. The memory foam shell is machine-washable up to 50 cycles without degradation.</p>
+      <div class="mode-stat">
+        <span>3-Second Detach</span>
+        <span>Machine Washable</span>
+        <span>50+ Wash Cycles</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SECTION -->
+<section>
+  <div class="section-label">Materials & Craft</div>
+  <h2 class="section-title">What It's Made Of</h2>
+
+  <div class="feature-split">
+    <div class="feature-text">
+      <h3><span>Memory Foam</span> Core</h3>
+      <p>Premium slow-rebound memory foam at 45kg/m³ density. Molds to your facial contours within 30 seconds of wear. Maintains structural integrity through 50+ machine wash cycles.</p>
+      <ul class="feature-list">
+        <li>45kg/m³ high-density memory foam</li>
+        <li>30-second thermal molding to face</li>
+        <li>50+ wash cycle durability tested</li>
+        <li>OEKO-TEX certified, zero harmful chemicals</li>
+      </ul>
+    </div>
+    <div class="feature-image"><img src="images/exploded_view_en.png" alt="Somni Contour Memory Foam Core - 4-Layer Exploded Construction" style="max-width:100%; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);" /></div>
+  </div>
+
+  <div class="feature-split reverse" style="margin-top:80px;">
+    <div class="feature-text">
+      <h3><span>Ice Silk</span> Outer Fabric</h3>
+      <p>The outer shell uses ice silk — a cooling fabric that stays 2-3°C below skin temperature. Hypoallergenic, breathable, and impossibly smooth against your skin. The inner lining is a plush microfiber that wicks moisture and prevents sleep creases.</p>
+      <ul class="feature-list">
+        <li>2-3°C cooling effect vs. ambient</li>
+        <li>Hypoallergenic & dermatologist-tested</li>
+        <li>Moisture-wicking inner lining</li>
+        <li>Anti-crease: wake up without mask marks</li>
+      </ul>
+    </div>
+    <div class="feature-image"><img src="images/O1CN01hga2kT2E2hlTCrWoY.jpg" alt="Somni Contour Ice Silk Fabric - Premium Cooling Fabric" style="max-width:100%; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);" /></div>
+  </div>
+</section>
+
+<!-- WHAT'S IN THE BOX -->
+<section>
+  <div class="section-label">Unboxing</div>
+  <h2 class="section-title">What's in the Box</h2>
+  <p class="section-desc">Every Somni Contour comes complete with everything you need for better sleep — right out of the box.</p>
+  
+  <div class="feature-split" style="margin-top:48px;">
+    <div class="feature-text">
+      <ul class="feature-list">
+        <li>Somni Contour 3D Sleep Mask ×1</li>
+        <li>USB-C Charging Cable ×1</li>
+        <li>Quick Start Guide ×1</li>
+        <li>Travel Storage Pouch ×1</li>
+        <li>Retail Packaging (gift-ready) ×1</li>
+      </ul>
+    </div>
+    <div class="feature-image">
+      <img src="images/O1CN01wzJLby2E2hlOXWR3s.jpg" alt="Somni Contour Full Kit - What's in the Box" style="max-width:100%; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);" />
+    </div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section>
+  <div class="section-label">Technical Specifications</div>
+  <h2 class="section-title">By the Numbers</h2>
+
+  <div class="specs-grid">
+    <div class="spec-card"><div class="spec-icon">⚖️</div><div class="spec-val">122g</div><div class="spec-label">Net Weight</div></div>
+    <div class="spec-card"><div class="spec-icon">🔋</div><div class="spec-val">6 Hours</div><div class="spec-label">Battery Life</div></div>
+    <div class="spec-card"><div class="spec-icon">📐</div><div class="spec-val">15mm</div><div class="spec-label">Eye Cup Depth</div></div>
+    <div class="spec-card"><div class="spec-icon">📡</div><div class="spec-val">BT 6.0</div><div class="spec-label">Bluetooth</div></div>
+    <div class="spec-card"><div class="spec-icon">📦</div><div class="spec-val">30×10×5cm</div><div class="spec-label">Package Size</div></div>
+    <div class="spec-card"><div class="spec-icon">🧵</div><div class="spec-val">Memory Foam</div><div class="spec-label">Core Material</div></div>
+    <div class="spec-card"><div class="spec-icon">✅</div><div class="spec-val">CE / OEKO</div><div class="spec-label">Certification</div></div>
+    <div class="spec-card"><div class="spec-icon">🔄</div><div class="spec-val">50+</div><div class="spec-label">Wash Cycles</div></div>
+    <div class="spec-card"><div class="spec-icon">🌡️</div><div class="spec-val">-3°C</div><div class="spec-label">Cooling Effect</div></div>
+    <div class="spec-card"><div class="spec-icon">🧵</div><div class="spec-val">240g</div><div class="spec-label">Package Weight</div></div>
+    <div class="spec-card"><div class="spec-icon">📋</div><div class="spec-val">SM025</div><div class="spec-label">Model</div></div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section>
+  <div class="section-label">Why Somni Contour</div>
+  <h2 class="section-title">Comparison</h2>
+  <div class="comparison">
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>Somni Contour</th><th>Basic Sleep Mask</th><th>Bluetooth Headband</th><th>Premium Eye Mask</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>3D Eye Contour (Zero Pressure)</td><td class="check">◆ 15mm Deep Cups</td><td class="cross">✕ Flat</td><td class="cross">✕ Flat</td><td class="check">◆ Shallow</td></tr>
+        <tr><td>100% Blackout</td><td class="check">◆ Nasal Baffle Seal</td><td class="cross">✕ Light Leaks</td><td class="cross">✕ Light Leaks</td><td class="check">◆ Partial</td></tr>
+        <tr><td>Built-in Bluetooth Audio</td><td class="check">◆ BT 6.0 + Ultra-Thin</td><td class="cross">✕ None</td><td class="check">◆ BT 5.0</td><td class="cross">✕ None</td></tr>
+        <tr><td>Detachable Electronics</td><td class="check">◆ 3-Second Modular</td><td class="cross">✕ N/A</td><td class="cross">✕ Fixed</td><td class="cross">✕ N/A</td></tr>
+        <tr><td>Machine Washable</td><td class="check">◆ Full Shell Washable</td><td class="check">◆ Yes</td><td class="cross">✕ Hand Wash Only</td><td class="check">◆ Yes</td></tr>
+        <tr><td>Side Sleeper Comfort</td><td class="check">◆ Optimized</td><td class="cross">✕ Uncomfortable</td><td class="cross">✕ Bulky Speakers</td><td class="check">◆ Moderate</td></tr>
+        <tr><td>Battery Life</td><td class="check">◆ 6 Hours</td><td class="cross">✕ N/A</td><td class="check">◆ 8-10 Hours</td><td class="cross">✕ N/A</td></tr>
+        <tr><td>Price</td><td class="check">◆ $49</td><td class="cross">$5-15</td><td class="cross">$20-30</td><td class="cross">$25-60</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SMART FEATURES -->
+<section>
+  <div class="section-label">Smart Engineering</div>
+  <h2 class="section-title">Hear. Wash. Repeat.</h2>
+
+  <div class="feature-split" style="margin-top:48px;">
+    <div class="feature-image"><img src="images/adjustable_speakers_en.png" alt="Adjustable Speakers & Washable" style="max-width:100%; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);" /></div>
+    <div class="feature-text">
+      <h3><span>Adjustable</span> Speaker Positioning</h3>
+      <p>Unlike fixed-speaker masks that miss your ears, Somni Contour's speakers slide along a precision track inside the strap. Adjust them to your exact ear position — one size truly fits all. The 0.8mm ultra-thin speakers disappear into the fabric so side sleepers feel nothing.</p>
+      <ul class="feature-list">
+        <li>Slide-to-fit speaker positioning — fits any head shape</li>
+        <li>0.8mm ultra-thin speakers — invisible to side sleepers</li>
+        <li>Bluetooth 6.0 with 10m range and instant auto-pair</li>
+        <li>Hidden Type-C charging port behind protective zipper</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="feature-split reverse" style="margin-top:80px;">
+    <div class="feature-image"><img src="images/wash_steps_en.png" alt="3-Step Wash Guide: Peel Velcro, Remove Core, Hand Wash" style="max-width:100%; border-radius:12px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);" /></div>
+    <div class="feature-text">
+      <h3><span>Modular</span> Detach & Wash System</h3>
+      <p>The electronic core module detaches in 3 seconds. Toss the fabric shell into the washing machine. The modular design separates cleanly: velcro-secured strap, removable eye cups, and zippered electronics bay. Your sleep mask stays fresh wash after wash.</p>
+      <ul class="feature-list">
+        <li>3-second modular detach — pull velcro, unzip, done</li>
+        <li>Machine washable fabric shell — cold water, air dry</li>
+        <li>50+ wash cycle durability tested</li>
+        <li>Includes cooling insert for hot sleepers</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COLORS -->
+<section id="buy">
+  <div class="cta-banner">
+    <h3>Ready for Your Best Sleep?</h3>
+    <p>Free shipping. 30-day trial. CE certified. 1-year warranty.</p>
+    <a href="#" class="btn-primary" style="font-size:16px; padding:16px 48px;">Pre-Order Somni Contour — $49</a>
+    <p style="font-size:12px; color:var(--text-muted); margin-top:12px;">Ships from Shenzhen. Duties & tax included. Estimated delivery: 7-14 days worldwide.</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section>
+  <div class="section-label">What Sleepers Say</div>
+  <h2 class="section-title">Verified Reviews</h2>
+  <div class="reviews-grid">
+    <div class="review-card"><div class="review-stars">★★★★★</div><p>"Finally a mask that doesn't press on my eyelashes. The 3D contour is a game-changer. I use the Bluetooth for sleep stories every night."</p><div class="review-author">Sarah K. — Verified Buyer</div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><p>"Side sleeper here. Every other mask would shift and leak light. This one stays put all night. The detachable module is genius."</p><div class="review-author">Marcus T. — Verified Buyer</div></div>
+    <div class="review-card"><div class="review-stars">★★★★☆</div><p>"Great mask. Audio quality is surprisingly good. My only wish is longer battery life — 6 hours is enough for one night."</p><div class="review-author">Jamie L. — Verified Buyer</div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Common Questions</h2>
+  <div class="faq">
+    <div class="faq-item"><div class="faq-q">How do I wash the Somni Contour?</div><div class="faq-a">Detach the electronic module (3 seconds), then machine wash the fabric shell in cold water. Air dry. The memory foam core is rated for 50+ wash cycles.</div></div>
+    <div class="faq-item"><div class="faq-q">Does it work for side sleepers?</div><div class="faq-a">Yes — the 0.8mm ultra-thin speakers and 3D contoured shape are specifically designed to be comfortable in all sleep positions, including side sleeping.</div></div>
+    <div class="faq-item"><div class="faq-q">What's the Bluetooth range?</div><div class="faq-a">Bluetooth 6.0 provides up to 10 meters (33 feet) of stable connection. Pair once and it auto-connects each night.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I wear it with lash extensions?</div><div class="faq-a">Absolutely. The 15mm-deep eye cups are specifically designed to provide full clearance for eyelash extensions, long natural lashes, and blinking.</div></div>
+    <div class="faq-item"><div class="faq-q">What's your return policy?</div><div class="faq-a">30-day no-questions-asked return. If you don't sleep better, we'll refund you. 1-year warranty covers manufacturing defects.</div></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Somni. CE Certified. Designed in California. Made with care in Shenzhen.</p>
+  <p style="margin-top:8px;font-size:11px;">SOMNI and the Somni logo are trademarks of Somni Sleep Technologies.</p>
+</footer>
+
+<script>
+  function swapMain(el) {
+    document.getElementById('mainImg').src = el.dataset.full;
+    document.querySelectorAll('.thumbnail-strip img').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+  function changeQty(delta) {
+    const inp = document.getElementById('qty');
+    let v = parseInt(inp.value) + delta;
+    if (v < 1) v = 1;
+    if (v > 99) v = 99;
+    inp.value = v;
+  }
+</script>
+
+</body>
+</html>
