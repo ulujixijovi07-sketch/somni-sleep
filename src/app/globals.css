@@ -762,6 +762,28 @@ footer { position: relative; z-index: 1; }
     .product-info h1 {
       font-size: 20px;
     }
+    .current-price {
+      font-size: 28px;
+    }
+    .original-price {
+      font-size: 15px;
+    }
+    .discount-badge {
+      font-size: 11px;
+    }
+    .feature-bullets li {
+      font-size: 12px;
+      padding: 8px 0;
+    }
+    .social-proof {
+      font-size: 11px;
+    }
+    .trust-badge {
+      font-size: 10px;
+    }
+    .shipping-banner {
+      font-size: 11px;
+    }
 
     /* Product page content: reduce side padding */
     .product-page-content {
@@ -808,6 +830,18 @@ footer { position: relative; z-index: 1; }
     /* Reviews grid: single column */
     .reviews-grid {
       grid-template-columns: 1fr;
+    }
+
+    /* Footer: smaller text on mobile */
+    footer h3 {
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+    footer a {
+      font-size: 12px;
+    }
+    footer .font-display {
+      font-size: 15px;
     }
   }
 }
