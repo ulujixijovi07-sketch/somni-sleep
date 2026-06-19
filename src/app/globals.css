@@ -760,29 +760,29 @@ footer { position: relative; z-index: 1; }
       max-width: 100%;
     }
     .product-info h1 {
-      font-size: 20px;
+      font-size: 18px;
     }
     .current-price {
-      font-size: 28px;
+      font-size: 24px;
     }
     .original-price {
-      font-size: 15px;
+      font-size: 13px;
     }
     .discount-badge {
-      font-size: 11px;
-    }
-    .feature-bullets li {
-      font-size: 12px;
-      padding: 8px 0;
-    }
-    .social-proof {
-      font-size: 11px;
-    }
-    .trust-badge {
       font-size: 10px;
     }
-    .shipping-banner {
+    .feature-bullets li {
       font-size: 11px;
+      padding: 6px 0;
+    }
+    .social-proof {
+      font-size: 10px;
+    }
+    .trust-badge {
+      font-size: 9px;
+    }
+    .shipping-banner {
+      font-size: 10px;
     }
 
     /* Product page content: reduce side padding */
@@ -790,10 +790,13 @@ footer { position: relative; z-index: 1; }
       padding: 0 16px 60px;
     }
     .product-page-content .section-title {
-      font-size: 22px;
+      font-size: 18px;
     }
     .product-page-content .section-desc {
-      font-size: 14px;
+      font-size: 12px;
+    }
+    .product-page-content .section-label {
+      font-size: 9px;
     }
 
     /* Mode cards: single column */
