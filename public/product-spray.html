@@ -461,6 +461,22 @@
   }
   .btn-primary:hover { background: #D4B55A; transform: translateY(-2px); }
 
+  /* Inline review badge for social proof throughout page */
+  .review-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 24px 0;
+    font-size: 13px;
+  }
+  .review-badge .stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; }
+  .review-badge .text { color: var(--text-dim); font-style: italic; flex: 1; }
+  .review-badge .author { color: var(--text); font-size: 12px; font-weight: 600; white-space: nowrap; }
+
   @media (max-width: 768px) {
     .product-detail { flex-direction: column; padding: 24px 16px 40px; }
     .product-gallery, .product-info { max-width: 100%; }
@@ -487,6 +503,9 @@
     .feature-text h3 { font-size: 16px; }
     .feature-text p { font-size: 12px; }
     .feature-list li { font-size: 11px; }
+    .review-badge { padding: 10px 14px; font-size: 10px; gap: 6px; }
+    .review-badge .stars { font-size: 11px; }
+    .review-badge .author { font-size: 9px; }
   }
 </style>
 </head>
@@ -568,6 +587,12 @@
     <div class="shipping-banner">
       🚚 Free Worldwide Shipping | Duties & Tax Included | 30-Day Money-Back Guarantee
     </div>
+
+    <div class="review-badge">
+      <span class="stars">★★★★★</span>
+      <span class="text">"10 minutes after spraying my pillow, I'm out. Better than any pill I've tried."</span>
+      <span class="author">— Maya T.</span>
+    </div>
   </div>
 </section>
 
@@ -647,6 +672,12 @@
   </div>
 </section>
 
+<div class="review-badge" style="max-width:800px; margin: 32px auto 0;">
+  <span class="stars">★★★★★</span>
+  <span class="text">"The lavender scent is so natural, not artificial at all. My sleep quality jumped 20% in the first week."</span>
+  <span class="author">— Olivia B.</span>
+</div>
+
 <!-- ══════ WHAT'S IN THE BOX ══════ -->
 <section>
   <div class="section-label">Unboxing</div>
@@ -683,6 +714,12 @@
     <div class="spec-card"><div class="spec-icon">✅</div><div class="spec-val">Export Quality</div><div class="spec-label">Grade</div></div>
   </div>
 </section>
+
+<div class="review-badge" style="max-width:800px; margin: 32px auto 0;">
+  <span class="stars">★★★★★</span>
+  <span class="text">"200 sprays per bottle — lasts 2 months. Beats melatonin pills by a mile. No grogginess."</span>
+  <span class="author">— James C.</span>
+</div>
 
 <!-- ══════ COMPARISON ══════ -->
 <section>
