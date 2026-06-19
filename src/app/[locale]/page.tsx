@@ -79,7 +79,7 @@ export default function HomePage() {
             Science of Sleep, Art of Rest
           </motion.span>
 
-          <h1 className="font-[family-name:var(--font-display)] text-5xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-[1.05] text-cream max-w-[16ch] mx-auto">
+          <h1 className="font-[family-name:var(--font-display)] text-4xl md:text-6xl lg:text-8xl font-normal tracking-tight leading-[1.05] text-cream max-w-[16ch] mx-auto">
             {"You Don't Have Insomnia. Your Senses Just Need Reset."
               .split(" ")
               .map((word, i) => (
