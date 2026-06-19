@@ -122,8 +122,11 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
           {/* Newsletter (spans 2 cols on desktop) */}
           <div className="lg:col-span-2">
-            <p className="font-display text-lg italic font-light text-brand-light/70 mb-4">
+            <p className="font-display text-lg italic font-light text-brand-light/70 mb-2">
               Sleep Science. Engineered.
+            </p>
+            <p className="text-sm text-brand-light/50 mb-4">
+              Sign up for 10% off your first order.
             </p>
 
             {subscribed ? (
