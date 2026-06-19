@@ -6,6 +6,7 @@ import {
   useContext,
   useMemo,
   useState,
+  useEffect,
 } from "react";
 
 // ─── Types ──────────────────────────────────────────────────────────────
@@ -46,11 +47,11 @@ type CartContextType = {
   total: number;
 };
 
-// ─── localStorage helpers ───────────────────────────────────────────────
+// ─── localStorage as single source of truth ─────────────────────────────
 
 const STORAGE_KEY = "somni-cart";
 
-function loadCart(): CartItem[] {
+function readCart(): CartItem[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -60,31 +61,19 @@ function loadCart(): CartItem[] {
   }
 }
 
-function saveCart(items: CartItem[]) {
+function writeCart(items: CartItem[]) {
   if (typeof window === "undefined") return;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   } catch {}
 }
 
-// ─── Cart store (module-level, survives route segment remounts) ─────────
-
-let _items: CartItem[] = [];
-let _listeners: Set<() => void> = new Set();
-
-function getItems(): CartItem[] {
-  return _items;
-}
-
-function setItems(newItems: CartItem[]) {
-  _items = newItems;
-  saveCart(_items);
-  _listeners.forEach((fn) => fn());
-}
-
-function subscribe(fn: () => void) {
-  _listeners.add(fn);
-  return () => { _listeners.delete(fn); };
+// Broadcast changes to other tabs/route-segments
+function broadcastCart() {
+  if (typeof window === "undefined") return;
+  try {
+    window.dispatchEvent(new Event("somni-cart-changed"));
+  } catch {}
 }
 
 // ─── Context ────────────────────────────────────────────────────────────
@@ -94,30 +83,22 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 // ─── Provider ───────────────────────────────────────────────────────────
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setReactItems] = useState<CartItem[]>(() => {
-    // Initialize from localStorage on first render
-    return loadCart();
-  });
+  // Initialize from localStorage on first render
+  const [items, setItems] = useState<CartItem[]>(() => readCart());
 
-  // Sync module-level store with React state
-  // This ensures all CartProvider instances share the same data
-  useState(() => {
-    const loaded = loadCart();
-    if (loaded.length > 0 && items.length === 0) {
-      setReactItems(loaded);
-    }
-  });
-
-  // Subscribe to external changes (from other route segments)
-  useState(() => {
-    const unsub = subscribe(() => {
-      setReactItems([...getItems()]);
-    });
-    return unsub;
-  });
+  // Listen for cross-tab/segment changes
+  useEffect(() => {
+    const handler = () => setItems(readCart());
+    window.addEventListener("somni-cart-changed", handler);
+    // Also check on focus (user may have changed cart in another tab)
+    window.addEventListener("focus", handler);
+    return () => {
+      window.removeEventListener("somni-cart-changed", handler);
+      window.removeEventListener("focus", handler);
+    };
+  }, []);
 
   const addToCart = useCallback((item: Omit<CartItem, "quantity">) => {
-    // GA4 add_to_cart event
     if (typeof window !== "undefined" && (window as any).gtag) {
       (window as any).gtag("event", "add_to_cart", {
         currency: "USD",
@@ -131,7 +112,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       });
     }
 
-    const current = getItems();
+    const current = readCart();
     const existing = current.find((i) => i.variantId === item.variantId);
     let next: CartItem[];
     if (existing) {
@@ -143,12 +124,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } else {
       next = [...current, { ...item, quantity: 1 }];
     }
+    writeCart(next);
+    broadcastCart();
     setItems(next);
   }, []);
 
   const removeFromCart = useCallback((variantId: number) => {
-    const current = getItems();
-    setItems(current.filter((i) => i.variantId !== variantId));
+    const current = readCart();
+    const next = current.filter((i) => i.variantId !== variantId);
+    writeCart(next);
+    broadcastCart();
+    setItems(next);
   }, []);
 
   const updateQuantity = useCallback(
@@ -157,17 +143,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         removeFromCart(variantId);
         return;
       }
-      const current = getItems();
-      setItems(
-        current.map((i) =>
-          i.variantId === variantId ? { ...i, quantity } : i
-        )
+      const current = readCart();
+      const next = current.map((i) =>
+        i.variantId === variantId ? { ...i, quantity } : i
       );
+      writeCart(next);
+      broadcastCart();
+      setItems(next);
     },
     [removeFromCart]
   );
 
   const clearCart = useCallback(() => {
+    writeCart([]);
+    broadcastCart();
     setItems([]);
   }, []);
 
