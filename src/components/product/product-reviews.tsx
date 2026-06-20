@@ -150,6 +150,10 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
       : b.rating - a.rating
   );
 
+  const [visibleCount, setVisibleCount] = useState(5);
+  const visible = sorted.slice(0, visibleCount);
+  const hasMore = visibleCount < sorted.length;
+
   // ── Render ────────────────────────────────────────────────────────
   return (
     <div className="mt-14 border-t border-moonlight/20 pt-10 max-w-[1200px] mx-auto px-10">
@@ -300,7 +304,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
           {/* Sort */}
           <div className="mt-6 flex gap-2">
             <button
-              onClick={() => setSort("recent")}
+              onClick={() => { setSort("recent"); setVisibleCount(5); }}
               className={cn(
                 "rounded-sm px-3 py-1.5 font-body text-xs",
                 sort === "recent"
@@ -311,7 +315,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
               Most Recent
             </button>
             <button
-              onClick={() => setSort("highest")}
+              onClick={() => { setSort("highest"); setVisibleCount(5); }}
               className={cn(
                 "rounded-sm px-3 py-1.5 font-body text-xs",
                 sort === "highest"
@@ -330,7 +334,7 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
             </p>
           ) : (
             <div className="mt-6 divide-y divide-border">
-              {sorted.map((review) => (
+              {visible.map((review) => (
                 <div key={review.id} className="bg-moonlight/[0.03] rounded-lg px-4 py-4">
                   <div className="flex items-center gap-2">
                     <div className="flex">
@@ -388,6 +392,16 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
                 </div>
               ))}
             </div>
+            {hasMore && (
+              <div className="mt-6 text-center">
+                <button
+                  onClick={() => setVisibleCount((c) => c + 5)}
+                  className="rounded border border-moonlight/30 px-8 py-3 font-body text-sm text-moonlight hover:bg-moonlight/10 transition-colors"
+                >
+                  Load More Reviews ({sorted.length - visibleCount} remaining)
+                </button>
+              </div>
+            )}
           )}
         </>
       )}
