@@ -13,7 +13,7 @@ export function addToCart(product: Product) {
   if (existing) {
     existing.qty += 1;
   } else {
-    cart.push({ id: product.id, name: product.name, price: product.price, image: product.images[0], slug: product.slug, qty: 1 });
+    cart.push({ id: product.id, name: product.name, price: product.price, image: product.images[0]?.url, slug: product.slug, qty: 1 });
   }
   localStorage.setItem("somni-cart", JSON.stringify(cart));
   window.dispatchEvent(new Event("cart-updated"));
@@ -35,7 +35,7 @@ export default function ProductCard({ product, idx = 0 }: { product: Product; id
         <div className={`relative aspect-[4/5] bg-gradient-to-br ${gradient} rounded-2xl overflow-hidden mb-5 border border-white/[0.04] group-hover:border-moonlight/15 transition-all duration-700`}>
           {/* Product image */}
           <img
-            src={product.images[0]}
+            src={product.images[0]?.url}
             alt={product.name}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
