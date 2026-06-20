@@ -213,52 +213,6 @@ function GenericSections({ product }: { product: NonNullable<ReturnType<typeof g
         </section>
       )}
 
-      {/* ── Specifications ── */}
-      <section className="specs-section">
-        {product.specCards ? (
-          <>
-            <div className="section-label">Technical Specifications</div>
-            <h2 className="section-title">By the Numbers</h2>
-            <div className="specs-grid">
-              {product.specCards.map((spec, i) => (
-                <div key={i} className="spec-card">
-                  <div className="spec-icon">{spec.icon}</div>
-                  <div className="spec-val">{spec.value}</div>
-                  <div className="spec-label">{spec.label}</div>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="section-label">Specifications</div>
-            <h2 className="section-title">Technical Details</h2>
-            <div className="specs-grid">
-              <div className="spec-item">
-                <span className="spec-label">Weight</span>
-                <span className="spec-value">{product.weight}</span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">Materials</span>
-                <span className="spec-value">{product.materials}</span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">Category</span>
-                <span className="spec-value">
-                  {product.senseLabel} — {product.category}
-                </span>
-              </div>
-              <div className="spec-item">
-                <span className="spec-label">Rating</span>
-                <span className="spec-value">
-                  {product.rating} ★ ({product.reviewCount} reviews)
-                </span>
-              </div>
-            </div>
-          </>
-        )}
-      </section>
-
       {/* ── Comparison Table ── */}
       {product.comparisonTable && (
         <section className="comparison-section">
