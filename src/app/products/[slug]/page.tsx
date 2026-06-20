@@ -350,6 +350,8 @@ export default function ProductPage() {
   const [productStyle, setProductStyle] = useState<string>("");
   // HTML body from product.html (only used for 3D contour sleep mask)
   const [htmlBody, setHtmlBody] = useState<string | null>(null);
+  // DB images (overrides static data images when available)
+  const [dbImages, setDbImages] = useState<string[] | null>(null);
 
   const isMask = slug === "3d-contour-sleep-mask";
 
@@ -398,12 +400,22 @@ export default function ProductPage() {
     notFound();
   }
 
-  // Replace the "5-in-1 Multi-Function Design" image (product_2) with updated asset
-  product.images = product.images.map((url) =>
-    url.includes("product_2")
-      ? "https://res.cloudinary.com/dyektnhyy/image/upload/v1781958406/nocturne/products/juzv2nz3rkx4gj7blaom.png"
-      : url
-  );
+  // Fetch DB images to override static data (enables admin panel image edits to reflect)
+  useEffect(() => {
+    fetch(`/api/products/${slug}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.images && Array.isArray(data.images)) {
+          setDbImages(data.images.map((img: { url: string }) => img.url));
+        }
+      })
+      .catch(() => {});
+  }, [slug]);
+
+  // Use DB images if available, otherwise fall back to static data
+  if (dbImages) {
+    product.images = dbImages;
+  }
 
   // ── Loading state (3D contour mask only) ───────────────────────────
 
