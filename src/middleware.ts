@@ -40,7 +40,13 @@ export default auth((req) => {
     }
 
     if (!isAdmin) {
-      return NextResponse.redirect(new URL("/", req.url));
+      // Allow whitelisted emails to access admin
+      const defaultWhitelist = "admin@somni-sleep.com,2940585444@proton.me";
+      const whitelistStr = process.env.ADMIN_WHITELIST || defaultWhitelist;
+      const adminWhitelist = whitelistStr.split(",").map(s => s.trim().toLowerCase());
+      if (!adminWhitelist.includes(authUser?.email?.toLowerCase() || "")) {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
     }
 
     // Admin is authenticated — skip intl for /admin/* routes (they have no locale prefix)
