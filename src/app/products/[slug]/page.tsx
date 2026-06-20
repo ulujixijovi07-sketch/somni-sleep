@@ -352,6 +352,8 @@ export default function ProductPage() {
   const [htmlBody, setHtmlBody] = useState<string | null>(null);
   // DB images (overrides static data images when available)
   const [dbImages, setDbImages] = useState<string[] | null>(null);
+  // DB product ID (corrects mismatch between static data and database IDs)
+  const [dbProductId, setDbProductId] = useState<number | null>(null);
 
   const isMask = slug === "3d-contour-sleep-mask";
 
@@ -400,11 +402,12 @@ export default function ProductPage() {
     notFound();
   }
 
-  // Fetch DB images to override static data (enables admin panel image edits to reflect)
+  // Fetch DB images + product ID to override static data
   useEffect(() => {
     fetch(`/api/products/${slug}`)
       .then((r) => r.json())
       .then((data) => {
+        if (data.id) setDbProductId(data.id);
         if (data.images && Array.isArray(data.images)) {
           setDbImages(data.images.map((img: { url: string }) => img.url));
         }
@@ -447,7 +450,7 @@ export default function ProductPage() {
 
         {/* Reviews */}
         <div className="product-page-content">
-          <ProductReviews productId={product.id} />
+          <ProductReviews productId={dbProductId ?? product.id} />
         </div>
       </>
     );
@@ -493,7 +496,7 @@ export default function ProductPage() {
 
       {/* Reviews */}
       <div className="product-page-content">
-        <ProductReviews productId={product.id} />
+        <ProductReviews productId={dbProductId ?? product.id} />
       </div>
     </>
   );
