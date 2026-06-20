@@ -392,16 +392,16 @@ export function ProductReviews({ productId }: ProductReviewsProps) {
                 </div>
               ))}
             </div>
-            {hasMore && (
-              <div className="mt-6 text-center">
-                <button
-                  onClick={() => setVisibleCount((c) => c + 5)}
-                  className="rounded border border-moonlight/30 px-8 py-3 font-body text-sm text-moonlight hover:bg-moonlight/10 transition-colors"
-                >
-                  Load More Reviews ({sorted.length - visibleCount} remaining)
-                </button>
-              </div>
-            )}
+          )}
+          {!loading && !error && sorted.length > 0 && hasMore && (
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setVisibleCount((c) => c + 5)}
+                className="rounded border border-moonlight/30 px-8 py-3 font-body text-sm text-moonlight hover:bg-moonlight/10 transition-colors"
+              >
+                Load More Reviews ({sorted.length - visibleCount} remaining)
+              </button>
+            </div>
           )}
         </>
       )}
