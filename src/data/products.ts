@@ -314,7 +314,7 @@ export const products: Product[] = [
     materials: "ABS housing, ultrasonic plate, fabric speaker grille, LED array, silicone feet",
     images: [
       "/products/white-noise-aroma-machine/product_0.webp",
-      "/products/white-noise-aroma-machine/product_2.webp",
+      "https://res.cloudinary.com/dyektnhyy/image/upload/v1781958406/nocturne/products/juzv2nz3rkx4gj7blaom.png",
       "/products/white-noise-aroma-machine/product_7.webp",
       "/products/white-noise-aroma-machine/img_5.webp",
       "/products/white-noise-aroma-machine/img_6.webp",
@@ -333,7 +333,7 @@ export const products: Product[] = [
       { icon: "🌸", title: "Aromatherapy Synergy", description: "Lavender and essential oils drift through the room via ultrasonic diffusion while white noise masks disruptive sounds. Two sensory pathways — auditory and olfactory — converge to create the ideal sleep environment. Studies show aromatherapy improves deep sleep by 20%.", stats: ["20% Deep Sleep", "Ultrasonic", "Dual Sensory"] }
     ],
     materialSections: [
-      { title: "5-in-1 Multi-Function", subtitle: "Design", description: "White noise machine, Bluetooth speaker, aroma diffuser, humidifier, and night light — all in one compact device. No more clutter of separate devices on your nightstand. Each function works independently or together for a fully customized sleep environment.", list: ["White noise machine", "Bluetooth 5.0 speaker", "Ultrasonic aroma diffuser", "Humidifier", "Night light"], image: "/products/white-noise-aroma-machine/product_2.webp" },
+      { title: "5-in-1 Multi-Function", subtitle: "Design", description: "White noise machine, Bluetooth speaker, aroma diffuser, humidifier, and night light — all in one compact device. No more clutter of separate devices on your nightstand. Each function works independently or together for a fully customized sleep environment.", list: ["White noise machine", "Bluetooth 5.0 speaker", "Ultrasonic aroma diffuser", "Humidifier", "Night light"], image: "https://res.cloudinary.com/dyektnhyy/image/upload/v1781958406/nocturne/products/juzv2nz3rkx4gj7blaom.png" },
       { title: "Realistic 3D Flame", subtitle: "Effect", description: "A lifelike flickering flame creates warm, cozy ambiance without any fire hazard. The LED flame effect mimics a real candle — dancing light that soothes the mind and signals bedtime to your brain. Perfect as a calming night light or decorative accent.", list: ["3D realistic flame effect", "No fire hazard", "Soothing amber glow", "Adjustable brightness"], image: "/products/white-noise-aroma-machine/product_7.webp", reversed: true }
     ],
     specCards: [

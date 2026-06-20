@@ -398,6 +398,13 @@ export default function ProductPage() {
     notFound();
   }
 
+  // Replace the "5-in-1 Multi-Function Design" image (product_2) with updated asset
+  product.images = product.images.map((url) =>
+    url.includes("product_2")
+      ? "https://res.cloudinary.com/dyektnhyy/image/upload/v1781958406/nocturne/products/juzv2nz3rkx4gj7blaom.png"
+      : url
+  );
+
   // ── Loading state (3D contour mask only) ───────────────────────────
 
   if (isMask && !htmlBody) {
