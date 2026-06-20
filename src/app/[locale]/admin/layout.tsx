@@ -39,6 +39,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const isLoading = status === "loading";
   const isAdmin = session?.user?.role === "ADMIN";
+  const isWhitelisted = (() => {
+    const defaultWhitelist = "admin@somni-sleep.com,2940585444@proton.me";
+    const whitelistStr = (typeof process !== 'undefined' && (process as any).env?.NEXT_PUBLIC_ADMIN_WHITELIST) || defaultWhitelist;
+    return whitelistStr.split(",").map((s: string) => s.trim().toLowerCase()).includes(session?.user?.email?.toLowerCase() || "");
+  })();
 
   if (isLoading) {
     return (
@@ -48,7 +53,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  if (!isAdmin) {
+  if (!isAdmin && !isWhitelisted) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-brand-secondary px-4">
         <div className="w-full max-w-sm rounded-sm border border-border bg-brand-primary p-8 shadow-sm text-center">
