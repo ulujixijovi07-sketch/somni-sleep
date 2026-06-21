@@ -65,7 +65,27 @@ function GenericSections({ product }: { product: NonNullable<ReturnType<typeof g
         <section className="how-it-works-section">
           <div className="section-label">How It Works</div>
           <h2 className="section-title">{product.howItWorks.title}</h2>
-          <p className="section-desc">{product.howItWorks.description}</p>
+          {product.howItWorks.image ? (
+            <div className="feature-split" style={{ marginTop: "48px" }}>
+              <div className="feature-text">
+                <p className="section-desc">{product.howItWorks.description}</p>
+              </div>
+              <div className="feature-image">
+                <img
+                  src={product.howItWorks.image}
+                  loading="lazy"
+                  alt={product.howItWorks.title}
+                  style={{
+                    maxWidth: "100%",
+                    borderRadius: "12px",
+                    boxShadow: "0 10px 40px rgba(0,0,0,0.4)",
+                  }}
+                />
+              </div>
+            </div>
+          ) : (
+            <p className="section-desc">{product.howItWorks.description}</p>
+          )}
         </section>
       )}
 
