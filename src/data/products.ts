@@ -213,16 +213,10 @@ export const products: Product[] = [
     senseLabel: "TACTUS",
     price: 79,
     compareAtPrice: 109,
-    description: "Handheld CES (Cranial Electrotherapy Stimulation) sleep device with ear-clip electrodes. Uses gentle microcurrent pulses to calm the nervous system and promote deep sleep. Rechargeable 800-1000mAh battery provides 1-3 hours of therapy per charge. Clinically studied for insomnia relief.",
+    description: "Ear-clip sleep aid device using gentle microcurrent pulses to promote deep sleep. Features 1000mAh rechargeable battery, 3 therapy modes with adjustable timer, and auto-shutoff. Ultra-lightweight at just 50g with ABS body. Clinically tested GB4706.1-2005 safety certified.",
     longDescription:
       "CES (Cranial Electrotherapy Stimulation) is a non-invasive therapy that delivers gentle microcurrent pulses through ear-clip electrodes. The pulses travel through the earlobes to modulate the brain's sleep-wake centers, calming the nervous system and promoting natural deep sleep. This handheld device features 3 intensity levels, a rechargeable 1000mAh battery providing 1-3 hours of therapy per charge, and a portable design for home or travel use. Clinically studied for insomnia relief with minimal side effects.",
-    features: [
-      "CES Microcurrent Therapy",
-      "Ear-Clip Electrode Design",
-      "Rechargeable 1000mAh Battery",
-      "3 Intensity Levels",
-      "Portable Handheld Design",
-    ],
+    features: ["CES Microcurrent Therapy", "Ear-Clip Electrode Design", "3 Therapy Modes + Timer", "1000mAh Rechargeable Battery", "50g Ultra-Lightweight"],
     science: [
       {
         title: "CES for insomnia treatment",
@@ -237,9 +231,9 @@ export const products: Product[] = [
         link: "https://pubmed.ncbi.nlm.nih.gov/25202170/",
       },
     ],
-    usage: "Clip electrodes to earlobes. Select intensity level (start with 1). Use for 20-60 minutes before sleep. Recharge via USB-C when low.",
-    weight: "180g",
-    materials: "ABS handheld body, ear-clip electrodes, lithium battery, microcurrent circuitry",
+    usage: "Moisten gasket with saline, clip electrodes to earlobes (no left/right distinction), long-press power to start, select mode and timer, use for 20-60 minutes before sleep. Auto-shuts off after 10min inactivity.",
+    weight: "50g",
+    materials: "ABS body, conductive ear-clip electrodes, 1000mAh lithium battery, microcurrent circuitry",
     images: [
       "/products/acupressure-sleep-mat/product_4.webp",
       "/products/acupressure-sleep-mat/product_5.webp",
@@ -256,22 +250,19 @@ export const products: Product[] = [
     bestSeller: false,
     video: "/videos/tactus-hero.mp4",
     modeCards: [
-      { icon: "⚡", title: "CES Microcurrent Therapy", description: "Cranial Electrotherapy Stimulation (CES) delivers gentle microcurrent pulses through ear-clip electrodes. These pulses travel via the earlobes to modulate the brain's sleep-wake centers, calming the nervous system and promoting natural deep sleep. Clinically used for over 40 years with minimal side effects.", stats: ["CES Technology", "Vagus Nerve", "40+ Years"] },
-      { icon: "🧠", title: "Brainwave Entrainment", description: "Microcurrent pulses gently guide your brain from an alert beta state into the relaxed alpha frequencies associated with rest and meditation. With regular use over 2 weeks, your brain learns this pathway — falling asleep becomes faster and more automatic. Drug-free by design.", stats: ["Alpha Wave", "2-Week", "Drug-Free"] }
+      { icon: "⚡", title: "Ear-Clip CES Therapy", description: "The ear-clip design delivers gentle microcurrent pulses directly through the earlobes — no adhesives, no gels, just saline-moistened conductive gaskets. The pulses travel to the brain's sleep centers via the vagus nerve pathway, calming the nervous system naturally.", stats: ["CES Technology", "Vagus Nerve", "40+ Years"] },
+      { icon: "🧠", title: "3 Modes + Smart Timer", description: "Choose from 3 therapy modes optimized for different sleep needs. Set the built-in timer for 20-60 minute sessions. The device auto-shuts off after 10 minutes of inactivity — safe for overnight use. Display dims automatically to preserve darkness.", stats: ["Alpha Wave", "2-Week", "Drug-Free"] }
     ],
     materialSections: [
-      { title: "Ear-Clip Electrode", subtitle: "Design", description: "Soft conductive ear-clips deliver microcurrent pulses comfortably through the earlobes. The clips are designed for a secure yet gentle fit — no adhesives, no gels, no discomfort. Simply clip on and let the pulses work their way to your brain's sleep centers.", list: ["Soft conductive ear-clips", "No adhesives or gels needed", "Gentle, secure fit", "Direct vagus nerve pathway"], image: "/products/acupressure-sleep-mat/product_4.webp" },
-      { title: "Rechargeable", subtitle: "& Portable", description: "Built-in 1000mAh rechargeable battery delivers 1-3 hours of therapy per charge. USB-C charging means you can top up anywhere. At just 180g, it's light enough to toss in your bag — perfect for travel, office naps, or anywhere sleep needs to happen.", list: ["1000mAh rechargeable battery", "1-3 hours per charge", "USB-C fast charging", "180g ultra-portable"], image: "/products/acupressure-sleep-mat/product_5.webp", reversed: true }
+      { title: "Ear-Clip Electrode", subtitle: "Design", description: "Soft conductive ear-clips deliver microcurrent pulses comfortably through the earlobes. The clips are designed for a secure yet gentle fit — no adhesives, no gels, no discomfort. Simply clip on and let the pulses work their way to your brain's sleep centers.", list: ["Soft conductive ear-clips", "No adhesives or gels needed", "Gentle, secure fit", "Direct vagus nerve pathway"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%283%29-womVeH0SMHnk9Sj8byO8DX5MacFNCx.webp" },
+      { title: "Rechargeable", subtitle: "& Portable", description: "Built-in 1000mAh rechargeable battery delivers 1-3 hours of therapy per charge. USB-C charging means you can top up anywhere. At just 180g, it's light enough to toss in your bag — perfect for travel, office naps, or anywhere sleep needs to happen.", list: ["1000mAh rechargeable battery", "1-3 hours per charge", "USB-C fast charging", "180g ultra-portable"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%281%29-Nc4A7Cpw1bdMRlhLKmt1Eg4SrbRulL.webp", reversed: true }
     ],
     specCards: [
       { icon: "🔋", value: "1000mAh", label: "Battery" },
-      { icon: "⏱️", value: "1-3 Hours", label: "Session" },
-      { icon: "📊", value: "3 Levels", label: "Intensity" },
-      { icon: "⚡", value: "CES", label: "Technology" },
-      { icon: "👂", value: "Ear-Clip", label: "Electrode" },
-      { icon: "🔌", value: "USB-C", label: "Charging" },
-      { icon: "⚖️", value: "180g", label: "Weight" },
-      { icon: "✅", value: "CE Certified", label: "Safety" }
+      { icon: "⏱️", value: "20-60 Min", label: "Session" },
+      { icon: "⚖️", value: "50g", label: "Weight" },
+      { icon: "📏", value: "136×65×18mm", label: "Dimensions" },
+      { icon: "🛡️", value: "GB4706.1", label: "Safety Cert" }
     ],
     comparisonTable: {
       headers: ["", "SOMNI CES", "Pills", "Meditation", "Weighted Blankets"],
@@ -283,8 +274,8 @@ export const products: Product[] = [
         { label: "Clinical Evidence", values: [{ text: "Strong", check: true }, { text: "Strong", check: true }, { text: "Moderate", check: false }, { text: "Moderate", check: false }] }
       ]
     },
-    boxContents: { items: ["CES Device ×1", "Ear-Clip Cable ×1", "USB-C Cable ×1", "Storage Pouch ×1", "User Guide ×1"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/O1CN01eBp2IV29TezAlw6ys_%21%212214660048069-0-cib-h088or1675HoBONCzQecfcLuqWonv1.jpg" },
-    howItWorks: { title: "Clip On. Select Intensity. Sleep Deep.", description: "Clip the electrodes onto your earlobes, select your intensity level (start with Level 1), and relax for 20 minutes before sleep. The microcurrent pulses gently guide your brain into a calm, sleep-ready state. With daily use over 2 weeks, falling asleep becomes faster and more automatic." },
+    boxContents: { items: ["CES Device ×1", "Ear-Clip Cable ×1", "USB-C Cable ×1", "Storage Pouch ×1", "User Guide ×1"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%285%29-2FV5h77jBAOGzLheqLbZJ3eg60uMUL.webp" },
+    howItWorks: { title: "Moisten. Clip. Sleep.", description: "Moisten the gasket with the included saline, clip the electrodes onto your earlobes (either side works), select your mode and timer, and relax. The gentle microcurrent pulses guide your brain into a calm, sleep-ready state within 20 minutes. With regular use, falling asleep becomes faster and more automatic." },
   },
   {
     id: 17,
