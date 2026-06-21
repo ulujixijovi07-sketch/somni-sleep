@@ -24,7 +24,7 @@ export interface Product {
   specCards?: { icon: string; value: string; label: string }[];
   comparisonTable?: { headers: string[]; rows: { label: string; values: ({ text: string; check: boolean } | string)[] }[] };
   boxContents?: { items: string[]; image: string };
-  howItWorks?: { title: string; description: string };
+  howItWorks?: { title: string; description: string; image?: string };
   video?: string;
 }
 
@@ -254,17 +254,20 @@ export const products: Product[] = [
       { icon: "🧠", title: "3 Modes + Smart Timer", description: "Choose from 3 therapy modes optimized for different sleep needs. Set the built-in timer for 20-60 minute sessions. The device auto-shuts off after 10 minutes of inactivity — safe for overnight use. Display dims automatically to preserve darkness.", stats: ["Alpha Wave", "2-Week", "Drug-Free"] }
     ],
     materialSections: [
-      { title: "Ear-Clip Electrode", subtitle: "Precision Fit", description: "Soft conductive ear-clips with saline-moistened gaskets deliver microcurrent pulses through the earlobes. Left and right clips are identical — no wrong way to wear. The ABS body at just 50g is barely noticeable, even for side sleepers.", list: ["Saline-moistened conductive gaskets", "Left/right universal fit", "50g ABS lightweight body", "No adhesives or gels required"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%283%29-womVeH0SMHnk9Sj8byO8DX5MacFNCx.webp" },
-      { title: "Wear & Relax", subtitle: "Effortless Therapy", description: "Simply clip onto your earlobes, select your mode, and let the microcurrent do the work. The device auto-shuts off after 10 minutes of inactivity — safe to fall asleep wearing it. Display dims automatically to preserve complete darkness.", list: ["One-click earlobe attachment", "Auto-shutoff after 10min inactivity", "Display auto-dims for darkness", "20-60 minute timed sessions"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%281%29-Nc4A7Cpw1bdMRlhLKmt1Eg4SrbRulL.webp", reversed: true },
-      { title: "Complete Kit", subtitle: "Everything Included", description: "Every order comes with the CES device, ear-clip electrode wire, 2 saline gaskets, USB-C charging cable, and sanitary saline bottle. No subscriptions, no refills needed — just saline solution from any pharmacy.", list: ["CES device ×1", "Ear-clip electrode wire ×1", "Saline gaskets ×2", "USB-C cable + saline bottle"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%282%29-n0VevUV8lmbqeOSggDtaAUuCgy8IuV.webp" },
-      { title: "Rechargeable", subtitle: "& Travel-Ready", description: "Built-in 1000mAh battery delivers 1-3 hours of therapy per charge. Compact 136×65×18mm fits in any bag. USB-C charging with standard 5V/1A input — top up from your phone charger, power bank, or laptop.", list: ["1000mAh rechargeable battery", "136×65×18mm compact size", "USB-C 5V/1A charging", "1-3 hours per charge"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh-hu3qG8RNjiwquVMey5Yi786mgowAzP.webp", reversed: true }
+      { title: "Ear-Clip Electrode", subtitle: "Conductive Interface", description: "Medical-grade conductive ear-clips deliver microcurrent pulses transdermally through the earlobes. The saline-moistened gasket ensures optimal impedance matching between electrode and skin — no adhesives, no conductive gel, no skin preparation required. Bilateral clips are anatomically symmetrical for universal left/right fit.", list: ["Saline-moistened conductive gaskets", "Transdermal microcurrent delivery", "Bilateral universal fit", "Zero skin preparation"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%283%29-womVeH0SMHnk9Sj8byO8DX5MacFNCx.webp" },
+      { title: "Therapeutic Application", subtitle: "Wear & Therapy", description: "Clip electrodes to earlobes and initiate therapy. Microcurrent pulses propagate via the auricular branch of the vagus nerve to the brainstem's sleep-regulatory nuclei. The device auto-terminates after 10 minutes of inactivity. LED display auto-dims to 0 lux, preserving circadian darkness during overnight use.", list: ["Auricular vagus nerve pathway", "Auto-shutoff at 10min inactivity", "Zero-lux display dimming", "20–60 minute programmable timer"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%281%29-Nc4A7Cpw1bdMRlhLKmt1Eg4SrbRulL.webp", reversed: true },
+      { title: "Complete System", subtitle: "Included Components", description: "Each unit ships with: CES therapy device, ear-clip electrode wire assembly, 2 sanitary saline gaskets, USB-C charging cable, sanitary saline bottle, and warranty documentation. No consumable refills required — standard physiological saline (0.9% NaCl) available at any pharmacy serves as the conductive medium.", list: ["CES device ×1", "Electrode wire ×1", "Saline gaskets ×2", "USB-C cable + saline bottle + warranty"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%282%29-n0VevUV8lmbqeOSggDtaAUuCgy8IuV.webp" },
+      { title: "Device Architecture", subtitle: "Compact & Rechargeable", description: "ABS polymer chassis houses a 1000mAh lithium-polymer cell delivering 1–3 hours of continuous therapy. Dimensions of 136×65×18mm and mass of 50g enable unobtrusive wear. USB-C charging at 5V/1A (0.5W nominal consumption). Compliant with GB4706.1-2005 safety standards for household electrical appliances.", list: ["1000mAh Li-Po, 1–3hr runtime", "136×65×18mm, 50g", "USB-C 5V/1A (0.5W)", "GB4706.1-2005 certified"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh-hu3qG8RNjiwquVMey5Yi786mgowAzP.webp", reversed: true }
     ],
     specCards: [
       { icon: "🔋", value: "1000mAh", label: "Battery" },
-      { icon: "⏱️", value: "20-60 Min", label: "Session" },
+      { icon: "⚡", value: "5V/1A", label: "Input" },
+      { icon: "📐", value: "0.2–1.3A", label: "Current" },
       { icon: "⚖️", value: "50g", label: "Weight" },
       { icon: "📏", value: "136×65×18mm", label: "Dimensions" },
-      { icon: "🛡️", value: "GB4706.1", label: "Safety Cert" }
+      { icon: "🔌", value: "0.5W", label: "Power" },
+      { icon: "🛡️", value: "GB4706.1", label: "Safety" },
+      { icon: "🧱", value: "ABS", label: "Material" }
     ],
     comparisonTable: {
       headers: ["", "SOMNI CES", "Pills", "Meditation", "Weighted Blankets"],
@@ -277,7 +280,7 @@ export const products: Product[] = [
       ]
     },
     boxContents: { items: ["CES Device ×1", "Ear-Clip Cable ×1", "USB-C Cable ×1", "Storage Pouch ×1", "User Guide ×1"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%285%29-2FV5h77jBAOGzLheqLbZJ3eg60uMUL.webp" },
-    howItWorks: { title: "Moisten. Clip. Sleep.", description: "Moisten the gasket with the included saline, clip the electrodes onto your earlobes (either side works), select your mode and timer, and relax. The gentle microcurrent pulses guide your brain into a calm, sleep-ready state within 20 minutes. With regular use, falling asleep becomes faster and more automatic." },
+    howItWorks: { title: "6-Step Protocol", description: "① Connect electrode wire to main unit. ② Moisten gasket with saline. ③ Clip electrodes to earlobes — no left/right distinction. ④ Long-press power to activate. ⑤ Select therapy mode via MODE button. ⑥ Set session duration via TIMER. Therapy begins immediately. Device auto-powers down after 10 minutes of inactivity.", image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/Gemini_Generated_Image_ctkhkrctkhkrctkh%20%284%29-Ns7R1Hpe4MZyARB2t81aPnkJaehjuX.webp" },
   },
   {
     id: 17,
