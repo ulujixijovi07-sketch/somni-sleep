@@ -283,7 +283,7 @@ export const products: Product[] = [
         { label: "Clinical Evidence", values: [{ text: "Strong", check: true }, { text: "Strong", check: true }, { text: "Moderate", check: false }, { text: "Moderate", check: false }] }
       ]
     },
-    boxContents: { items: ["CES Device ×1", "Ear-Clip Cable ×1", "USB-C Cable ×1", "Storage Pouch ×1", "User Guide ×1"], image: "/products/acupressure-sleep-mat/img_5.webp" },
+    boxContents: { items: ["CES Device ×1", "Ear-Clip Cable ×1", "USB-C Cable ×1", "Storage Pouch ×1", "User Guide ×1"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/O1CN01eBp2IV29TezAlw6ys_%21%212214660048069-0-cib-h088or1675HoBONCzQecfcLuqWonv1.jpg" },
     howItWorks: { title: "Clip On. Select Intensity. Sleep Deep.", description: "Clip the electrodes onto your earlobes, select your intensity level (start with Level 1), and relax for 20 minutes before sleep. The microcurrent pulses gently guide your brain into a calm, sleep-ready state. With daily use over 2 weeks, falling asleep becomes faster and more automatic." },
   },
   {
