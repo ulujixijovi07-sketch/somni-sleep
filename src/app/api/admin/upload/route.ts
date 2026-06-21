@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file" }, { status: 400 });
     }
 
-    const blob = await put(file.name, file, { access: "public" });
+    const blob = await put(file.name, file, { access: "public", addRandomSuffix: true });
 
     return NextResponse.json({ url: blob.url });
   } catch (error: unknown) {
