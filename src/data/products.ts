@@ -281,7 +281,7 @@ export const products: Product[] = [
       ]
     },
     boxContents: { items: ["CES Device ×1", "Ear-Clip Cable ×1", "USB-C Cable ×1", "Storage Pouch ×1", "User Guide ×1"], image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/img_v2_5-9iNI7dukhXPCmxI155UckmO7QxTpiy.webp" },
-    howItWorks: { title: "6-Step Protocol", description: "① Connect electrode wire to main unit. ② Moisten gasket with saline. ③ Clip electrodes to earlobes — no left/right distinction. ④ Long-press power to activate. ⑤ Select therapy mode via MODE button. ⑥ Set session duration via TIMER. Therapy begins immediately. Device auto-powers down after 10 minutes of inactivity.", image: "https://k58ot7m95vy6fahb.public.blob.vercel-storage.com/img_v2_2-dc6qrIu3VITEvubW8DU5owTYaDKzla.webp" },
+    howItWorks: { title: "6-Step Protocol", description: "① Connect electrode wire to main unit. ② Moisten gasket with saline. ③ Clip electrodes to earlobes — no left/right distinction. ④ Long-press power to activate. ⑤ Select therapy mode via MODE button. ⑥ Set session duration via TIMER. Therapy begins immediately. Device auto-powers down after 10 minutes of inactivity." },
   },
   {
     id: 17,
