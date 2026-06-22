@@ -1,59 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, Star, Users } from "@phosphor-icons/react";
-
-const purchases = [
-  { name: "Sarah M.", location: "New York, NY", product: "3D Contour Sleep Mask", time: "2 min ago" },
-  { name: "James K.", location: "Austin, TX", product: "White Noise Machine", time: "5 min ago" },
-  { name: "Emily R.", location: "Portland, OR", product: "Deep Sleep Pillow Spray", time: "8 min ago" },
-  { name: "Michael T.", location: "Chicago, IL", product: "Weighted Sleep Mask", time: "12 min ago" },
-  { name: "Lisa P.", location: "Denver, CO", product: "Silk Pillowcase Set", time: "15 min ago" },
-  { name: "David L.", location: "Seattle, WA", product: "Sleep Ritual Set", time: "18 min ago" },
-  { name: "Anna W.", location: "Miami, FL", product: "Amber Sleep Light", time: "21 min ago" },
-  { name: "Chris B.", location: "Nashville, TN", product: "Cooling Sleep Blanket", time: "24 min ago" },
-];
+import { Star, Users } from "@phosphor-icons/react";
 
 export default function SocialProof() {
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % purchases.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <>
-      {/* Live purchase notification */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0, y: 20, x: 20 }}
-          animate={{ opacity: 1, y: 0, x: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4 }}
-          className="fixed bottom-6 left-6 z-50 hidden md:block"
-        >
-          <div className="glass-card px-4 py-3 flex items-center gap-3 max-w-[280px] shadow-xl">
-            <div className="w-8 h-8 rounded-full bg-moonlight/20 flex items-center justify-center shrink-0">
-              <CheckCircle size={16} className="text-moonlight" weight="fill" />
-            </div>
-            <div className="min-w-0">
-              <p className="text-xs text-cream/80 truncate">
-                <span className="font-medium">{purchases[current].name}</span> from {purchases[current].location}
-              </p>
-              <p className="text-[10px] text-mist/60 truncate">
-                purchased <span className="text-cream/50">{purchases[current].product}</span>
-              </p>
-              <p className="text-[10px] text-moonlight/50 mt-0.5">{purchases[current].time}</p>
-            </div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-
       {/* Social proof bar — placed after hero */}
       <section className="relative bg-abyss/30 border-y border-moonlight/10">
         <div className="max-w-[1400px] mx-auto px-8 py-6">

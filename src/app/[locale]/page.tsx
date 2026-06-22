@@ -118,8 +118,8 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 1.5 }}
             className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link href="/shop/visual" className="btn-primary text-sm uppercase tracking-[0.15em] px-8 py-3.5">
-              Explore the 4 Senses
+            <Link href="/shop" className="btn-primary text-sm uppercase tracking-[0.15em] px-8 py-3.5">
+              Start Your 30-Night Trial
             </Link>
             <Link href="/science" className="group btn-outline text-sm uppercase tracking-[0.15em] px-8 py-3.5">
               See the Science{" "}
@@ -308,6 +308,31 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+
+          {/* Bundle card */}
+          <Link href="/shop" className="block mt-4 glass-card p-6 hover:border-moonlight/30 transition-all group">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <p className="text-moonlight text-xs uppercase tracking-[0.15em] mb-1">Best Value</p>
+                <h3 className="font-[family-name:var(--font-display)] text-xl text-cream font-bold">Complete 4-Sense Protocol</h3>
+                <p className="text-sm text-mist/70 mt-1">All four sleep tools. One protocol. Save $40.</p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {["LUX · Visual", "SONUS · Auditory", "TACTUS · Tactile", "OLFACIO · Olfactory"].map((s) => (
+                    <span key={s} className="text-[10px] uppercase tracking-[0.1em] border border-moonlight/20 text-moonlight/60 rounded-full px-2.5 py-1">{s}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center gap-4 shrink-0">
+                <div className="text-right">
+                  <p className="text-xs text-mist/40 line-through">$197</p>
+                  <p className="text-2xl font-bold text-cream">$157</p>
+                </div>
+                <span className="inline-flex items-center gap-1 btn-primary text-xs uppercase tracking-[0.1em] px-5 py-2.5 group-hover:opacity-90">
+                  Add Bundle <ArrowRight size={12} />
+                </span>
+              </div>
+            </div>
+          </Link>
           <div className="text-center mt-10">
             <Link href="/shop/visual" className="btn-outline text-sm uppercase tracking-[0.1em]">
               Shop All Products <ArrowRight size={14} className="inline ml-1" />

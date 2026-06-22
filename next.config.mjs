@@ -2,12 +2,21 @@
 const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
+  compress: true,
   images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 2592000,
     remotePatterns: [
       { protocol: "https", hostname: "**.alicdn.com" },
       { protocol: "https", hostname: "**.alibaba.com" },
       { protocol: "https", hostname: "**.1688.com" },
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "images.pexels.com" },
+      { protocol: "https", hostname: "**.r2.dev" },
     ],
+  },
+  experimental: {
+    optimizeCss: true,
   },
   async redirects() {
     return [

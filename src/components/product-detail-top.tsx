@@ -31,6 +31,9 @@ function discountPercent(price: number, compareAt?: number): number {
 
 export default function ProductDetailTop({ product }: ProductDetailTopProps) {
   const [selectedImage, setSelectedImage] = useState(0);
+  const [subscribeMode, setSubscribeMode] = useState<"onetime" | "subscribe">(
+    product.slug === "deep-sleep-pillow-spray" ? "subscribe" : "onetime"
+  );
   const [qty, setQty] = useState(1);
   const [toast, setToast] = useState<string | null>(null);
   const { addToCart } = useCart();
@@ -187,6 +190,38 @@ export default function ProductDetailTop({ product }: ProductDetailTopProps) {
               </button>
             </div>
           </div>
+
+          {/* Subscribe & Save — only for pillow spray */}
+          {product.slug === "deep-sleep-pillow-spray" && (
+            <div className="mt-4 mb-2 space-y-2">
+              {[
+                { value: "onetime", label: "One-time purchase", price: `$${product.price}` },
+                { value: "subscribe", label: "Subscribe & Save 15%", price: "$24.65/month" },
+              ].map((opt) => (
+                <label
+                  key={opt.value}
+                  className={`flex items-center justify-between gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                    subscribeMode === opt.value
+                      ? "border-moonlight/50 bg-moonlight/5"
+                      : "border-white/10 bg-white/[0.02] hover:border-white/20"
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <input
+                      type="radio"
+                      name="purchase-mode"
+                      value={opt.value}
+                      checked={subscribeMode === opt.value}
+                      onChange={() => setSubscribeMode(opt.value as "onetime" | "subscribe")}
+                      className="accent-moonlight"
+                    />
+                    <span className="text-sm text-cream">{opt.label}</span>
+                  </div>
+                  <span className="text-sm font-semibold text-moonlight">{opt.price}</span>
+                </label>
+              ))}
+            </div>
+          )}
 
           <button
             className="btn-add-cart"

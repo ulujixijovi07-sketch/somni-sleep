@@ -126,7 +126,7 @@ export function Footer() {
               Sleep Science. Engineered.
             </p>
             <p className="text-sm text-brand-light/50 mb-4">
-              Sign up for 10% off your first order.
+              Get the 30-Night Sleep Protocol Guide + 10% off your first order.
             </p>
 
             {subscribed ? (
